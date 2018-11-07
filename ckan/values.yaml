@@ -1,0 +1,8 @@
+ckanSecretName: ckan-secrets
+envVarsSecretName: ckan-env-vars
+
+ckanOperatorImage: orihoch/ckan-multi-cca-operator:v0.0.1a
+ckanImage: orihoch/ckan-multi-ckan:v0.0.1a
+dbImage: orihoch/ckan-multi-db:v0.0.1a
+solrImage: orihoch/ckan-multi-solr:v0.0.1a
+nginxImage: orihoch/ckan-multi-nginx:v0.0.1a

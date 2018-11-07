@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: datastore-db
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: datastore-db
+    spec:
+      {{ if .Values.datastoreDbTerminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.datastoreDbTerminationGracePeriodSeconds }}
+      {{ end }}
+      containers:
+      - name: db
+        image: {{ .Values.dbImage | quote }}
+        ports:
+        - containerPort: 5432
+        {{ if .Values.datastoreDbResources }}
+        resources: {{ .Values.datastoreDbResources }}
+        {{ end }}
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom: {secretKeyRef: {name: {{ .Values.envVarsSecretName | quote }}, key: "DATASTORE_POSTGRES_PASSWORD"}}
+        - name: DATASTORE_RO_PASSWORD
+          valueFrom: {secretKeyRef: {name: {{ .Values.envVarsSecretName | quote }}, key: "DATASTORE_RO_PASSWORD"}}
+        - name: DATASTORE_RO_USER
+          valueFrom: {secretKeyRef: {name: {{ .Values.envVarsSecretName | quote }}, key: "DATASTORE_RO_USER"}}
+        {{ if .Values.datastorePublicreadonlyDbUserPasswordSecretName }}
+        - name: DATASTORE_PUBLIC_RO_PASSWORD
+          valueFrom: {secretKeyRef: {name: {{ .Values.datastorePublicreadonlyDbUserPasswordSecretName | quote }}, key: "DATASTORE_PUBLIC_RO_PASSWORD"}}
+        {{ end }}
+        volumeMounts:
+        - name: ckan-data
+          mountPath: /var/lib/postgresql/data
+          subPath: datastore-db-postgresql-data
+      volumes:
+      - name: ckan-data
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-datastore-db
+      {{ else }}
+        hostPath:
+          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

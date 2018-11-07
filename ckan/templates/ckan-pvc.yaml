@@ -1,0 +1,13 @@
+{{ if .Values.usePersistentVolumes }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Namespace }}-ckan
+spec:
+  storageClassName: {{ .Values.ckanStorageClassName }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+{{ end }}

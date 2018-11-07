@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      {{ if .Values.dbTerminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.dbTerminationGracePeriodSeconds }}
+      {{ end }}
+      containers:
+      - name: db
+        image: {{ .Values.dbImage | quote }}
+        ports:
+        - containerPort: 5432
+        {{ if .Values.dbResources }}
+        resources: {{ .Values.dbResources }}
+        {{ end }}
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom: {secretKeyRef: {name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_PASSWORD"}}
+        volumeMounts:
+        - name: ckan-data
+          mountPath: /var/lib/postgresql/data
+          subPath: postgresql-data
+      volumes:
+      - name: ckan-data
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-db
+      {{ else }}
+        hostPath:
+          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

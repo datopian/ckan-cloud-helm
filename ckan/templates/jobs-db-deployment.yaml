@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: {name: jobs-db}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: {app: jobs-db}
+    spec:
+      {{ if .Values.ckanJobsDbTerminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.ckanJobsDbTerminationGracePeriodSeconds }}
+      {{ end }}
+      containers:
+      - name: postgres
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "123456"
+        {{ if .Values.ckanJobsDbResources }}
+        resources: {{ .Values.ckanJobsDbResources }}
+        {{ end }}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: ckan-data
+          subPath: ckan-jobs-db
+      volumes:
+      - name: ckan-data
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-jobs-db
+      {{ else }}
+        hostPath:
+          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

@@ -1,0 +1,250 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ckan
+data:
+  who.ini: |
+    [plugin:auth_tkt]
+    use = ckan.lib.auth_tkt:make_plugin
+
+    [plugin:friendlyform]
+    use = repoze.who.plugins.friendlyform:FriendlyFormPlugin
+    login_form_url= /user/login
+    login_handler_path = /login_generic
+    logout_handler_path = /user/logout
+    rememberer_name = auth_tkt
+    post_login_url = /user/logged_in
+    post_logout_url = /user/logged_out
+    charset = utf-8
+
+    [general]
+    request_classifier = repoze.who.classifiers:default_request_classifier
+    challenge_decider = repoze.who.classifiers:default_challenge_decider
+
+    [identifiers]
+    plugins =
+        friendlyform;browser
+        auth_tkt
+
+    [authenticators]
+    plugins =
+        auth_tkt
+        ckan.lib.authenticator:UsernamePasswordAuthenticator
+
+    [challengers]
+    plugins =
+        friendlyform;browser
+  production.ini.template: |
+    [DEFAULT]
+    debug = false
+
+    [server:main]
+    use = egg:Paste#http
+    host = 0.0.0.0
+    port = 5000
+
+    [app:main]
+    use = egg:ckan
+    full_stack = true
+    cache_dir = /tmp/%%(ckan.site_id)s/
+    beaker.session.key = ckan
+
+    beaker.session.secret = {{ "{{" }}BEAKER_SESSION_SECRET{{ "}}" }}
+    app_instance_uuid = {{ "{{" }}APP_INSTANCE_UUID{{ "}}" }}
+
+    who.config_file = %%(here)s/who.ini
+    who.log_level = warning
+    who.log_file = %%(cache_dir)s/who_log.ini
+    # Session timeout (user logged out after period of inactivity, in seconds).
+    # Inactive by default, so the session doesn't expire.
+    # who.timeout = 86400
+
+    ## Database Settings
+    sqlalchemy.url = {{ "{{" }}SQLALCHEMY_URL{{ "}}" }}
+
+    ckan.datastore.write_url = {{ "{{" }}CKAN_DATASTORE_WRITE_URL{{ "}}" }}
+    ckan.datastore.read_url = {{ "{{" }}CKAN_DATASTORE_READ_URL{{ "}}" }}
+
+    # PostgreSQL' full-text search parameters
+    ckan.datastore.default_fts_lang = english
+    ckan.datastore.default_fts_index_method = gist
+
+
+    ## Site Settings
+
+    ckan.site_url = {{ .Values.siteUrl | default "http://localhost:8080" }}
+    #ckan.use_pylons_response_cleanup_middleware = true
+
+    ## Authorization Settings
+
+    ckan.auth.anon_create_dataset = {{ .Values.authAnon_create_dataset | default "false" }}
+    ckan.auth.create_unowned_dataset = {{ .Values.authCreate_unowned_dataset | default "false" }}
+    ckan.auth.create_dataset_if_not_in_organization = {{ .Values.authCreate_dataset_if_not_in_organization | default "true" }}
+    ckan.auth.user_create_groups = {{ .Values.authUser_create_groups | default "false" }}
+    ckan.auth.user_create_organizations = {{ .Values.authUser_create_organizations | default "false" }}
+    ckan.auth.user_delete_groups = {{ .Values.authUser_delete_groups | default "false" }}
+    ckan.auth.user_delete_organizations = {{ .Values.authUser_delete_organizations | default "false" }}
+    ckan.auth.create_user_via_api = {{ .Values.authCreate_user_via_api | default "false" }}
+    ckan.auth.create_user_via_web = {{ .Values.authCreate_user_via_web | default "true" }}
+    ckan.auth.roles_that_cascade_to_sub_groups = {{ .Values.authRoles_that_cascade_to_sub_groups | default "admin" }}
+
+
+    ## Search Settings
+
+    ckan.site_id = default
+    solr_url = {{ "{{" }}SOLR_URL{{ "}}" }}
+
+
+    ## Redis Settings
+
+    # URL to your Redis instance, including the database to be used.
+    ckan.redis.url = {{ "{{" }}CKAN_REDIS_URL{{ "}}" }}
+
+
+    ## CORS Settings
+
+    # If cors.origin_allow_all is true, all origins are allowed.
+    # If false, the cors.origin_whitelist is used.
+    # ckan.cors.origin_allow_all = true
+    # cors.origin_whitelist is a space separated list of allowed domains.
+    # ckan.cors.origin_whitelist = http://example1.com http://example2.com
+
+
+    ## Plugins Settings
+
+    #		Add ``resource_proxy`` to enable resorce proxying and get around the
+    #		same origin policy
+    ckan.plugins = {{ .Values.ckanPlugins | default "stats text_view image_view recline_view datastore xloader" }}
+
+    # Define which views should be created by default
+    # (plugins must be loaded in ckan.plugins)
+    ckan.views.default_views = image_view text_view recline_view
+
+    # Customize which text formats the text_view plugin will show
+    #ckan.preview.json_formats = json
+    #ckan.preview.xml_formats = xml rdf rdf+xml owl+xml atom rss
+    #ckan.preview.text_formats = text plain text/plain
+
+    # Customize which image formats the image_view plugin will show
+    #ckan.preview.image_formats = png jpeg jpg gif
+
+    ## Front-End Settings
+
+    # Uncomment following configuration to enable using of Bootstrap 2
+    #ckan.base_public_folder = public-bs2
+    #ckan.base_templates_folder = templates-bs2
+
+    ckan.site_title = {{ .Values.siteTitle | default "Datagov CKAN Demo" }}
+    ckan.site_logo = {{ .Values.siteLogo | default "/base/images/ckan-logo.png" }}
+    ckan.site_description = {{ .Values.siteDescription | default "Local development environment" }}
+    ckan.favicon = {{ .Values.favIcon | default "/base/images/ckan.ico" }}
+    ckan.gravatar_default = identicon
+    ckan.preview.direct = png jpg gif
+    ckan.preview.loadable = html htm rdf+xml owl+xml xml n3 n-triples turtle plain atom csv tsv rss txt json
+    ckan.display_timezone = {{ .Values.displayTimezone | default "Etc/UTC" }}
+
+    # package_hide_extras = for_search_index_only
+    #package_edit_return_url = http://another.frontend/dataset/<NAME>
+    #package_new_return_url = http://another.frontend/dataset/<NAME>
+    #ckan.recaptcha.publickey =
+    #ckan.recaptcha.privatekey =
+    #licenses_group_url = http://licenses.opendefinition.org/licenses/groups/ckan.json
+    # ckan.template_footer_end =
+
+
+    ## Internationalisation Settings
+    #    ckan.locale_default = {{ .Values.localeDefault }}
+    #    ckan.locale_order = {{ .Values.localeOrder }}
+    #    ckan.locales_offered = {{ .Values.localesOffered }}
+    #    ckan.locales_filtered_out = {{ .Values.localesFilteredOut }}
+
+    ## Feeds Settings
+
+    ckan.feeds.authority_name =
+    ckan.feeds.date =
+    ckan.feeds.author_name =
+    ckan.feeds.author_link =
+
+    ## Storage Settings
+
+    ckan.storage_path = /var/lib/ckan
+    ckan.max_resource_size = 100
+    ckan.max_image_size = 5
+
+    ## xloader settings
+
+    ckanext.xloader.jobs_db.uri = postgresql://postgres:123456@jobs-db/postgres
+
+    # Resource Proxy settings
+    # Preview size limit, default: 1MB
+    #ckan.resource_proxy.max_file_size = 1048576
+    # Size of chunks to read/write.
+    #ckan.resource_proxy.chunk_size = 4096
+
+    ## Activity Streams Settings
+
+    #ckan.activity_streams_enabled = true
+    #ckan.activity_list_limit = 31
+    #ckan.activity_streams_email_notifications = true
+    #ckan.email_notifications_since = 2 days
+    ckan.hide_activity_from_users = %%(ckan.site_id)s
+
+
+    ## Email settings
+
+    #email_to = errors@example.com
+    #error_email_from = ckan-errors@example.com
+    smtp.server = {{ "{{" }}SMTP_SERVER{{ "}}" }}
+    smtp.starttls = {{ "{{" }}SMTP_STARTTLS{{ "}}" }}
+    smtp.user = {{ "{{" }}SMTP_USER{{ "}}" }}
+    smtp.password = {{ "{{" }}SMTP_PASSWORD{{ "}}" }}
+    smtp.mail_from = {{ "{{" }}SMTP_MAIL_FROM{{ "}}" }}
+
+{{ if .Values.extraCkanConfig }}{{ .Values.extraCkanConfig | indent 4 }}{{ end }}
+
+    ## Logging configuration
+    [loggers]
+    keys = root, ckan, ckanext
+
+    [handlers]
+    keys = console
+
+    [formatters]
+    keys = generic
+
+    [logger_root]
+    level = WARNING
+    handlers = console
+
+    [logger_ckan]
+    level = INFO
+    handlers = console
+    qualname = ckan
+    propagate = 0
+
+    [logger_ckanext]
+    level = DEBUG
+    handlers = console
+    qualname = ckanext
+    propagate = 0
+
+    [handler_console]
+    class = StreamHandler
+    args = (sys.stderr,)
+    level = NOTSET
+    formatter = generic
+
+    [formatter_generic]
+    format = %%(asctime)s %%(levelname)-5.5s [%%(name)s] %%(message)s
+  ckan_init.sh.template: |
+    #!/usr/bin/env bash
+    echo Waiting for ckan infrastructure...
+    while sleep 2; do
+        pg_isready -h db &&\
+        pg_isready -h datastore-db &&\
+        wget -qO - {{ "{{" }}SOLR_URL{{ "}}" }}/schema/version &&\
+        redis-cli -h redis ping &&\
+        exit 0
+        echo .
+    done
+    exit 1

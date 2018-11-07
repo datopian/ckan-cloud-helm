@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: solr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: solr
+    spec:
+      initContainers:
+      - name: permissions
+        image: alpine
+        command:
+        - sh
+        - "-c"
+        - |
+          chown -R 8983:8983 /opt/solr/server/solr/ckan/data &&\
+          ls -lah /opt/solr/server/solr/ckan/data
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: ckan-data
+          mountPath: /opt/solr/server/solr/ckan/data
+          subPath: solr-ckan-data
+      containers:
+      - image: {{ .Values.solrImage | quote }}
+        name: solr
+        ports:
+        - containerPort: 8983
+        {{ if .Values.solrResources }}
+        resources: {{ .Values.solrResources }}
+        {{ end }}
+        volumeMounts:
+        - name: ckan-data
+          mountPath: /opt/solr/server/solr/ckan/data
+          subPath: solr-ckan-data
+      volumes:
+      - name: ckan-data
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-solr
+      {{ else }}
+        hostPath:
+          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

@@ -1,0 +1,122 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: {name: ckan}
+spec:
+  replicas: {{ .Values.replicas | default "2" }}
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels: {app: ckan}
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/ckan-configmap.yaml") . | sha256sum }}
+    spec:
+      {{ if .Values.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{ end }}
+      serviceAccountName: ckan-{{ .Release.Namespace }}-operator
+      initContainers:
+      - name: secrets
+        image: {{ .Values.ckanOperatorImage | quote }}
+        command:
+        - bash
+        - "-c"
+        - |
+          ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
+          ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
+                                                    {{ .Values.ckanSecretName | quote }} &&\
+          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh
+        volumeMounts:
+        - name: ckan-conf-secrets
+          mountPath: /etc/ckan-conf/secrets
+      - name: files
+        image: alpine
+        command:
+        - sh
+        - "-c"
+        - |
+          chown -R 900:900 /var/lib/ckan && chmod -R ug+w /var/lib/ckan && chown -R 900:900 /etc/ckan-conf/secrets &&\
+          ls -lah /var/lib/ckan && ls -lah /etc/ckan-conf/secrets
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
+        - name: ckan-conf-secrets
+          mountPath: /etc/ckan-conf/secrets
+      {{ if .Values.ckanSolrRebuild }}
+      - name: ckan-solr-rebuild
+        image: {{ .Values.ckanImage | quote }}
+        command: [/ckan-entrypoint.sh, ckan-paster, --plugin=ckan, search-index, rebuild, -c, /etc/ckan/production.ini]
+        env:
+        - name: CKAN_STORAGE_PATH
+          value: /var/lib/ckan/data
+        - name: CKAN_K8S_SECRETS
+          value: /etc/ckan-conf/secrets/secrets.sh
+        - name: CKAN_K8S_TEMPLATES
+          value: /etc/ckan-conf/templates
+        - name: GUNICORN_WORKERS
+          value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
+        volumeMounts:
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
+        - name: ckan-conf-secrets
+          mountPath: /etc/ckan-conf/secrets
+          readOnly: true
+        - name: ckan-conf-templates
+          mountPath: /etc/ckan-conf/templates
+          readOnly: true
+      {{ end }}
+      containers:
+      - name: ckan
+        image: {{ .Values.ckanImage | quote }}
+        env:
+        - name: CKAN_STORAGE_PATH
+          value: /var/lib/ckan/data
+        - name: CKAN_K8S_SECRETS
+          value: /etc/ckan-conf/secrets/secrets.sh
+        - name: CKAN_K8S_TEMPLATES
+          value: /etc/ckan-conf/templates
+        - name: GUNICORN_WORKERS
+          value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
+        ports:
+        - containerPort: 5000
+        {{ if .Values.ckanResources }}
+        resources: {{ .Values.ckanResources }}
+        {{ end }}
+        volumeMounts:
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
+        - name: ckan-conf-secrets
+          mountPath: /etc/ckan-conf/secrets
+          readOnly: true
+        - name: ckan-conf-templates
+          mountPath: /etc/ckan-conf/templates
+          readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          timeoutSeconds: 8
+          failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 20
+          periodSeconds: 60
+          timeoutSeconds: 8
+          failureThreshold: 3
+      volumes:
+      - name: ckan-conf-secrets
+        emptyDir: {}
+      - name: ckan-conf-templates
+        configMap:
+          name: ckan
+      - name: ckan-data
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-ckan
+      {{ else }}
+        hostPath:
+          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

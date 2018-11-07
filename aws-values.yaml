@@ -1,0 +1,87 @@
+# Domain for the load balancer
+domain: cloud-demo5.ckan.io
+
+# automatic SSL using Let's encrypt for subdomains of ckan.io
+withSansSSL: true
+
+# if set, create-instance script will register this subdomain under ckan.io
+registerSubdomain: "cloud-demo5"
+
+# Main URL to the CKAN web-app and API
+siteUrl: http://localhost:8080
+
+# CKAN pods
+replicas: 2
+terminationGracePeriodSeconds: 30
+ckanGunicornWorkers: 2
+ckanResources: '{"requests": {"cpu": "400m", "memory": "1200Mi"}, "limits": {"memory": "2Gi"}}'
+
+# CKAN config
+ckanPlugins: "stats text_view image_view recline_view datastore xloader"
+siteTitle: "Datagov CKAN Demo"
+siteLogo: "/base/images/ckan-logo.png"
+siteDescription: "Staging environment"
+favIcon: /base/images/ckan.ico
+displayTimezone: Etc/UTC
+
+# CKAN auth
+authAnon_create_dataset: "false"
+authCreate_unowned_dataset: "false"
+authCreate_dataset_if_not_in_organization: "true"
+authUser_create_groups: "false"
+authUser_create_organizations: "false"
+authUser_delete_groups: "false"
+authUser_delete_organizations: "false"
+authCreate_user_via_api: "false"
+authCreate_user_via_web: "true"
+authRoles_that_cascade_to_sub_groups: "admin"
+
+# optional extra CKAN configurations - appended to the production.ini file
+# extraCkanConfig: |
+#   ckanext.foo = bar
+
+# DataStore
+datastoreDbTerminationGracePeriodSeconds: 30
+datastoreDbResources: '{"requests": {"cpu": "100m", "memory": "300Mi"}, "limits": {"memory": "600Mi"}}'
+
+# DB
+dbTerminationGracePeriodSeconds: 30
+dbResources: '{"requests": {"cpu": "100m", "memory": "300Mi"}, "limits": {"memory": "600Mi"}}'
+
+# CKAN jobs
+ckanJobsDbTerminationGracePeriodSeconds: 30
+ckanJobsDbResources: '{"requests": {"cpu": "20m", "memory": "50Mi"}, "limits": {"memory": "200Mi"}}'
+ckanJobsTerminationGracePeriodSeconds: 30
+ckanJobsResources: '{"requests": {"cpu": "150m", "memory": "600Mi"}, "limits": {"memory": "1500Mi"}}'
+ckanJobsPortForward: true  # this is required until you setup an external load balancer and domain
+
+# Nginx
+nginxReplicas: 2
+nginxResources: '{"requests": {"cpu": "60m", "memory": "300Mi"}, "limits": {"memory": "800Mi"}}'
+
+# Redis
+redisResources: '{"requests": {"cpu": "15m", "memory": "100Mi"}, "limits": {"memory": "300Mi"}}'
+
+# SOLR
+solrResources: '{"requests": {"cpu": "60m", "memory": "600Mi"}, "limits": {"memory": "1Gi"}}'
+
+# Persistent storage
+usePersistentVolumes: true
+storageClassName: cca-storage
+ckanStorageClassName: cca-ckan
+dbPersistentDiskSizeGB: 20
+dataStoreDbPersistentDiskSizeGB: 20
+jobsDbPersistentDiskSizeGB: 5
+solrPersistentDiskSizeGB: 10
+
+# Secrets
+# these secrets are created by cca-operator, if you need to recreate the secrets, change the secret name
+ckanSecretName: ckan-secrets
+envVarsSecretName: ckan-env-vars
+
+# docker images are built by Jenkins on cloud-management.ckan.io, hosted on private gitlab Docker registry
+ckanOperatorImage: registry.gitlab.com/datopian/datagov-ckan-multi:cca-operator-e4111a5ac6c20a69e548b88403733bd3cf16c270
+ckanImage: registry.gitlab.com/datopian/datagov-ckan-multi:ckan-e4111a5ac6c20a69e548b88403733bd3cf16c270
+dbImage: registry.gitlab.com/datopian/datagov-ckan-multi:db-e4111a5ac6c20a69e548b88403733bd3cf16c270
+solrImage: registry.gitlab.com/datopian/datagov-ckan-multi:solr-e4111a5ac6c20a69e548b88403733bd3cf16c270
+nginxImage: registry.gitlab.com/datopian/datagov-ckan-multi:nginx-e4111a5ac6c20a69e548b88403733bd3cf16c270

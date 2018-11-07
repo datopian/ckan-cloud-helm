@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: datastore-db
+spec:
+  selector:
+    app: datastore-db
+  ports:
+  - name: "5432"
+    port: 5432
