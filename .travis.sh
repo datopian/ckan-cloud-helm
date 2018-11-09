@@ -22,7 +22,7 @@ elif [ "${1}" == "deploy" ]; then
     [ "$?" != "0" ] && exit 1
     if ! [ -z "${SLACK_TAG_NOTIFICATION_CHANNEL}" ] && ! [ -z "${SLACK_TAG_NOTIFICATION_WEBHOOK_URL}" ]; then
         ! curl -X POST \
-               --data-urlencode "payload={\"channel\": \"#${SLACK_TAG_NOTIFICATION_CHANNEL}\", \"username\": \"CKAN Cloud\", \"text\": \"Released ckan-cloud-helm ${TAG}\nhttps://github.com/ViderumGlobal/ckan-cloud-helm/releases/tag/${TAG}\", \"icon_emoji\": \":female-technologist:\"}" \
+               --data-urlencode "payload={\"channel\": \"#${SLACK_TAG_NOTIFICATION_CHANNEL}\", \"username\": \"CKAN Cloud\", \"text\": \"Released ckan-cloud-helm ${TRAVIS_TAG}\nhttps://github.com/ViderumGlobal/ckan-cloud-helm/releases/tag/${TRAVIS_TAG}\", \"icon_emoji\": \":female-technologist:\"}" \
                ${SLACK_TAG_NOTIFICATION_WEBHOOK_URL} && exit 1
     fi
     exit 0

@@ -16,7 +16,7 @@ registerSubdomain: "cloud-demo5"
 # These values are used to populate the CKAN Helm chart values
 
 # Main URL to the CKAN web-app and API
-siteUrl: http://localhost:8080
+siteUrl: http://nginx:8080
 
 # CKAN pods
 replicas: 2

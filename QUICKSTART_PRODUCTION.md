@@ -19,22 +19,32 @@ helm version &&\
 helm list
 ```
 
+## Register the CKAN Cloud Helm charts repository
+
+```
+helm repo add ckan-cloud https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository
+```
+
 ## Get the code
 
 Clone from Git or download the source zip.
 
-All the following commands and scripts should run from current working directory: `datagov-ckan-multi/multi-tenant-helm`
+All the following commands and scripts should run from the `ckan-cloud-helm` project directory
 
-## Define utility functions
+## Define shortcut functions
 
 ```
+export KUBECONFIG=/etc/ckan-cloud/.kube-config
+export CCA_HELM_FUNCTIONS_KUBECTL_ARGS=""
+export CCA_HELM_FUNCTIONS_HELM_ARGS=""
+export CKAN_CHART=ckan-cloud/ckan
 source cca_helm_functions.sh
 ```
 
 ## Create CKAN namespace and RBAC
 
 ```
-export CKAN_NAMESPACE="test1"
+export CKAN_NAMESPACE="test2"
 
 cca_kubectl create ns "${CKAN_NAMESPACE}" &&\
 cca_kubectl create serviceaccount "ckan-${CKAN_NAMESPACE}-operator" &&\
@@ -48,7 +58,7 @@ cca_kubectl create rolebinding "ckan-${CKAN_NAMESPACE}-operator-rolebinding" \
 
 ## Deploy
 
-Save the values yaml file:
+Copy the values yaml file and (optionally) modify:
 
 ```
 sudo cp aws-values.yaml /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
@@ -86,6 +96,30 @@ cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yam
 
 ## Login to CKAN
 
+ensure all pods are running
+
+```
+cca_kubectl get pods
+```
+
+Start port forward to the nginx pod
+
+```
+cca_kubectl port-forward $(cca_pod_name nginx) 8080
+```
+
+Add a hosts entry mapping domain `nginx` to `127.0.0.1`:
+
+```
+127.0.0.1 nginx
+```
+
+Ensure CKAN availability:
+
+```
+curl http://nginx:8080/api/3
+```
+
 Create an admin user
 
 ```
@@ -93,13 +127,7 @@ cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan 
     add admin password=12345678 email=admin@localhost"
 ```
 
-Start port forward to the nginx pod
-
-```
-cca_kubectl port-forward $(cca_pod_name nginx) 8080:80
-```
-
-Login to CKAN at http://localhost:8080 with username `admin` password `12345678`
+Login to CKAN at http://nginx:8080 with username `admin` password `12345678`
 
 ## Expose via load balancer
 
@@ -107,9 +135,31 @@ see [multi-tenant-cluster](../multi-tenant-cluster/README.md) for creating and c
 
 Configure the load balancer to direct traffic to `http://nginx.<CKAN_NAMESPACE>:8080`
 
-Duplicate and modify `aws-values.yaml` and set the siteUrl to the relevant external domain.
+Modify the instance values and set the siteUrl to the relevant external domain.
 
 Deploy with the modified values:
+
+```
+cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
+```
+
+## Testing different CKAN helm chart releases
+
+The default deploy uses the latest released CKAN Helm chart.
+
+The `cca_helm_upgrade` function uses the `CKAN_CHART` environment variable to determine the chart to install.
+
+Check available chart versions from the repository:
+
+```
+helm repo update
+helm search ckan-cloud/ckan
+```
+
+* Use a specific chart release: `export CKAN_CHART="ckan-cloud/ckan --version v0.0.2"`
+* Use the chart from local directory `ckan` for testing local chart changes: `export CKAN_CHART=ckan`
+
+Deploy normally:
 
 ```
 cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml

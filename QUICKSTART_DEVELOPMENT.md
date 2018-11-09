@@ -111,6 +111,7 @@ kubectl --context minikube --namespace "${CKAN_NAMESPACE}" \
 ```
 export CCA_HELM_FUNCTIONS_KUBECTL_ARGS="--context minikube"
 export CCA_HELM_FUNCTIONS_HELM_ARGS="--kube-context minikube"
+export CKAN_CHART=ckan
 source cca_helm_functions.sh
 ```
 

@@ -15,6 +15,6 @@ cca_helm() {
 
 cca_helm_upgrade() {
   [ -z "${CKAN_NAMESPACE}" ] && echo missing CKAN_NAMESPACE env var && return 1
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" ckan --dry-run "$@" &&\
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" ckan "$@"
+  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" $CKAN_CHART --dry-run "$@" &&\
+  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" $CKAN_CHART "$@"
 }
