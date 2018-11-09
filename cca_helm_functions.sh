@@ -1,7 +1,7 @@
 cca_kubectl() {
   [ -z "${CKAN_NAMESPACE}" ] && echo missing CKAN_NAMESPACE env var && return 1
-  echo kubeconfig = /etc/ckan-cloud/.kube-config, CKAN_NAMESPACE = $CKAN_NAMESPACE >/dev/stderr
-  kubectl --kubeconfig /etc/ckan-cloud/.kube-config --namespace "${CKAN_NAMESPACE}" "$@"
+  echo $CCA_HELM_FUNCTIONS_KUBECTL_ARGS CKAN_NAMESPACE = $CKAN_NAMESPACE >/dev/stderr
+  kubectl $CCA_HELM_FUNCTIONS_KUBECTL_ARGS --namespace "${CKAN_NAMESPACE}" "$@"
 }
 
 cca_pod_name() {
@@ -9,13 +9,12 @@ cca_pod_name() {
 }
 
 cca_helm() {
-  echo kubeconfig = /etc/ckan-cloud/.kube-config  >/dev/stderr
-  ! [ -e ./ckan/Chart.yaml ] && cd ../multi-tenant-helm
-  helm --kubeconfig /etc/ckan-cloud/.kube-config "$@"
+  echo $CCA_HELM_FUNCTIONS_HELM_ARGS >/dev/stderr
+  helm $CCA_HELM_FUNCTIONS_HELM_ARGS "$@"
 }
 
 cca_helm_upgrade() {
   [ -z "${CKAN_NAMESPACE}" ] && echo missing CKAN_NAMESPACE env var && return 1
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-multi-${CKAN_NAMESPACE}" ckan --dry-run "$@" &&\
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-multi-${CKAN_NAMESPACE}" ckan "$@"
+  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" ckan --dry-run "$@" &&\
+  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-cloud-${CKAN_NAMESPACE}" ckan "$@"
 }

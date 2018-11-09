@@ -28,7 +28,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_
 
 Clone from Git or download the source zip.
 
-All the following commands and scripts should run from current working directory: `datagov-ckan-multi/multi-tenant-helm`
+All the following commands and scripts should run from `ckan-cloud-helm` project directory
 
 ## Start a Minikube cluster
 
@@ -109,37 +109,20 @@ kubectl --context minikube --namespace "${CKAN_NAMESPACE}" \
 ## Define shortcut functions
 
 ```
-cca_kubectl() {
-  [ -z "${CKAN_NAMESPACE}" ] && echo missing CKAN_NAMESPACE env var && return 1
-  echo context = minikube, CKAN_NAMESPACE = $CKAN_NAMESPACE >/dev/stderr
-  kubectl --context minikube --namespace "${CKAN_NAMESPACE}" "$@"
-}
-
-cca_pod_name() {
-  cca_kubectl get pods -l "app=${1}" -o 'jsonpath={.items[0].metadata.name}'
-}
-
-cca_helm() {
-  [ -z "${CKAN_NAMESPACE}" ] && echo missing CKAN_NAMESPACE env var && return 1
-  echo context = minikube, CKAN_NAMESPACE = $CKAN_NAMESPACE  >/dev/stderr
-  helm --kube-context minikube "$@"
-}
-
-cca_helm_upgrade() {
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-multi-${CKAN_NAMESPACE}" ckan --dry-run "$@" &&\
-  cca_helm upgrade --namespace $CKAN_NAMESPACE "ckan-multi-${CKAN_NAMESPACE}" ckan "$@"
-}
+export CCA_HELM_FUNCTIONS_KUBECTL_ARGS="--context minikube"
+export CCA_HELM_FUNCTIONS_HELM_ARGS="--kube-context minikube"
+source cca_helm_functions.sh
 ```
 
 ## Deploy
 
-First install should be with a single replica, additional values for running on Minikube:
+First install should be with a single replica:
 
 ```
-cca_helm_upgrade --install --set replicas=1 --set ckanJobsPortForward=true --set nginxReplicas=1
+cca_helm_upgrade --install --set replicas=1 --set nginxReplicas=1
 ```
 
-Wait for Pods to be in Running state:
+Wait for pods to be in Running state:
 
 ```
 cca_kubectl get pods
@@ -159,6 +142,30 @@ cca_kubectl logs -f $(cca_pod_name ckan)
 
 ## Login to CKAN
 
+ensure all pods are running
+
+```
+cca_kubectl get pods
+```
+
+Start port forward to the nginx pod
+
+```
+cca_kubectl port-forward $(cca_pod_name nginx) 8080
+```
+
+Add a hosts entry mapping domain `nginx` to `127.0.0.1`:
+
+```
+127.0.0.1 nginx
+```
+
+Ensure CKAN availability:
+
+```
+curl http://nginx:8080/api/3
+```
+
 Create an admin user
 
 ```
@@ -166,10 +173,4 @@ cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan 
     add admin password=12345678 email=admin@localhost"
 ```
 
-Start port forward to the nginx pod
-
-```
-cca_kubectl port-forward $(cca_pod_name nginx) 8080:80
-```
-
-Login to CKAN at http://localhost:8080 with username `admin` password `12345678`
+Login to CKAN at http://nginx:8080 with username `admin` password `12345678`

@@ -1,3 +1,8 @@
+# Example values for a production deployment on AWS
+
+### cca-operator values ###
+# These values are used by cca-operator (e.g. by the create / update instance commands)
+
 # Domain for the load balancer
 domain: cloud-demo5.ckan.io
 
@@ -6,6 +11,9 @@ withSansSSL: true
 
 # if set, create-instance script will register this subdomain under ckan.io
 registerSubdomain: "cloud-demo5"
+
+### CKAN Helm chart values ###
+# These values are used to populate the CKAN Helm chart values
 
 # Main URL to the CKAN web-app and API
 siteUrl: http://localhost:8080
@@ -53,7 +61,6 @@ ckanJobsDbTerminationGracePeriodSeconds: 30
 ckanJobsDbResources: '{"requests": {"cpu": "20m", "memory": "50Mi"}, "limits": {"memory": "200Mi"}}'
 ckanJobsTerminationGracePeriodSeconds: 30
 ckanJobsResources: '{"requests": {"cpu": "150m", "memory": "600Mi"}, "limits": {"memory": "1500Mi"}}'
-ckanJobsPortForward: true  # this is required until you setup an external load balancer and domain
 
 # Nginx
 nginxReplicas: 2
@@ -76,12 +83,12 @@ solrPersistentDiskSizeGB: 10
 
 # Secrets
 # these secrets are created by cca-operator, if you need to recreate the secrets, change the secret name
-ckanSecretName: ckan-secrets
-envVarsSecretName: ckan-env-vars
+# ckanSecretName: ckan-secrets
+# envVarsSecretName: ckan-env-vars
 
-# docker images are built by Jenkins on cloud-management.ckan.io, hosted on private gitlab Docker registry
-ckanOperatorImage: registry.gitlab.com/datopian/datagov-ckan-multi:cca-operator-e4111a5ac6c20a69e548b88403733bd3cf16c270
-ckanImage: registry.gitlab.com/datopian/datagov-ckan-multi:ckan-e4111a5ac6c20a69e548b88403733bd3cf16c270
-dbImage: registry.gitlab.com/datopian/datagov-ckan-multi:db-e4111a5ac6c20a69e548b88403733bd3cf16c270
-solrImage: registry.gitlab.com/datopian/datagov-ckan-multi:solr-e4111a5ac6c20a69e548b88403733bd3cf16c270
-nginxImage: registry.gitlab.com/datopian/datagov-ckan-multi:nginx-e4111a5ac6c20a69e548b88403733bd3cf16c270
+# uncomment to use latest unstable version, or modify to use custom images
+# ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-latest
+# ckanImage: viderum/ckan-cloud-docker:ckan-latest
+# dbImage: viderum/ckan-cloud-docker:db-latest
+# solrImage: viderum/ckan-cloud-docker:solr-latest
+# nginxImage: viderum/ckan-cloud-docker:nginx-latest

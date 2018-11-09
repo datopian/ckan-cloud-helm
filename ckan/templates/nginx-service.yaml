@@ -3,5 +3,5 @@ kind: Service
 metadata: {name: nginx}
 spec:
   ports:
-  - {name: '80', port: 80}
+  - {name: '8080', port: 8080}
   selector: {app: nginx}

@@ -1,0 +1,20 @@
+language: bash
+sudo: required
+env:
+  global:
+  - TRAVIS_CI_OPERATOR=1
+services:
+- docker
+install:
+- curl -L https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/travis_ci_operator.sh > $HOME/bin/travis_ci_operator.sh
+- bash $HOME/bin/travis_ci_operator.sh init
+- bash .travis.sh install
+script:
+- bash .travis.sh script
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bash .travis.sh deploy
+  on:
+    tags: true
+    condition: $TRAVIS_PULL_REQUEST = "false"

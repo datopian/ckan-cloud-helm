@@ -62,17 +62,6 @@ spec:
         - name: ckan-conf-templates
           mountPath: /etc/ckan-conf/templates
           readOnly: true
-      {{ if .Values.ckanJobsPortForward }}
-      - name: port-forward
-        image: {{ .Values.ckanOperatorImage | quote }}
-        resources: {"requests": {"cpu": "10m", "memory": "50Mi"}, "limits": {"memory": "200Mi"}}
-        command:
-        - bash
-        - "-c"
-        - |
-          NGINX_POD_NAME=$(kubectl get pods -l "app=nginx" -o 'jsonpath={.items[0].metadata.name}')
-          exec kubectl port-forward "${NGINX_POD_NAME}" 8080:80
-      {{ end }}
       volumes:
       - name: ckan-conf-secrets
         emptyDir: {}

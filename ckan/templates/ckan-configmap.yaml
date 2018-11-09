@@ -72,7 +72,7 @@ data:
 
     ## Site Settings
 
-    ckan.site_url = {{ .Values.siteUrl | default "http://localhost:8080" }}
+    ckan.site_url = {{ .Values.siteUrl | default "http://nginx:8080" }}
     #ckan.use_pylons_response_cleanup_middleware = true
 
     ## Authorization Settings

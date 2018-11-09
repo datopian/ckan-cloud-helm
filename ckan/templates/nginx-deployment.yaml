@@ -14,7 +14,7 @@ spec:
       - name: nginx
         image: {{ .Values.nginxImage | quote }}
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         {{ if .Values.nginxResources }}
         resources: {{ .Values.nginxResources }}
         {{ end }}

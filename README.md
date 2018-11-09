@@ -1,4 +1,4 @@
-# Multi-tenant CKAN Helm chart
+# CKAN Cloud Helm Chart
 
 Helm chart which deploys a single CKAN instance and related infrastructure as part of a multi-tenant cluster.
 
@@ -9,5 +9,5 @@ Supported Kubernetes providers:
 
 ## Quickstart
 
-[Quickstart using Minikube for local development](QUICKSTART_MINIKUBE.md)
-[Quickstart for production deployment](QUCIKSTART_PRODUCTION.md)
+* [Quickstart for local development](QUICKSTART_DEVELOPMENT.md)
+* [Quickstart for production deployment](QUCIKSTART_PRODUCTION.md)
