@@ -1,0 +1,10 @@
+apiVersion: v1
+entries:
+  ckan:
+  - created: 2018-11-09T14:24:49.979424909Z
+    digest: 0bbf25c8ffea35d89ba20cb1401e6ce47eb66f363b864b21c099c226338e7908
+    name: ckan
+    urls:
+    - ckan-v0.0.1.tgz
+    version: v0.0.1
+generated: 2018-11-09T14:24:49.978832802Z
