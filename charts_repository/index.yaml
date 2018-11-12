@@ -1,10 +1,30 @@
 apiVersion: v1
 entries:
   ckan:
-  - created: 2018-11-09T15:09:18.466083824Z
+  - created: 2018-11-12T06:42:19.709772074Z
+    digest: 32fbadcdb115a991f2e62218db36aef6ecb1c3c962b4956940acc7408ed0348d
+    name: ckan
+    urls:
+    - ckan-v0.0.2.tgz
+    version: v0.0.2
+  - created: 2018-11-12T06:42:19.708892856Z
     digest: 1df1f656568d00357ed82af087f21348f38d59cbe556845259c2d9cedd5dbd1a
     name: ckan
     urls:
     - ckan-v0.0.1.tgz
     version: v0.0.1
-generated: 2018-11-09T15:09:18.464893493Z
+  efs:
+  - created: 2018-11-12T06:42:19.710004171Z
+    digest: 14080aab0fafa4abd38ab34c6318f7827a69704fdc19b99f6509b61616578940
+    name: efs
+    urls:
+    - efs-v0.0.2.tgz
+    version: v0.0.2
+  traefik:
+  - created: 2018-11-12T06:42:19.710281116Z
+    digest: c53d68a39dc24021a5fb123de59fb6dfbbb137678224613f34c4358efb4556a2
+    name: traefik
+    urls:
+    - traefik-v0.0.2.tgz
+    version: v0.0.2
+generated: 2018-11-12T06:42:19.707753762Z
