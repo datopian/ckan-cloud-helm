@@ -1,0 +1,59 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: traefik
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: traefik
+      annotations:
+        # update the pod on traefik configuration changes
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: traefik
+        image: traefik
+        ports:
+        - {containerPort: 80}
+        - {containerPort: 443}
+        resources: {"requests": {"cpu": "100m", "memory": "50Mi"}}
+        volumeMounts:
+        - name: etc-traefik
+          mountPath: /etc-traefik
+        - name: traefik-acme
+          mountPath: /traefik-acme
+          subPath: {{ .Release.Namespace }}-traefik
+        args:
+        - "--configFile=/etc-traefik/traefik.toml"
+        {{ if eq .Values.dnsProvider "route53" }}
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: {{ .Values.AWS_ACCESS_KEY_ID | quote }}
+        - name: AWS_REGION
+          value: {{ .Values.AWS_REGION | quote }}
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.awsSecretName }}
+              key: AWS_SECRET_ACCESS_KEY
+        {{ end }}
+        {{ if eq .Values.dnsProvider "cloudflare" }}
+        env:
+        - name: CLOUDFLARE_EMAIL
+          value: {{ .Values.CLOUDFLARE_EMAIL | quote }}
+        - name: CLOUDFLARE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.cfSecretName }}
+              key: CLOUDFLARE_API_KEY
+        {{ end }}
+      volumes:
+      - name: etc-traefik
+        configMap:
+          name: etc-traefik
+      - name: traefik-acme
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-traefik

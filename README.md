@@ -1,6 +1,6 @@
-# CKAN Cloud Helm Chart
+# CKAN Cloud Helm Charts
 
-Helm chart which deploys a single CKAN instance and related infrastructure as part of a multi-tenant cluster.
+Helm charts to support the CKAN Cloud CKAN instances and other related infrastructure.
 
 Supported Kubernetes providers:
 
