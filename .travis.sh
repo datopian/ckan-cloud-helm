@@ -17,7 +17,7 @@ elif [ "${1}" == "deploy" ]; then
         helm package ../ckan --version "${TRAVIS_TAG}" &&\
         helm package ../efs --version "${TRAVIS_TAG}" &&\
         helm package ../traefik --version "${TRAVIS_TAG}" &&\
-        helm repo index . &&\
+        helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ . &&\
         cd .. &&\
         git add charts_repository/index.yaml \
                 charts_repository/ckan-${TRAVIS_TAG}.tgz \
