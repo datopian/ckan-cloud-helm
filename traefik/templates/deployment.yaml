@@ -9,9 +9,11 @@ spec:
     metadata:
       labels:
         app: traefik
+      {{ if .Values.createConfigmap }}
       annotations:
         # update the pod on traefik configuration changes
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{ end }}
     spec:
       containers:
       - name: traefik
@@ -19,7 +21,7 @@ spec:
         ports:
         - {containerPort: 80}
         - {containerPort: 443}
-        resources: {"requests": {"cpu": "100m", "memory": "50Mi"}}
+        resources: {{ .Values.resources }}
         volumeMounts:
         - name: etc-traefik
           mountPath: /etc-traefik
@@ -53,7 +55,7 @@ spec:
       volumes:
       - name: etc-traefik
         configMap:
-          name: etc-traefik
+          name: {{ .Values.configmapName }}
       - name: traefik-acme
         persistentVolumeClaim:
           claimName: {{ .Release.Namespace }}-traefik

@@ -1,7 +1,8 @@
+{{ if .Values.createConfigmap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: etc-traefik
+  name: {{ .Values.configmapName }}
 data:
   traefik.toml: |
     # https://docs.traefik.io/configuration/commons/
@@ -38,3 +39,4 @@ data:
 
     [frontends]
 {{ .Values.frontends | indent 6}}
+{{ end }}

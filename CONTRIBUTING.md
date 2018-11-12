@@ -19,3 +19,17 @@ Please follow this suggested flow:
 
 * Helm chart repository is hosted on the same GitHub branch as the helm charts
 * The repository is updated when a new release is published on GitHub
+
+## Updating the Helm charts repo for development
+
+```
+SEMANTIC_VERSION=v0.0.0
+
+cd charts_repository &&\
+helm package ../ckan --version "${SEMANTIC_VERSION}" &&\
+helm package ../efs --version "${SEMANTIC_VERSION}" &&\
+helm package ../traefik --version "${SEMANTIC_VERSION}" &&\
+helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ .
+```
+
+Then you can test locally or push to GitHub to publish to the repo

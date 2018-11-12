@@ -1,0 +1,15 @@
+createConfigmap: false
+configmapName: "etc-traefik"
+resources: '{"requests": {"cpu": "100m", "memory": "50Mi"}}'
+
+dnsProvider: "route53|cloudflare"
+
+AWS_ACCESS_KEY_ID: ""
+AWS_REGION: ""
+awsSecretName: "secret_with_AWS_SECRET_ACCESS_KEY_value"
+
+CLOUDFLARE_EMAIL: ""
+CLOUDFLARE_API_KEY: ""
+cfSecretName: "secret_with_CLOUDFLARE_API_KEY_value"
+
+ckanStorageClassName: "cca-ckan"
