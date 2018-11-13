@@ -93,18 +93,18 @@ spec:
           httpGet:
             path: /
             port: 5000
-          initialDelaySeconds: 3
-          periodSeconds: 5
-          timeoutSeconds: 8
-          failureThreshold: 2
+          initialDelaySeconds: {{ .Values.ckanReadinessInitialDelaySeconds | default "15" }}
+          periodSeconds: {{ .Values.ckanReadinessPeriodSeconds | default "10" }}
+          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "12" }}
+          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "5" }}
         livenessProbe:
           httpGet:
             path: /
             port: 5000
-          initialDelaySeconds: 20
-          periodSeconds: 60
-          timeoutSeconds: 8
-          failureThreshold: 3
+          initialDelaySeconds: {{ .Values.ckanLivenessInitialDelaySeconds | default "60" }}
+          periodSeconds: {{ .Values.ckanLivenessPeriodSeconds | default "60" }}
+          timeoutSeconds: {{ .Values.ckanLivenessTimeoutSeconds | default "12" }}
+          failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "5" }}
       volumes:
       - name: ckan-conf-secrets
         emptyDir: {}
