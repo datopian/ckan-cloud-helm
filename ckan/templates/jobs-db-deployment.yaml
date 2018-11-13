@@ -35,6 +35,6 @@ spec:
           claimName: {{ .Release.Namespace }}-jobs-db
       {{ else }}
         hostPath:
-          path: /var/datagov-ckan-multi-{{ .Release.Namespace }}
+          path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}

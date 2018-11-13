@@ -26,7 +26,7 @@ ckanResources: '{"requests": {"cpu": "400m", "memory": "1200Mi"}, "limits": {"me
 
 # CKAN config
 ckanPlugins: "stats text_view image_view recline_view datastore xloader"
-siteTitle: "Datagov CKAN Demo"
+siteTitle: "CKAN Cloud Demo"
 siteLogo: "/base/images/ckan-logo.png"
 siteDescription: "Staging environment"
 favIcon: /base/images/ckan.ico

@@ -1,0 +1,13 @@
+# Values for a development deployment on Minikube
+# Most values are taken from the default values at ckan/values.yaml
+replicas: 1
+nginxReplicas: 1
+terminationGracePeriodSeconds: 1
+datastoreDbTerminationGracePeriodSeconds: 1
+dbTerminationGracePeriodSeconds: 1
+ckanJobsTerminationGracePeriodSeconds: 1
+ckanJobsDbTerminationGracePeriodSeconds: 1
+
+# use the latest unstable version of the helm chart
+ckanHelmChartVersion: v0.0.0
+ckanHelmChartRepo: https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository

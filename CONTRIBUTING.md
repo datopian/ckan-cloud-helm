@@ -29,7 +29,8 @@ cd charts_repository &&\
 helm package ../ckan --version "${SEMANTIC_VERSION}" &&\
 helm package ../efs --version "${SEMANTIC_VERSION}" &&\
 helm package ../traefik --version "${SEMANTIC_VERSION}" &&\
-helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ .
+helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ . &&\
+cd ..
 ```
 
 Then you can test locally or push to GitHub to publish to the repo

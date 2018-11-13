@@ -134,7 +134,7 @@ data:
     #ckan.base_public_folder = public-bs2
     #ckan.base_templates_folder = templates-bs2
 
-    ckan.site_title = {{ .Values.siteTitle | default "Datagov CKAN Demo" }}
+    ckan.site_title = {{ .Values.siteTitle | default "CKAN Cloud Demo" }}
     ckan.site_logo = {{ .Values.siteLogo | default "/base/images/ckan-logo.png" }}
     ckan.site_description = {{ .Values.siteDescription | default "Local development environment" }}
     ckan.favicon = {{ .Values.favIcon | default "/base/images/ckan.ico" }}
