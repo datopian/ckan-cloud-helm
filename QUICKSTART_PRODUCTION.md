@@ -2,7 +2,7 @@
 
 ## Create cluster resources
 
-The following resources are required, follow the [multi-tenant CKAN cluster management docs](../multi-tenant-cluster/README.md) to create them:
+The following resources are required, follow the [multi-tenant CKAN cluster management docs](https://github.com/ViderumGlobal/ckan-cloud-cluster/blob/master/README.md) to create them:
 
 * Kubernetes cluster, accessible via a kubeconfig file
 * Helm installed on the cluster
@@ -131,8 +131,6 @@ Login to CKAN at http://nginx:8080 with username `admin` password `12345678`
 
 ## Expose via load balancer
 
-see [multi-tenant-cluster](../multi-tenant-cluster/README.md) for creating and configuring the load balancer
-
 Configure the load balancer to direct traffic to `http://nginx.<CKAN_NAMESPACE>:8080`
 
 Modify the instance values and set the siteUrl to the relevant external domain.
@@ -143,11 +141,9 @@ Deploy with the modified values:
 cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
 ```
 
-## Testing different CKAN helm chart releases
+## Testing different CKAN helm chart versions
 
-The default deploy uses the latest released CKAN Helm chart.
-
-The `cca_helm_upgrade` function uses the `CKAN_CHART` environment variable to determine the chart to install.
+The `CKAN_CHART` environment variable determines which Helm chart version will be installed
 
 Check available chart versions from the repository:
 
@@ -156,11 +152,16 @@ helm repo update
 helm search ckan-cloud/ckan
 ```
 
-* Use a specific chart release: `export CKAN_CHART="ckan-cloud/ckan --version v0.0.2"`
-* Use the chart from local directory `ckan` for testing local chart changes: `export CKAN_CHART=ckan`
-
-Deploy normally:
+Deploy a specific version:
 
 ```
+export CKAN_CHART="ckan-cloud/ckan --version v0.0.2"
+cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
+```
+
+Deploy from local directory for development:
+
+```
+export CKAN_CHART="ckan"
 cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
 ```
