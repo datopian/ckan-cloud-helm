@@ -10,4 +10,4 @@ Supported Kubernetes providers:
 ## Quickstart
 
 * [Quickstart for local development](QUICKSTART_DEVELOPMENT.md)
-* [Quickstart for production deployment](QUCIKSTART_PRODUCTION.md)
+* [Quickstart for production deployment](QUICKSTART_PRODUCTION.md)
