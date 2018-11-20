@@ -7,3 +7,4 @@ usePersistentVolumes: false
 storageClassName: cca-storage
 ckanStorageClassName: cca-ckan
 apiDbPersistentDiskSizeGB: 10
+apiEnvFromSecret: api-env

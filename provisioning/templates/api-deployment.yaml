@@ -24,7 +24,7 @@ spec:
         - name: EXTERNAL_ADDRESS
           value: {{ .Values.apiExternalAddress | quote }}
         envFrom:
-          secretRef:
+        - secretRef:
             # secret with values which corresponds to the env vars from https://github.com/ViderumGlobal/ckan-cloud-provisioning-api
             # not including DATABASE_URL and EXTERNAL_ADDRESS which are defined in the chart values
             name: {{ .Values.apiEnvFromSecret | quote }}
