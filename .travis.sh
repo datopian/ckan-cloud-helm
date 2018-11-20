@@ -17,12 +17,14 @@ elif [ "${1}" == "deploy" ]; then
         helm package ../ckan --version "${TRAVIS_TAG}" &&\
         helm package ../efs --version "${TRAVIS_TAG}" &&\
         helm package ../traefik --version "${TRAVIS_TAG}" &&\
+        helm package ../provisioning --version "${TRAVIS_TAG}" &&\
         helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ . &&\
         cd .. &&\
         git add charts_repository/index.yaml \
                 charts_repository/ckan-${TRAVIS_TAG}.tgz \
                 charts_repository/efs-${TRAVIS_TAG}.tgz \
-                charts_repository/traefik-${TRAVIS_TAG}.tgz
+                charts_repository/traefik-${TRAVIS_TAG}.tgz \
+                charts_repository/provisioning-${TRAVIS_TAG}.tgz
     " "upgrade helm chart repo to CKAN chart ${TRAVIS_TAG}"
     [ "$?" != "0" ] && exit 1
     if ! [ -z "${SLACK_TAG_NOTIFICATION_CHANNEL}" ] && ! [ -z "${SLACK_TAG_NOTIFICATION_WEBHOOK_URL}" ]; then

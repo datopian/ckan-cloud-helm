@@ -1,0 +1,54 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: {{ .Values.apiImage | quote }}
+        ports:
+        - containerPort: 8000
+        {{ if .Values.apiResources }}
+        resources: {{ .Values.apiResources }}
+        {{ end }}
+        env:
+        - name: DATABASE_URL
+          value: postgresql://postgres:123456@localhost:5432/postgres
+        - name: EXTERNAL_ADDRESS
+          value: {{ .Values.apiExternalAddress | quote }}
+        envFrom:
+          secretRef:
+            # secret with values which corresponds to the env vars from https://github.com/ViderumGlobal/ckan-cloud-provisioning-api
+            # not including DATABASE_URL and EXTERNAL_ADDRESS which are defined in the chart values
+            name: {{ .Values.apiEnvFromSecret | quote }}
+      - name: db
+        image: {{ .Values.apiDbImage | quote }}
+        ports:
+        - containerPort: 5432
+        {{ if .Values.apiDbResources }}
+        resources: {{ .Values.apiDbResources }}
+        {{ end }}
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "123456"
+        volumeMounts:
+        - name: db
+          mountPath: /var/lib/postgresql/data
+          subPath: provisioning-api-db
+      volumes:
+      - name: db
+      {{ if .Values.usePersistentVolumes }}
+        persistentVolumeClaim:
+          claimName: {{ .Release.Namespace }}-api-db
+      {{ else }}
+        hostPath:
+          path: /var/ckan-cloud-{{ .Release.Namespace }}
+          type: DirectoryOrCreate
+      {{ end }}

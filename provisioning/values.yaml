@@ -1,0 +1,9 @@
+apiImage: viderum/ckan-cloud-provisioning-api:latest
+# apiResources: '{"requests": {"cpu": "50m", "memory": "200Mi"}, "limits": {"memory": "800Mi"}}'
+apiDbImage: postgres
+# apiDbResources: '{"requests": {"cpu": "50m", "memory": "200Mi"}, "limits": {"memory": "800Mi"}}'
+apiExternalAddress: http://localhost:8000
+usePersistentVolumes: false
+storageClassName: cca-storage
+ckanStorageClassName: cca-ckan
+apiDbPersistentDiskSizeGB: 10
