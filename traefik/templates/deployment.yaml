@@ -21,7 +21,8 @@ spec:
         ports:
         - {containerPort: 80}
         - {containerPort: 443}
-        resources: {{ .Values.resources }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
         - name: etc-traefik
           mountPath: /etc-traefik

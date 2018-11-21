@@ -1,6 +1,10 @@
 createConfigmap: false
 configmapName: "etc-traefik"
-resources: '{"requests": {"cpu": "100m", "memory": "50Mi"}}'
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 150Mi
 
 dnsProvider: "route53|cloudflare"
 
