@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: traefik
-        image: traefik
+        image: traefik:1.6-alpine
         ports:
         - {containerPort: 80}
         - {containerPort: 443}
