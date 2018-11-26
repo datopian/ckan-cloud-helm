@@ -8,3 +8,9 @@ storageClassName: cca-storage
 ckanStorageClassName: cca-ckan
 apiDbPersistentDiskSizeGB: 10
 apiEnvFromSecret: api-env
+
+
+uiImage: viderum/ckan-cloud-provisioning-ui:latest
+# uiResources: '{"requests": {"cpu": "50m", "memory": "200Mi"}, "limits": {"memory": "800Mi"}}'
+# uiApiServer: ""
+# uiAuthServer: ""

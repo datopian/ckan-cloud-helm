@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ui
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - name: ui
+        image: {{ .Values.uiImage | quote }}
+        ports:
+        - containerPort: 8000
+        {{ if .Values.uiResources }}
+        resources: {{ .Values.uiResources }}
+        {{ end }}
+        env:
+        {{ if .Values.uiApiServer }}
+        - name: API_SERVER
+          value: {{ .Values.uiApiServer | quote }}
+        {{ end }}
+        {{ if .Values.uiAuthServer }}
+        - name: AUTH_SERVER
+          value: {{ .Values.uiAuthServer | quote }}
+        {{ end }}
