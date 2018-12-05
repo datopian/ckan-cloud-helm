@@ -23,14 +23,16 @@ Please follow this suggested flow:
 ## Updating the Helm charts repo for development
 
 ```
-SEMANTIC_VERSION=v0.0.0
+BRANCH_NAME=github-branch-name
+
+SEMANTIC_VERSION=v0.0.0-$BRANCH_NAME
 
 cd charts_repository &&\
 helm package ../ckan --version "${SEMANTIC_VERSION}" &&\
 helm package ../efs --version "${SEMANTIC_VERSION}" &&\
 helm package ../traefik --version "${SEMANTIC_VERSION}" &&\
 helm package ../provisioning --version "${SEMANTIC_VERSION}" &&\
-helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ . &&\
+helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/${BRANCH_NAME}/charts_repository/ . &&\
 cd ..
 ```
 
