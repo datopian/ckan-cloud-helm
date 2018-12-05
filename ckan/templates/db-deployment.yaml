@@ -1,3 +1,5 @@
+{{ if not .Values.useCentralizedInfra }}
+{{ if not .Values.dbDisabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -25,7 +27,16 @@ spec:
         {{ end }}
         env:
         - name: POSTGRES_PASSWORD
+        {{ if .Values.centralizedInfraOnly }}
+          # this is only relevant when self-hosting the centralized infra which should only be used for local development
+          value: "123456"
+        {{ else }}
+        {{ if .Values.envVarsSecretName }}
           valueFrom: {secretKeyRef: {name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_PASSWORD"}}
+        {{ else }}
+          value: "123456"
+        {{ end }}
+        {{ end }}
         volumeMounts:
         - name: ckan-data
           mountPath: /var/lib/postgresql/data
@@ -40,3 +51,5 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
+{{ end }}
+{{ end }}

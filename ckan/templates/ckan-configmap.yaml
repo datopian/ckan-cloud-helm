@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -240,11 +241,12 @@ data:
     #!/usr/bin/env bash
     echo Waiting for ckan infrastructure...
     while sleep 2; do
-        pg_isready -h db &&\
-        pg_isready -h datastore-db &&\
+        psql -d {{ "{{" }}SQLALCHEMY_URL{{ "}}" }} -c "select 1" -t | cat &&\
+        psql -d {{ "{{" }}CKAN_DATASTORE_WRITE_URL{{ "}}" }} -c "select 1" -t | cat &&\
         wget -qO - {{ "{{" }}SOLR_URL{{ "}}" }}/schema/version &&\
         redis-cli -h redis ping &&\
         exit 0
         echo .
     done
     exit 1
+{{ end }}

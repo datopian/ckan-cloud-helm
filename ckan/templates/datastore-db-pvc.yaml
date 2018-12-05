@@ -1,3 +1,5 @@
+{{ if not .Values.centralizedInfraOnly }}
+{{ if not .Values.useCentralizedInfra }}
 {{ if .Values.usePersistentVolumes }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -10,4 +12,6 @@ spec:
   resources:
     requests:
       storage: {{ .Values.dataStoreDbPersistentDiskSizeGB }}G
+{{ end }}
+{{ end }}
 {{ end }}

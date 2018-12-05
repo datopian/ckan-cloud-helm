@@ -1,4 +1,6 @@
+{{ if not .Values.useCentralizedInfra }}
 {{ if .Values.usePersistentVolumes }}
+{{ if not .Values.solrDisabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -10,4 +12,6 @@ spec:
   resources:
     requests:
       storage: {{ .Values.solrPersistentDiskSizeGB }}G
+{{ end }}
+{{ end }}
 {{ end }}

@@ -1,3 +1,5 @@
+{{ if not .Values.centralizedInfraOnly }}
+{{ if not .Values.disableJobs }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: {name: jobs}
@@ -77,3 +79,5 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
+{{ end }}
+{{ end }}

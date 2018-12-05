@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -18,3 +19,4 @@ spec:
         {{ if .Values.nginxResources }}
         resources: {{ .Values.nginxResources }}
         {{ end }}
+{{ end }}

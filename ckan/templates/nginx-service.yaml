@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 apiVersion: v1
 kind: Service
 metadata: {name: nginx}
@@ -5,3 +6,4 @@ spec:
   ports:
   - {name: '8080', port: 8080}
   selector: {app: nginx}
+{{ end }}

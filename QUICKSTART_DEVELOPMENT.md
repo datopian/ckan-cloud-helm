@@ -90,10 +90,20 @@ spec:
 '
 ```
 
-## Create CKAN namespace and RBAC
+## (optional) Deploy the centralized infrastructure
+
+The centralized infra is deployed on `ckan-cloud` namespace
 
 ```
-export CKAN_NAMESPACE="test7"
+kubectl --context minikube create ns ckan-cloud &&\
+helm upgrade --namespace ckan-cloud "ckan-cloud-infra" ckan --install \
+     --set centralizedInfraOnly=true
+```
+
+## Create an instance namespace and service account permissions
+
+```
+export CKAN_NAMESPACE="test27"
 
 kubectl --context minikube create ns "${CKAN_NAMESPACE}" &&\
 kubectl --context minikube --namespace "${CKAN_NAMESPACE}" \
@@ -117,11 +127,23 @@ source cca_helm_functions.sh
 
 ## Deploy
 
-First install should be with a single replica:
+If using the centralized infrastructure - create the solr cloud collection with the default ckan config
 
 ```
-cca_helm_upgrade --install --set replicas=1 --set nginxReplicas=1
+SOLRCLOUD_POD_NAME=$(kubectl --context minikube -n ckan-cloud get pods -l "app=solr" -o 'jsonpath={.items[0].metadata.name}')
+kubectl --context minikube -n ckan-cloud exec $SOLRCLOUD_POD_NAME -- \
+    bin/solr create_collection -c ${CKAN_NAMESPACE} -d ckan_default -n ckan_default
 ```
+
+This will install the ckan helm chart for initial deployment on the centralized self-hosted infrastructure
+
+```
+cca_helm_upgrade --install --set replicas=1 --set nginxReplicas=1 --set disableJobs=true --set useCentralizedInfra=true --set noProbes=true
+```
+
+If you haven't deployed the centralized infra - remove the useCentralizedInfra option
+
+To deploy a local image - connect to the minikube docker: `eval $(minikube docker-env)`, build images from `ckan-cloud-docker` and deploy with e.g. `--set ckanOperatorImage=viderum/ckan-cloud-docker:cca-operator-latest`
 
 Wait for pods to be in Running state:
 
@@ -141,12 +163,25 @@ Follow logs
 cca_kubectl logs -f $(cca_pod_name ckan)
 ```
 
+Once all pods are running, deploy again for full deployment using centralized infra (remove `centralizedInfra=true` for self-hosted local infra.)
+
+```
+cca_helm_upgrade --install --set useCentralizedInfra=true
+```
+
 ## Login to CKAN
 
 ensure all pods are running
 
 ```
 cca_kubectl get pods
+```
+
+Create an admin user
+
+```
+cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan sysadmin -c /etc/ckan/production.ini \
+    add admin password=12345678 email=admin@localhost"
 ```
 
 Start port forward to the nginx pod
@@ -159,19 +194,6 @@ Add a hosts entry mapping domain `nginx` to `127.0.0.1`:
 
 ```
 127.0.0.1 nginx
-```
-
-Ensure CKAN availability:
-
-```
-curl http://nginx:8080/api/3
-```
-
-Create an admin user
-
-```
-cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan sysadmin -c /etc/ckan/production.ini \
-    add admin password=12345678 email=admin@localhost"
 ```
 
 Login to CKAN at http://nginx:8080 with username `admin` password `12345678`

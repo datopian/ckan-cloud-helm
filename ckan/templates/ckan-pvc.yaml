@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 {{ if .Values.usePersistentVolumes }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -10,4 +11,5 @@ spec:
   resources:
     requests:
       storage: 1Mi
+{{ end }}
 {{ end }}
