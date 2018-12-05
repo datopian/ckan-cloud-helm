@@ -40,7 +40,7 @@ spec:
       - image: {{ if .Values.centralizedInfraOnly }}{{ .Values.solrcloudImage | quote }}{{ else }}{{ .Values.solrImage | quote }}{{ end }}
         name: solr
         {{ if .Values.centralizedInfraOnly }}
-        command: [docker-entrypoint.sh, solr, start, -c, -f]
+        args: [solr, start, -c, -f]
         {{ end }}
         ports:
         - containerPort: 8983
