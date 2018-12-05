@@ -95,4 +95,4 @@ solrPersistentDiskSizeGB: 10
 
 # centralized infrastructure
 useCentralizedInfra: true
-centralizedSecretName: centralized-infra.ckan-cloud
+centralizedSecretName: ckan-infra

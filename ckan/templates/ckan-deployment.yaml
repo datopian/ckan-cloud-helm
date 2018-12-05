@@ -25,7 +25,9 @@ spec:
           ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
           ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
-          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh
+          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
+          echo ckan secrets initialized successfully && exit 0
+          echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
         {{ if .Values.useCentralizedInfra }}
         env:
         - name: CKAN_CLOUD_INSTANCE_ID
@@ -38,15 +40,18 @@ spec:
         - name: CKAN_CLOUD_POSTGRES_HOST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_HOST"}}
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_HOST"
         - name: CKAN_CLOUD_POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_USER"}}
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_USER"
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_PASSWORD"}}
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_PASSWORD"
         {{ else }}
         - name: CKAN_CLOUD_POSTGRES_HOST
           value: db.ckan-cloud
@@ -131,16 +136,16 @@ spec:
             port: 5000
           initialDelaySeconds: {{ .Values.ckanReadinessInitialDelaySeconds | default "30" }}
           periodSeconds: {{ .Values.ckanReadinessPeriodSeconds | default "5" }}
-          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "12" }}
-          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "10" }}
+          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "10" }}
+          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "15" }}
         livenessProbe:
           httpGet:
             path: /
             port: 5000
           initialDelaySeconds: {{ .Values.ckanLivenessInitialDelaySeconds | default "60" }}
-          periodSeconds: {{ .Values.ckanLivenessPeriodSeconds | default "60" }}
-          timeoutSeconds: {{ .Values.ckanLivenessTimeoutSeconds | default "12" }}
-          failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "5" }}
+          periodSeconds: {{ .Values.ckanLivenessPeriodSeconds | default "5" }}
+          timeoutSeconds: {{ .Values.ckanLivenessTimeoutSeconds | default "10" }}
+          failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "15" }}
         {{ end }}
       volumes:
       - name: ckan-conf-secrets

@@ -9,7 +9,7 @@ The following resources are required, follow the [multi-tenant CKAN cluster mana
 * `cca-storage` storage class - allowing to provision `ReadWriteOnce` persistent disks
 * `cca-ckan` storage class - allowing to provision `ReadWriteMany` persistent disks
 * PostgreSQL DB - hosted and managed outside the cluster (e.g. Amazon RDS)
-  * Connection details should be provided in a secret named `centralized-infra` on `ckan-cloud` namespace
+  * Connection details should be provided in a secret named `ckan-infra` on `ckan-cloud` namespace
 * Solr Cloud - hosted on `ckan-cloud` namespace, `solr` service
 
 Verify the cluster requirements:
@@ -23,10 +23,19 @@ helm version &&\
 helm list
 ```
 
-Verify the DB
+Get the centralized DB connection details
 
 ```
-kubectl get secret -n ckan-cloud centralized-infra
+CENTRAL_DB_URL=$(
+kubectl -n ckan-cloud get secret ckan-infra -o json \
+    | python -c 'import json,sys,base64; print("postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}".format(**{k:base64.b64decode(v) for k,v in json.load(sys.stdin)["data"].items()}))'
+)
+```
+
+Try to connect to the DB:
+
+```
+psql -d $CENTRAL_DB_URL
 ```
 
 Verify SOLR Cloud
@@ -59,6 +68,8 @@ export CKAN_CHART=ckan-cloud/ckan
 source cca_helm_functions.sh
 ```
 
+For local development set `export CKAN_CHART=ckan` to install from the local chart directory
+
 ## Create CKAN namespace and RBAC
 
 ```
@@ -74,18 +85,32 @@ cca_kubectl create rolebinding "ckan-${CKAN_NAMESPACE}-operator-rolebinding" \
                                --serviceaccount "${CKAN_NAMESPACE}:ckan-${CKAN_NAMESPACE}-operator"
 ```
 
+Copy the centralized infra secret
+
+```
+kubectl -n ckan-cloud get secret ckan-infra --export -o yaml | kubectl -n $CKAN_NAMESPACE create -f -
+```
+
 ## Deploy
 
-Copy the values yaml file and modify:
+If using the centralized infrastructure - create the solr cloud collection with the default ckan config
+
+```
+SOLRCLOUD_POD_NAME=$(kubectl -n ckan-cloud get pods -l "app=solr" -o 'jsonpath={.items[0].metadata.name}')
+kubectl -n ckan-cloud exec $SOLRCLOUD_POD_NAME -- \
+    sudo -u solr bin/solr create_collection -c ${CKAN_NAMESPACE} -d ckan_default -n ckan_default
+```
+
+Copy the values yaml file:
 
 ```
 sudo cp aws-values.yaml /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
 ```
 
-Initial deployment should be with 1 replica
+Initial deployment
 
 ```
-cca_helm_upgrade -if /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml --set replicas=1 --set nginxReplicas=1
+cca_helm_upgrade -if /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml --set replicas=1 --set nginxReplicas=1 --set disableJobs=true --set noProbes=true
 ```
 
 Wait for Pods to be in Running state:
@@ -106,10 +131,10 @@ Follow logs
 cca_kubectl logs -f $(cca_pod_name ckan)
 ```
 
-Once all pods are in Running state, deploy with replicas (2 replicas by default for both ckan and nginx):
+Once all pods are in Running state, do a full deployment
 
 ```
-cca_helm_upgrade --install --values /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
+cca_helm_upgrade -if /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml
 ```
 
 ## Login to CKAN
@@ -118,6 +143,13 @@ ensure all pods are running
 
 ```
 cca_kubectl get pods
+```
+
+Create an admin user
+
+```
+cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan sysadmin -c /etc/ckan/production.ini \
+    add admin password=12345678 email=admin@localhost"
 ```
 
 Start port forward to the nginx pod
@@ -130,19 +162,6 @@ Add a hosts entry mapping domain `nginx` to `127.0.0.1`:
 
 ```
 127.0.0.1 nginx
-```
-
-Ensure CKAN availability:
-
-```
-curl http://nginx:8080/api/3
-```
-
-Create an admin user
-
-```
-cca_kubectl exec -it $(cca_pod_name ckan) -- bash -c "ckan-paster --plugin=ckan sysadmin -c /etc/ckan/production.ini \
-    add admin password=12345678 email=admin@localhost"
 ```
 
 Login to CKAN at http://nginx:8080 with username `admin` password `12345678`
