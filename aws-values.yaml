@@ -92,3 +92,7 @@ solrPersistentDiskSizeGB: 10
 # dbImage: viderum/ckan-cloud-docker:db-latest
 # solrImage: viderum/ckan-cloud-docker:solr-latest
 # nginxImage: viderum/ckan-cloud-docker:nginx-latest
+
+# centralized infrastructure
+useCentralizedInfra: true
+centralizedSecretName: centralized-infra.ckan-cloud

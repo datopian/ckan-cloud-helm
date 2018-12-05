@@ -34,18 +34,27 @@ spec:
           {{ else }}
           value: {{ .Release.Namespace | quote }}
           {{ end }}
+        {{ if .Values.centralizedSecretName }}
         - name: CKAN_CLOUD_POSTGRES_HOST
-          value: {{ .Values.centralizedPostgresHost | default "db.ckan-cloud" | quote }}
-        - name: CKAN_CLOUD_POSTGRES_USER
-          value: {{ .Values.centralizedPostgresUser | default "postgres" | quote }}
-        - name: PGPASSWORD
-          {{ if .Values.centralizedPostgresPasswordSecretName }}
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.envVarsSecretName | quote }}, key: "PGPASSWORD"}}
-          {{ else }}
+              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_HOST"}}
+        - name: CKAN_CLOUD_POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_USER"}}
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.envVarsSecretName | quote }}, key: "POSTGRES_PASSWORD"}}
+        {{ else }}
+        - name: CKAN_CLOUD_POSTGRES_HOST
+          value: db.ckan-cloud
+        - name: CKAN_CLOUD_POSTGRES_USER
+          value: postgres
+        - name: PGPASSWORD
           value: "123456"
-          {{ end }}
+        {{ end }}
         - name: CKAN_CLOUD_SOLR_HOST
           value: {{ .Values.centralizedSolrHost | default "solr.ckan-cloud" | quote }}
         - name: CKAN_CLOUD_SOLR_PORT

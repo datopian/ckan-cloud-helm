@@ -1,5 +1,4 @@
 {{ if not .Values.useCentralizedInfra }}
-{{ if .Values.centralizedInfraSolr }}
 {{ if not .Values.solrDisabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -62,6 +61,5 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
-{{ end }}
 {{ end }}
 {{ end }}

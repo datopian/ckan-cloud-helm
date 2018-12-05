@@ -8,16 +8,34 @@ The following resources are required, follow the [multi-tenant CKAN cluster mana
 * Helm installed on the cluster
 * `cca-storage` storage class - allowing to provision `ReadWriteOnce` persistent disks
 * `cca-ckan` storage class - allowing to provision `ReadWriteMany` persistent disks
+* PostgreSQL DB - hosted and managed outside the cluster (e.g. Amazon RDS)
+  * Connection details should be provided in a secret named `centralized-infra` on `ckan-cloud` namespace
+* Solr Cloud - hosted on `ckan-cloud` namespace, `solr` service
 
-Verify the requirements:
+Verify the cluster requirements:
 
 ```
 export KUBECONFIG=/etc/ckan-cloud/.kube-config &&\
+kubectl get nodes &&\
 kubectl get storageclass cca-storage &&\
 kubectl get storageclass cca-ckan &&\
 helm version &&\
 helm list
 ```
+
+Verify the DB
+
+```
+kubectl get secret -n ckan-cloud centralized-infra
+```
+
+Verify SOLR Cloud
+
+```
+kubectl port-forward -n ckan-cloud deployment/solr 8983
+```
+
+Solr Cloud should be available at http://localhost:8983
 
 ## Register the CKAN Cloud Helm charts repository
 
@@ -58,7 +76,7 @@ cca_kubectl create rolebinding "ckan-${CKAN_NAMESPACE}-operator-rolebinding" \
 
 ## Deploy
 
-Copy the values yaml file and (optionally) modify:
+Copy the values yaml file and modify:
 
 ```
 sudo cp aws-values.yaml /etc/ckan-cloud/${CKAN_NAMESPACE}_values.yaml

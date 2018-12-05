@@ -2,14 +2,14 @@ ckanSecretName: ckan-secrets
 envVarsSecretName: ckan-env-vars
 
 # https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-086e56e1f49fe3158855ad7939b7a1a5171f1e62
+ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-dd31fa561f8b70b9d2f6ca75bc16e0b716e11018
 # https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-ckanImage: viderum/ckan-cloud-docker:ckan-086e56e1f49fe3158855ad7939b7a1a5171f1e62
+ckanImage: viderum/ckan-cloud-docker:ckan-dd31fa561f8b70b9d2f6ca75bc16e0b716e11018
 dbImage: viderum/ckan-cloud-docker:db-v0.0.1
 solrImage: viderum/ckan-cloud-docker:solr-v0.0.1
 nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.1
 # https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-solrcloudImage: viderum/ckan-cloud-docker:solrcloud-086e56e1f49fe3158855ad7939b7a1a5171f1e62
+solrcloudImage: viderum/ckan-cloud-docker:solrcloud-dd31fa561f8b70b9d2f6ca75bc16e0b716e11018
 
 # enabling this deploys a ckan release with only the infrastructure components
 # these components are then shared between multiple ckan instances
@@ -29,14 +29,7 @@ solrcloudImage: viderum/ckan-cloud-docker:solrcloud-086e56e1f49fe3158855ad7939b7
 # by default the current namespace is used but you can override it here
 # ckanCloudInstanceId=ckan-demo-1
 
-# connection details to the centralized DB
-# will use the self-hosted centralized infra by default - for development/testing
-# centralizedPostgresHost=
-# centralizedPostgresUser=
-# kubectl create secret generic central-postgress-password --from-literal=PGPASSWORD=
-# centralizedPostgresPasswordSecretName=central-postgress-passwor
-
-# connection details to the centralized SOLR
-# will use the self-hosted centralized infra by default - for development/testing
+# connection details to the centralized infrastructure
+# centralizedSecretName=
 # centralizedSolrHost=
 # centralizedSolrPort=
