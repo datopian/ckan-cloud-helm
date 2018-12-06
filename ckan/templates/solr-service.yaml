@@ -1,3 +1,5 @@
+{{ if not .Values.useCentralizedInfra }}
+{{ if not .Values.solrDisabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,3 +10,5 @@ spec:
   ports:
   - name: "8983"
     port: 8983
+{{ end }}
+{{ end }}

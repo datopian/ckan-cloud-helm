@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: {name: ckan}
@@ -24,7 +25,46 @@ spec:
           ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
           ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
-          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh
+          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
+          echo ckan secrets initialized successfully && exit 0
+          echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
+        {{ if .Values.useCentralizedInfra }}
+        env:
+        - name: CKAN_CLOUD_INSTANCE_ID
+          {{ if .Values.ckanCloudInstanceId }}
+          value: {{ .Values.ckanCloudInstanceId | quote }}
+          {{ else }}
+          value: {{ .Release.Namespace | quote }}
+          {{ end }}
+        {{ if .Values.centralizedSecretName }}
+        - name: CKAN_CLOUD_POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_HOST"
+        - name: CKAN_CLOUD_POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_USER"
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.centralizedSecretName | quote }}
+              key: "POSTGRES_PASSWORD"
+        {{ else }}
+        - name: CKAN_CLOUD_POSTGRES_HOST
+          value: db.ckan-cloud
+        - name: CKAN_CLOUD_POSTGRES_USER
+          value: postgres
+        - name: PGPASSWORD
+          value: "123456"
+        {{ end }}
+        - name: CKAN_CLOUD_SOLR_HOST
+          value: {{ .Values.centralizedSolrHost | default "solr.ckan-cloud" | quote }}
+        - name: CKAN_CLOUD_SOLR_PORT
+          value: {{ .Values.centralizedSolrPort | default "8983" | quote }}
+        {{ end }}
         volumeMounts:
         - name: ckan-conf-secrets
           mountPath: /etc/ckan-conf/secrets
@@ -89,22 +129,24 @@ spec:
         - name: ckan-conf-templates
           mountPath: /etc/ckan-conf/templates
           readOnly: true
+        {{ if not .Values.noProbes }}
         readinessProbe:
           httpGet:
             path: /
             port: 5000
-          initialDelaySeconds: {{ .Values.ckanReadinessInitialDelaySeconds | default "15" }}
-          periodSeconds: {{ .Values.ckanReadinessPeriodSeconds | default "10" }}
-          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "12" }}
-          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "5" }}
+          initialDelaySeconds: {{ .Values.ckanReadinessInitialDelaySeconds | default "30" }}
+          periodSeconds: {{ .Values.ckanReadinessPeriodSeconds | default "5" }}
+          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "10" }}
+          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "15" }}
         livenessProbe:
           httpGet:
             path: /
             port: 5000
           initialDelaySeconds: {{ .Values.ckanLivenessInitialDelaySeconds | default "60" }}
-          periodSeconds: {{ .Values.ckanLivenessPeriodSeconds | default "60" }}
-          timeoutSeconds: {{ .Values.ckanLivenessTimeoutSeconds | default "12" }}
-          failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "5" }}
+          periodSeconds: {{ .Values.ckanLivenessPeriodSeconds | default "5" }}
+          timeoutSeconds: {{ .Values.ckanLivenessTimeoutSeconds | default "10" }}
+          failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "15" }}
+        {{ end }}
       volumes:
       - name: ckan-conf-secrets
         emptyDir: {}
@@ -120,3 +162,4 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
+{{ end }}

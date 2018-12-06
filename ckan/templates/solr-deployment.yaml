@@ -1,3 +1,5 @@
+{{ if not .Values.useCentralizedInfra }}
+{{ if not .Values.solrDisabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -18,18 +20,28 @@ spec:
         command:
         - sh
         - "-c"
+        {{ if .Values.centralizedInfraOnly }}
+        - |
+          mkdir -p /opt/solr/server/solr &&\
+          chown -R 8984:8984 /opt/solr &&\
+          ls -lah /opt/solr
+        {{ else }}
         - |
           chown -R 8983:8983 /opt/solr/server/solr/ckan/data &&\
           ls -lah /opt/solr/server/solr/ckan/data
+        {{ end }}
         securityContext:
           runAsUser: 0
         volumeMounts:
         - name: ckan-data
-          mountPath: /opt/solr/server/solr/ckan/data
+          mountPath: /opt/solr/server/solr
           subPath: solr-ckan-data
       containers:
-      - image: {{ .Values.solrImage | quote }}
+      - image: {{ if .Values.centralizedInfraOnly }}{{ .Values.solrcloudImage | quote }}{{ else }}{{ .Values.solrImage | quote }}{{ end }}
         name: solr
+        {{ if .Values.centralizedInfraOnly }}
+        args: [solr, start, -c, -f]
+        {{ end }}
         ports:
         - containerPort: 8983
         {{ if .Values.solrResources }}
@@ -37,7 +49,7 @@ spec:
         {{ end }}
         volumeMounts:
         - name: ckan-data
-          mountPath: /opt/solr/server/solr/ckan/data
+          mountPath: /opt/solr/server/solr
           subPath: solr-ckan-data
       volumes:
       - name: ckan-data
@@ -49,3 +61,5 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
+{{ end }}
+{{ end }}

@@ -1,3 +1,4 @@
+{{ if not .Values.centralizedInfraOnly }}
 apiVersion: v1
 kind: Service
 metadata: {name: ckan}
@@ -5,3 +6,4 @@ spec:
   ports:
   - {name: '5000', port: 5000}
   selector: {app: ckan}
+{{ end }}

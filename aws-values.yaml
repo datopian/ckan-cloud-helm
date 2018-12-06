@@ -12,6 +12,11 @@ withSansSSL: true
 # if set, create-instance script will register this subdomain under ckan.io
 registerSubdomain: "cloud-demo5"
 
+ckanAdminEmail: "admin@cloud-demo5"
+
+# ckanHelmChartRepo: https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository
+# ckanHelmChartVersion: ""
+
 ### CKAN Helm chart values ###
 # These values are used to populate the CKAN Helm chart values
 
@@ -92,3 +97,7 @@ solrPersistentDiskSizeGB: 10
 # dbImage: viderum/ckan-cloud-docker:db-latest
 # solrImage: viderum/ckan-cloud-docker:solr-latest
 # nginxImage: viderum/ckan-cloud-docker:nginx-latest
+
+# centralized infrastructure
+useCentralizedInfra: true
+centralizedSecretName: ckan-infra
