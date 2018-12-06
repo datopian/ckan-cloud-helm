@@ -1,15 +1,12 @@
 ckanSecretName: ckan-secrets
 envVarsSecretName: ckan-env-vars
 
-# https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-d6d1710d758f0d10957798ce11886c410c4c1468
-# https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-ckanImage: viderum/ckan-cloud-docker:ckan-d6d1710d758f0d10957798ce11886c410c4c1468
-dbImage: viderum/ckan-cloud-docker:db-v0.0.1
-solrImage: viderum/ckan-cloud-docker:solr-v0.0.1
-nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.1
-# https://github.com/ViderumGlobal/ckan-cloud-docker/pull/19
-solrcloudImage: viderum/ckan-cloud-docker:solrcloud-d6d1710d758f0d10957798ce11886c410c4c1468
+ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-v0.0.6
+ckanImage: viderum/ckan-cloud-docker:ckan-v0.0.6
+dbImage: viderum/ckan-cloud-docker:db-v0.0.6
+solrImage: viderum/ckan-cloud-docker:solr-v0.0.6
+nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.6
+solrcloudImage: viderum/ckan-cloud-docker:solrcloud-v0.0.6
 
 # enabling this deploys a ckan release with only the infrastructure components
 # these components are then shared between multiple ckan instances
