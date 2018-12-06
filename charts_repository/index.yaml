@@ -1,139 +1,73 @@
 apiVersion: v1
 entries:
   ckan:
-  - created: 2018-12-05T21:21:57.763582762+02:00
+  - created: 2018-12-06T10:03:41.293771551Z
+    digest: 92d6136e97ecb2e459c2d243fcc395db44f651a4dd25a4b6b0ebd9d8952ee20b
+    name: ckan
+    urls:
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.6.tgz
+    version: v0.0.6
+  - created: 2018-12-06T10:03:41.292780429Z
     digest: 50628575db501a09bbfd5441246c6628a3b2066fbb7febf7384b2390215cf117
     name: ckan
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.5.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.5.tgz
     version: v0.0.5
-  - created: 2018-12-05T21:21:57.763161375+02:00
+  - created: 2018-12-06T10:03:41.29221096Z
     digest: b5583638a1f9e40fdc6fbb4dd69302d583a214c15da539bc01e8cd2a8d3faad7
     name: ckan
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.4.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.4.tgz
     version: v0.0.4
-  - created: 2018-12-05T21:21:57.762755357+02:00
-    digest: 1adc37fc3e0fd5e1dc71d380d962b2493c7e9a71a1546f6d8bceda6a57dd0cbf
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.3.tgz
-    version: v0.0.3
-  - created: 2018-12-05T21:21:57.762331741+02:00
-    digest: 32fbadcdb115a991f2e62218db36aef6ecb1c3c962b4956940acc7408ed0348d
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.2.tgz
-    version: v0.0.2
-  - created: 2018-12-05T21:21:57.761881264+02:00
-    digest: 1df1f656568d00357ed82af087f21348f38d59cbe556845259c2d9cedd5dbd1a
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.1.tgz
-    version: v0.0.1
-  - created: 2018-12-05T21:21:57.761458761+02:00
-    digest: db1a3e1c59a97a4f4ccced6c7389e500c560acdd617b99271ef2874198fe04ee
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.0.tgz
-    version: v0.0.0
-  - created: 2018-12-05T21:21:57.761003023+02:00
-    digest: 280f6eae4037132cd21ca5762c143c1b48a101ab5d4e23068fb06b388959d3c0
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/ckan-v0.0.0-centralized-infra.tgz
-    version: v0.0.0-centralized-infra
   efs:
-  - created: 2018-12-05T21:21:57.764476066+02:00
+  - created: 2018-12-06T10:03:41.294970963Z
+    digest: 348753a9a17e6460d86be2ac6b0d957c513430a7646ef84b37d15de840f69d5c
+    name: efs
+    urls:
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.6.tgz
+    version: v0.0.6
+  - created: 2018-12-06T10:03:41.294619691Z
     digest: 8ab023c0bd1a33be6af215c3ff613b47f670cf9507dbc50e9d109a81238415e4
     name: efs
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.5.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.5.tgz
     version: v0.0.5
-  - created: 2018-12-05T21:21:57.764333272+02:00
+  - created: 2018-12-06T10:03:41.29417534Z
     digest: 88ab25e7df0208f1da9fe3e1d00e134f4f42614d47b10c10e449f9ee05d4e03a
     name: efs
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.4.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.4.tgz
     version: v0.0.4
-  - created: 2018-12-05T21:21:57.764193456+02:00
-    digest: b247e3b5f68057c5e4810b4adcf4fbc14e907b84f13015421f50e8bb93e7932b
-    name: efs
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.3.tgz
-    version: v0.0.3
-  - created: 2018-12-05T21:21:57.764018773+02:00
-    digest: cf24e9f0c836073232677bb36bfea878c1d459e68a6cb91502ed280cd6b54425
-    name: efs
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.2.tgz
-    version: v0.0.2
-  - created: 2018-12-05T21:21:57.763855821+02:00
-    digest: d5a2584bbb881ce95dd7dcc0280ed1f8fe3b1a197f5ca22476b42c22178e26e6
-    name: efs
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.0.tgz
-    version: v0.0.0
-  - created: 2018-12-05T21:21:57.763724819+02:00
-    digest: 7db8e46dc76190e91b3b37af3b27fb12e7844255ebe8e1e7ce5bc440a35c7cfc
-    name: efs
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/efs-v0.0.0-centralized-infra.tgz
-    version: v0.0.0-centralized-infra
   provisioning:
-  - created: 2018-12-05T21:21:57.764999723+02:00
+  - created: 2018-12-06T10:03:41.295749729Z
+    digest: 133d158a6b94137069bf7d5d6eb9f3bb019ed4dbd3f5ade30a11444a2bec7f7c
+    name: provisioning
+    urls:
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.6.tgz
+    version: v0.0.6
+  - created: 2018-12-06T10:03:41.295374497Z
     digest: 054ee4fb20d4a856dd8ac53a6705588c00d639b5b9f190971a876037d009062d
     name: provisioning
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/provisioning-v0.0.5.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.5.tgz
     version: v0.0.5
-  - created: 2018-12-05T21:21:57.764838485+02:00
-    digest: 635864de3fbef23028c35dc4f67f4c90745b1b86cafa84d9b29ac6ad9e4a5401
-    name: provisioning
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/provisioning-v0.0.0.tgz
-    version: v0.0.0
-  - created: 2018-12-05T21:21:57.764651273+02:00
-    digest: 7efc25050b9473eaba30f2a06fc3e61051948d2346d3c69614be4ee8189f096d
-    name: provisioning
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/provisioning-v0.0.0-centralized-infra.tgz
-    version: v0.0.0-centralized-infra
   traefik:
-  - created: 2018-12-05T21:21:57.766032886+02:00
+  - created: 2018-12-06T10:03:41.296782309Z
+    digest: ee0c1095f41c7fa05e183c4141a47cdcdcbc3f4604446fdc76d54121d8c024a6
+    name: traefik
+    urls:
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.6.tgz
+    version: v0.0.6
+  - created: 2018-12-06T10:03:41.296470944Z
     digest: 98bb09e75cf17de7e3725e7c0e88d0d51b2022984a6f0ba27679834fbd140d90
     name: traefik
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.5.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.5.tgz
     version: v0.0.5
-  - created: 2018-12-05T21:21:57.765880026+02:00
+  - created: 2018-12-06T10:03:41.296082735Z
     digest: d72b1746d92f60d8f1a74c575cec12280194100d1b19836bd198b72d5f9828d6
     name: traefik
     urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.4.tgz
+    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.4.tgz
     version: v0.0.4
-  - created: 2018-12-05T21:21:57.765721541+02:00
-    digest: f34d9474a5ce8d50a6185e3615317a0cfec04e3df0c45a2934eb1665129b18f1
-    name: traefik
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.3.tgz
-    version: v0.0.3
-  - created: 2018-12-05T21:21:57.765504173+02:00
-    digest: e6ee915b867b870da1355c8c61693b43ad39339d0089c8f0ccab6807c9d456b0
-    name: traefik
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.2.tgz
-    version: v0.0.2
-  - created: 2018-12-05T21:21:57.765297922+02:00
-    digest: 3c0eeac1927a1c3cae16736de5a97a78a4f7cabc5e871dffacce740fe9db8e36
-    name: traefik
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.0.tgz
-    version: v0.0.0
-  - created: 2018-12-05T21:21:57.765147848+02:00
-    digest: a5572924addc42886c9d4783cecb921ca3f0ca55e0019263eef785c642394fb9
-    name: traefik
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/centralized-infra/charts_repository/traefik-v0.0.0-centralized-infra.tgz
-    version: v0.0.0-centralized-infra
-generated: 2018-12-05T21:21:57.7604098+02:00
+generated: 2018-12-06T10:03:41.291551831Z
