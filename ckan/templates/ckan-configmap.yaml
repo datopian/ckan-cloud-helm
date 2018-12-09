@@ -115,7 +115,8 @@ data:
 
     #		Add ``resource_proxy`` to enable resorce proxying and get around the
     #		same origin policy
-    ckan.plugins = {{ .Values.ckanPlugins | default "stats text_view image_view recline_view datastore xloader" }}
+    ckan.plugins = 
+{{ .Values.ckanPlugins | default "stats text_view image_view recline_view datastore xloader" | indent 6 }}
 
     # Define which views should be created by default
     # (plugins must be loaded in ckan.plugins)
