@@ -104,6 +104,15 @@ spec:
           mountPath: /etc/ckan-conf/templates
           readOnly: true
       {{ end }}
+      {{ if .Values.ckanPrimaryColor }}
+      - name: themer
+        image: {{ .Values.themerImage | quote }}
+        env:
+        - name: CKAN_PRIMARY_COLOR
+          value: {{ .Values.ckanPrimaryColor | quote }}
+        volumeMounts:
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
+      {{ end }}
       containers:
       - name: ckan
         image: {{ .Values.ckanImage | quote }}
