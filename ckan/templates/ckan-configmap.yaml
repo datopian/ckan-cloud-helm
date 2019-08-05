@@ -47,15 +47,15 @@ data:
     [app:main]
     use = egg:ckan
     full_stack = true
-    cache_dir = /tmp/%%(ckan.site_id)s/
+    cache_dir = /tmp/%(ckan.site_id)s/
     beaker.session.key = ckan
 
     beaker.session.secret = {{ "{{" }}BEAKER_SESSION_SECRET{{ "}}" }}
     app_instance_uuid = {{ "{{" }}APP_INSTANCE_UUID{{ "}}" }}
 
-    who.config_file = %%(here)s/who.ini
+    who.config_file = %(here)s/who.ini
     who.log_level = warning
-    who.log_file = %%(cache_dir)s/who_log.ini
+    who.log_file = %(cache_dir)s/who_log.ini
     # Session timeout (user logged out after period of inactivity, in seconds).
     # Inactive by default, so the session doesn't expire.
     # who.timeout = 86400
@@ -106,7 +106,7 @@ data:
 
     # If cors.origin_allow_all is true, all origins are allowed.
     # If false, the cors.origin_whitelist is used.
-    # ckan.cors.origin_allow_all = true
+    ckan.cors.origin_allow_all = true
     # cors.origin_whitelist is a space separated list of allowed domains.
     # ckan.cors.origin_whitelist = http://example1.com http://example2.com
 
@@ -189,7 +189,7 @@ data:
     #ckan.activity_list_limit = 31
     #ckan.activity_streams_email_notifications = true
     #ckan.email_notifications_since = 2 days
-    ckan.hide_activity_from_users = %%(ckan.site_id)s
+    ckan.hide_activity_from_users = %(ckan.site_id)s
 
 
     ## Email settings
@@ -237,7 +237,7 @@ data:
     formatter = generic
 
     [formatter_generic]
-    format = %%(asctime)s %%(levelname)-5.5s [%%(name)s] %%(message)s
+    format = %(asctime)s %(levelname)-5.5s [%(name)s] %(message)s
   ckan_init.sh.template: |
     #!/usr/bin/env bash
     echo Waiting for ckan infrastructure...
