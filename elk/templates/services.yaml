@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: elasticsearch-logging-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: elasticsearch
+    role: client
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: elasticsearch-logging
+  labels:
+    app: elasticsearch
+    role: client
+spec:
+  selector:
+    app: elasticsearch
+    role: client
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: elasticsearch-data
+  labels:
+    app: elasticsearch
+    role: data
+spec:
+  ports:
+  - port: 9300
+    name: transport
+  clusterIP: None
+  selector:
+    app: elasticsearch
+    role: data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: elasticsearch-discovery
+  labels:
+    app: elasticsearch
+    role: master
+spec:
+  selector:
+    app: elasticsearch
+    role: master
+  ports:
+  - name: transport
+    port: 9300
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: kibana
+spec:
+  type: LoadBalancer
+  selector:
+    app: kibana
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5601
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash-application
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: logstash-application
+spec:
+  type: LoadBalancer
+  selector:
+    app: logstash-application
+  ports:
+  - name: logstash
+    port: 5044
+    targetPort: 5044
+    protocol: TCP

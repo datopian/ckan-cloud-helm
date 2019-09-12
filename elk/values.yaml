@@ -1,0 +1,8 @@
+elasticsearchImage: quay.io/pires/docker-elasticsearch-kubernetes:5.5.0
+elasticsearchMemoryLimit: 3Gi
+elasticsearchStorage: 300Gi
+elsaticsearchReplicas: 2
+kibanaImage: cfontes/kibana-xpack-less:5.5.0
+logstashImage: docker.elastic.co/logstash/logstash:5.5.0
+logstashMemoryLimit: 1.5Gi
+storageclassProvisioner: kubernetes.io/aws-ebs
