@@ -13,7 +13,7 @@ data:
     }
     output {
       elasticsearch {
-        hosts => "elasticsearch-logging.elasticsearch:9200"
+        hosts => "elasticsearch-logging:9200"
         index => "logstash-%%{+YYYY.MM.dd}"
         sniffing => false
       }

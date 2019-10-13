@@ -36,7 +36,7 @@ spec:
         - name: "CLUSTER_NAME"
           value: "myesdb"
         - name: "NUMBER_OF_MASTERS"
-          value: "2"
+          value: "1"
         - name: NODE_MASTER
           value: "true"
         - name: NODE_INGEST
