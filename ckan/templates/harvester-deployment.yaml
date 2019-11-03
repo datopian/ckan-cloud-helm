@@ -1,0 +1,52 @@
+{{ if .Values.enableHarvesterNG }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: {name: harvester}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: {app: harvester}
+    spec:
+      serviceAccountName: ckan-{{ .Release.Namespace }}-operator
+      containers:
+      - name: harvester
+        image: {{ .Values.harvesterImage | quote }}
+        env:
+        - name: LOAD_EX
+          value: n
+        - name: EXECUTOR
+          value: Local
+        - name: POSTGRES_USER
+          value: airflow
+        - name: POSTGRES_PASSWORD
+          value: airflow
+        - name: POSTGRES_DB
+          value: airflow
+        - name: POSTGRES_HOST
+          value: harvester_postgres
+        - name: CKAN_API_KEY
+          value: READ_FROM_DB
+        - name: CKAN_BASE_URL
+          value: http://ckan:5000
+        - name: CKAN_VALID_USER_ID
+          value: admin
+        - name: HARVESTER_APP_PATH
+          value: /app
+        - name: AIRFLOW__WEBSERVER__WEB_SERVER_PORT
+          value: 8082
+        - name: AIRFLOW__WEBSERVER__BASE_URL
+          value: https://my_host/airflow
+        - name: AIRFLOW__CORE__DAGS_FOLDER
+          value: /app/automate-tasks/airflow/dags
+        - name: AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT
+          value: 180
+        - name: AIRFLOW__CORE__PARALLELISM
+          value: 3
+        - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
+          value: False
+        resources: {{ .Values.harvesterResources }}
+{{ end }}
