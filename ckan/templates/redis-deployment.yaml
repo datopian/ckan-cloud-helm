@@ -1,5 +1,5 @@
 {{ if not .Values.centralizedInfraOnly }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
@@ -8,6 +8,8 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: redis}
   template:
     metadata:
       labels:
