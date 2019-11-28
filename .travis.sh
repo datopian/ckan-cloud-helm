@@ -14,7 +14,7 @@ elif [ "${1}" == "script" ]; then
 elif [ "${1}" == "deploy" ]; then
     travis_ci_operator.sh github-update self ${TRAVIS_BRANCH} "
         cd charts_repository &&\
-        git fetch && git checkout master -- index.yaml &&\
+        git fetch --all && git checkout master -- index.yaml &&\
         helm package ../ckan --version "${TRAVIS_TAG}" &&\
         helm package ../efs --version "${TRAVIS_TAG}" &&\
         helm package ../traefik --version "${TRAVIS_TAG}" &&\
