@@ -1,5 +1,5 @@
 {{ if .Values.enableHarvesterNG }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata: {name: harvester-db}
 spec:
@@ -7,6 +7,8 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: harvester-db}
   template:
     metadata:
       labels: {app: harvester-db}
