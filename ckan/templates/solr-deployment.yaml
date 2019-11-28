@@ -1,6 +1,6 @@
 {{ if not .Values.useCentralizedInfra }}
 {{ if not .Values.solrDisabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: solr
@@ -9,6 +9,8 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: solr}
   template:
     metadata:
       labels:

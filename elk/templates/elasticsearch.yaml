@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: {{ .Release.Namespace }}
@@ -8,6 +8,10 @@ metadata:
     role: master
 spec:
   replicas: {{ .Values.elasticsearchReplicas }}
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: master
   template:
     metadata:
       labels:
@@ -70,7 +74,7 @@ spec:
               medium: ""
             name: "storage"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: {{ .Release.Namespace }}
@@ -80,6 +84,10 @@ metadata:
     role: client
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: client
   template:
     metadata:
       labels:
