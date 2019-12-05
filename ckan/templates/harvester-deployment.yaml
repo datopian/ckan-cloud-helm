@@ -19,7 +19,7 @@ spec:
         image: {{ .Values.harvesterImage | quote }}
         env:
         - name: LOAD_EX
-          value: n
+          value: "n"
         - name: EXECUTOR
           value: Local
         - name: POSTGRES_USER
@@ -49,6 +49,6 @@ spec:
         - name: AIRFLOW__CORE__PARALLELISM
           value: 3
         - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
-          value: False
+          value: "False"
         resources: {{ .Values.harvesterResources }}
 {{ end }}
