@@ -29,7 +29,7 @@ spec:
         - name: POSTGRES_DB
           value: airflow
         - name: POSTGRES_HOST
-          value: harvester_postgres
+          value: harvester-db
         - name: CKAN_API_KEY
           value: READ_FROM_DB
         - name: CKAN_BASE_URL
