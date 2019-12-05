@@ -1,0 +1,9 @@
+{{ if .Values.enableHarvesterNG }}
+apiVersion: v1
+kind: Service
+metadata: {name: harvester}
+spec:
+  ports:
+  - {name: '8082', port: 8082}
+  selector: {app: harvester}
+{{ end }}
