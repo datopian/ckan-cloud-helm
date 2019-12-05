@@ -39,15 +39,15 @@ spec:
         - name: HARVESTER_APP_PATH
           value: /app
         - name: AIRFLOW__WEBSERVER__WEB_SERVER_PORT
-          value: 8082
+          value: "8082"
         - name: AIRFLOW__WEBSERVER__BASE_URL
           value: https://my_host/airflow
         - name: AIRFLOW__CORE__DAGS_FOLDER
           value: /app/automate-tasks/airflow/dags
         - name: AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT
-          value: 180
+          value: "180"
         - name: AIRFLOW__CORE__PARALLELISM
-          value: 3
+          value: "3"
         - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
           value: "False"
         resources: {{ .Values.harvesterResources }}
