@@ -14,6 +14,44 @@ spec:
       labels: {app: harvester}
     spec:
       serviceAccountName: ckan-{{ .Release.Namespace }}-operator
+      initContainers:
+        - name: secrets
+          image: {{ .Values.ckanOperatorImage | quote }}
+          command:
+          - bash
+          - "-c"
+          - |
+            ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
+            ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
+                                                      {{ .Values.ckanSecretName | quote }} &&\
+            ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
+            echo ckan secrets initialized successfully && exit 0
+            echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
+          env:
+          - name: CKAN_CLOUD_INSTANCE_ID
+            value: {{ .Values.ckanCloudInstanceId | quote }}
+          - name: CKAN_CLOUD_POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.centralizedSecretName | quote }}
+                key: "POSTGRES_HOST"
+          - name: CKAN_CLOUD_POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.centralizedSecretName | quote }}
+                key: "POSTGRES_USER"
+          - name: PGPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.centralizedSecretName | quote }}
+                key: "POSTGRES_PASSWORD"
+          - name: CKAN_CLOUD_SOLR_HOST
+            value: {{ .Values.centralizedSolrHost | default "solr.ckan-cloud" | quote }}
+          - name: CKAN_CLOUD_SOLR_PORT
+            value: {{ .Values.centralizedSolrPort | default "8983" | quote }}
+          volumeMounts:
+          - name: harvester-secrets
+            mountPath: /etc/ckan-conf/secrets
       containers:
       - name: harvester
         image: {{ .Values.harvesterImage | quote }}
@@ -51,4 +89,14 @@ spec:
         - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
           value: "False"
         resources: {{ .Values.harvesterResources }}
+        volumeMounts:
+        - name: harvester-secrets
+          mountPath: /etc/ckan-conf/secrets
+          readOnly: true
+
+      volumes:
+        - name: harvester-secrets
+          emptyDir: {}
+      
+
 {{ end }}
