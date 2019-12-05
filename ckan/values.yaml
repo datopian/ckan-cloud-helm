@@ -9,6 +9,10 @@ nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.6
 solrcloudImage: viderum/ckan-cloud-docker:solrcloud-v0.0.6
 themerImage: viderum/ckan-theme-generator:latest
 
+harvesterResources: '{"requests": {"cpu": "60m", "memory": "600Mi"}, "limits": {"memory": "1Gi"}}'
+harvesterImage: viderum/ckan-ng-harvest:latest
+harvesterDbPersistentDiskSizeGB: 10
+
 # enabling this deploys a ckan release with only the infrastructure components
 # these components are then shared between multiple ckan instances
 # centralizedInfraOnly=true
