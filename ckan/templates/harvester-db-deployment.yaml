@@ -1,41 +1,42 @@
-{{ if not .Values.centralizedInfraOnly }}
+{{ if .Values.enableHarvesterNG }}
 apiVersion: apps/v1
 kind: Deployment
-metadata: {name: jobs-db}
+metadata: {name: harvester-db}
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
   selector:
-    matchLabels: {app: jobs-db}
+    matchLabels: {app: harvester-db}
   template:
     metadata:
-      labels: {app: jobs-db}
+      labels: {app: harvester-db}
     spec:
-      {{ if .Values.ckanJobsDbTerminationGracePeriodSeconds }}
-      terminationGracePeriodSeconds: {{ .Values.ckanJobsDbTerminationGracePeriodSeconds }}
-      {{ end }}
       containers:
       - name: postgres
-        image: postgres
+        image: postgres:9.6
         ports:
         - containerPort: 5432
         env:
         - name: POSTGRES_PASSWORD
-          value: "123456"
-        {{ if .Values.ckanJobsDbResources }}
-        resources: {{ .Values.ckanJobsDbResources }}
+          value: "airflow"
+        - name: POSTGRES_USER
+          value: "airflow"
+        - name: POSTGRES_DB
+          value: "airflow"
+        {{ if .Values.harvesterDbResources }}
+        resources: {{ .Values.harvesterDbResources }}
         {{ end }}
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: ckan-data
-          subPath: ckan-jobs-db
+          subPath: ckan-harvester-db
       volumes:
       - name: ckan-data
       {{ if .Values.usePersistentVolumes }}
         persistentVolumeClaim:
-          claimName: {{ .Release.Namespace }}-jobs-db
+          claimName: {{ .Release.Namespace }}-harvester-db
       {{ else }}
         hostPath:
           path: /var/ckan-cloud-{{ .Release.Namespace }}

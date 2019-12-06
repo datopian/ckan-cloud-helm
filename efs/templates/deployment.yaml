@@ -1,11 +1,13 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: efs-provisioner
 spec:
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: efs-provisioner}
   template:
     metadata:
       labels:

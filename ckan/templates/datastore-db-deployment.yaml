@@ -1,6 +1,6 @@
 {{ if not .Values.centralizedInfraOnly }}
 {{ if not .Values.useCentralizedInfra }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datastore-db
@@ -9,6 +9,8 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: datastore-db}
   template:
     metadata:
       labels:

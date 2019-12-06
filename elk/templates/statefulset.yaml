@@ -9,6 +9,10 @@ metadata:
 spec:
   serviceName: elasticsearch-data
   replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: data
   template:
     metadata:
       labels:

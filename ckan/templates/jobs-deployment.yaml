@@ -1,6 +1,6 @@
 {{ if not .Values.centralizedInfraOnly }}
 {{ if not .Values.disableJobs }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata: {name: jobs}
 spec:
@@ -8,6 +8,8 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels: {app: jobs}
   template:
     metadata:
       labels: {app: jobs}

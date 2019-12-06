@@ -23,12 +23,14 @@ data:
     path.config: /usr/share/logstash/pipeline
     xpack.monitoring.enabled: false
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash-application
   namespace: {{ .Release.Namespace }}
 spec:
+  selector:
+    matchLabels: {app: logstash-application}
   template:
     metadata:
       labels:
