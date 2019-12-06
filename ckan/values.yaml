@@ -1,12 +1,12 @@
 ckanSecretName: ckan-secrets
 envVarsSecretName: ckan-env-vars
 
-ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-v0.0.7
-ckanImage: viderum/ckan-cloud-docker:ckan-v0.0.7
-dbImage: viderum/ckan-cloud-docker:db-v0.0.6
-solrImage: viderum/ckan-cloud-docker:solr-v0.0.6
-nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.6
-solrcloudImage: viderum/ckan-cloud-docker:solrcloud-v0.0.6
+ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-v0.0.9
+ckanImage: viderum/ckan-cloud-docker:ckan-v0.0.9
+dbImage: viderum/ckan-cloud-docker:db-v0.0.9
+solrImage: viderum/ckan-cloud-docker:solr-v0.0.9
+nginxImage: viderum/ckan-cloud-docker:nginx-v0.0.9
+solrcloudImage: viderum/ckan-cloud-docker:solrcloud-v0.0.9
 themerImage: viderum/ckan-theme-generator:latest
 
 harvesterResources: '{"requests": {"cpu": "60m", "memory": "600Mi"}, "limits": {"memory": "1Gi"}}'
