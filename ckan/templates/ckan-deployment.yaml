@@ -28,6 +28,7 @@ spec:
           ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
           ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
+          cat /etc/ckan-conf/secrets/secrets.sh &&
           echo ckan secrets initialized successfully && exit 0
           echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
         {{ if .Values.useCentralizedInfra }}
