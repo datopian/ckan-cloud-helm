@@ -15,10 +15,17 @@ spec:
       terminationGracePeriodSeconds: 1
       containers:
       - name: nginx
-        image: {{ .Values.nginxImage | quote }}
+        image: {{ .Values.nginxImage | default "nginx:1.7-alpine" | quote }}
         ports:
         - containerPort: 8080
         {{ if .Values.nginxResources }}
         resources: {{ .Values.nginxResources }}
         {{ end }}
+        volumeMounts:
+        - name: nginx-configuration
+          mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: nginx-configuration
+        configMap:
+          name: nginx
 {{ end }}
