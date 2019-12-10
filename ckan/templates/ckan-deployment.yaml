@@ -85,28 +85,6 @@ spec:
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
         - name: ckan-conf-secrets
           mountPath: /etc/ckan-conf/secrets
-      {{ if .Values.ckanSolrRebuild }}
-      - name: ckan-solr-rebuild
-        image: {{ .Values.ckanImage | quote }}
-        command: [/ckan-entrypoint.sh, ckan-paster, --plugin=ckan, search-index, rebuild, -c, /etc/ckan/production.ini]
-        env:
-        - name: CKAN_STORAGE_PATH
-          value: /var/lib/ckan/data
-        - name: CKAN_K8S_SECRETS
-          value: /etc/ckan-conf/secrets/secrets.sh
-        - name: CKAN_K8S_TEMPLATES
-          value: /etc/ckan-conf/templates
-        - name: GUNICORN_WORKERS
-          value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
-        volumeMounts:
-        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
-        - name: ckan-conf-secrets
-          mountPath: /etc/ckan-conf/secrets
-          readOnly: true
-        - name: ckan-conf-templates
-          mountPath: /etc/ckan-conf/templates
-          readOnly: true
-      {{ end }}
       {{ if .Values.ckanPrimaryColor }}
       - name: themer
         image: {{ .Values.themerImage | quote }}
@@ -128,6 +106,8 @@ spec:
           value: /etc/ckan-conf/templates
         - name: GUNICORN_WORKERS
           value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
+        - name: DEBUG_MODE
+          value: {{ .Values.debugMode | default "no" | quote }}
         ports:
         - containerPort: 5000
         {{ if .Values.ckanResources }}
