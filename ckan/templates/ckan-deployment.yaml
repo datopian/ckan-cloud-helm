@@ -24,6 +24,7 @@ spec:
         - bash
         - "-c"
         - |
+					sleep 3600 &&\
           ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
           ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
