@@ -1,5 +1,6 @@
 ckanSecretName: ckan-secrets
 envVarsSecretName: ckan-env-vars
+bucketSecretName: bucket-credentials
 
 ckanOperatorImage: viderum/ckan-cloud-docker:cca-operator-v0.0.9
 ckanImage: viderum/ckan-cloud-docker:ckan-v0.0.9
@@ -34,3 +35,6 @@ harvesterDbPersistentDiskSizeGB: 10
 # centralizedSecretName=
 # centralizedSolrHost=
 # centralizedSolrPort=
+
+# true if cloud-native object storage enabled
+# useCloudStorage=true

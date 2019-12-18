@@ -68,6 +68,11 @@ spec:
         - name: CKAN_CLOUD_SOLR_PORT
           value: {{ .Values.centralizedSolrPort | default "8983" | quote }}
         {{ end }}
+        {{ if .Values.useCloudStorage }}
+        envFrom:
+          - secretRef:
+            name: {{ bucketSecretName }}
+        {{ end }}
         volumeMounts:
         - name: ckan-conf-secrets
           mountPath: /etc/ckan-conf/secrets
