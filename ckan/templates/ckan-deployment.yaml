@@ -70,7 +70,7 @@ spec:
         {{ end }}
         {{ if .Values.useCloudStorage }}
         envFrom:
-          - secretRef:
+        - secretRef:
             name: {{ .Values.bucketSecretName }}
         {{ end }}
         volumeMounts:
