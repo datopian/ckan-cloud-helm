@@ -71,7 +71,7 @@ spec:
         {{ if .Values.useCloudStorage }}
         envFrom:
           - secretRef:
-            name: {{ bucketSecretName }}
+            name: {{ .Values.bucketSecretName }}
         {{ end }}
         volumeMounts:
         - name: ckan-conf-secrets
