@@ -41,9 +41,9 @@ harvesterDbPersistentDiskSizeGB: 10
 
 # imagePullSecret:
 
-# Cronjobs example:
+# Cronjob example:
 # cronjobs:
-#   - name: hello world private repo
+#   - name: hello-world
 #     image: viderum/ckan-cloud-docker:ckan-v0.0.9
 #     schedule: "*/1 * * * *"
 #     args:
