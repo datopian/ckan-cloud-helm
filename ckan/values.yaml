@@ -38,3 +38,18 @@ harvesterDbPersistentDiskSizeGB: 10
 
 # true if cloud-native object storage enabled
 # useCloudStorage=true
+
+# imagePullSecret:
+
+# Cronjobs example:
+# cronjobs:
+#   - name: hello world private repo
+#     image: viderum/ckan-cloud-docker:ckan-v0.0.9
+#     schedule: "*/1 * * * *"
+#     args:
+#       - echo hello
+#       - echo world
+#       - echo $ECHO_TEXT
+#     env:
+#     - name: ECHO_TEXT
+#       value: hello world
