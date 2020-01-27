@@ -1,668 +1,662 @@
 apiVersion: v1
 entries:
   ckan:
-  - created: 2020-01-27T16:32:44.237139087+04:00
-    digest: 4dde4ac9f4435b53a338c6585c38d94504e36765921fc941d4cc4c7983dbda8d
-    name: ckan
-    urls:
-    - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.18-rc1.tgz
-    version: v0.0.18-rc1
-  - created: 2020-01-27T16:32:44.236624407+04:00
+  - created: 2020-01-14T21:40:34.342011279+04:00
     digest: 62cbbfb697b5ae2ec14ae81b41e9744b19c16a4450a2dd7af07fbd21dbe916a2
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.17.tgz
     version: v0.0.17
-  - created: 2020-01-27T16:32:44.236141595+04:00
+  - created: 2020-01-14T21:40:34.340542798+04:00
     digest: 031132f60f553837227362af7815f086e5da8586f073310ca81148c9717f5ede
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.16.tgz
     version: v0.0.16
-  - created: 2020-01-27T16:32:44.235655155+04:00
+  - created: 2020-01-14T21:40:34.33858484+04:00
     digest: ed5855c6d609cea1b0ed6b933abdd1e227171d161aa4c6e77d4ff386a77940fc
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.15.tgz
     version: v0.0.15
-  - created: 2020-01-27T16:32:44.235156718+04:00
+  - created: 2020-01-14T21:40:34.333208827+04:00
     digest: 3e563688f0d21d75c79e80d5ef059ec42828e775b1cdc79a5b202e57d8d1d213
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.14-rc4.tgz
     version: v0.0.14-rc4
-  - created: 2020-01-27T16:32:44.23465043+04:00
+  - created: 2020-01-14T21:40:34.331474049+04:00
     digest: 9171d4e8f4b37b3a1eaa854724a8524565cc0f02f82a93ca71972ee526ddab54
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.14-rc3.tgz
     version: v0.0.14-rc3
-  - created: 2020-01-27T16:32:44.234175324+04:00
+  - created: 2020-01-14T21:40:34.329859403+04:00
     digest: 99d6954cd88c8f15a61f32855572fbf000176171e3541542927abece5ca21082
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.14-rc2.tgz
     version: v0.0.14-rc2
-  - created: 2020-01-27T16:32:44.233698657+04:00
+  - created: 2020-01-14T21:40:34.32810906+04:00
     digest: fb52e75fbd55b56aa0177a99e3a73373bca3b347339750f1c1c3199896e944ab
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.14-rc1.tgz
     version: v0.0.14-rc1
-  - created: 2020-01-27T16:32:44.233196+04:00
+  - created: 2020-01-14T21:40:34.326386856+04:00
     digest: 7fec51ca419fb2685307969869331329e3acd9806b3e7ae5cd7c1600e5e8ee19
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.13.tgz
     version: v0.0.13
-  - created: 2020-01-27T16:32:44.232720904+04:00
+  - created: 2020-01-14T21:40:34.324474484+04:00
     digest: 40457e2638e7b67bbf652a3b5ec496ad257ae3c5cb506c5ebf8e3f961d194b33
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.12.tgz
     version: v0.0.12
-  - created: 2020-01-27T16:32:44.232020013+04:00
+  - created: 2020-01-14T21:40:34.321711124+04:00
     digest: 3c9e9bd2d2db52f7c24e5898d7dbb1f51112b3125b84936ec3ce0b3e1e7dfa7e
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc3.tgz
     version: v0.0.11-rc3
-  - created: 2020-01-27T16:32:44.231470985+04:00
+  - created: 2020-01-14T21:40:34.310077506+04:00
     digest: 1722dd72a8bb5f878235bcda7a6c0cd884ea0c8ff31ee0f5933c0d6e780dcb19
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc22.tgz
     version: v0.0.11-rc22
-  - created: 2020-01-27T16:32:44.230754349+04:00
+  - created: 2020-01-14T21:40:34.308108085+04:00
     digest: 85f19295b75d39d8655594e8be682834ee449a133021e27886ba2562c7a1fa0b
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc21.tgz
     version: v0.0.11-rc21
-  - created: 2020-01-27T16:32:44.230231535+04:00
+  - created: 2020-01-14T21:40:34.30295844+04:00
     digest: 14fff6c15c2129ea6f512c75ec4e4fdceb34afd5ef5220fda30bc0ff98e69a97
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc2.tgz
     version: v0.0.11-rc2
-  - created: 2020-01-27T16:32:44.229762122+04:00
+  - created: 2020-01-14T21:40:34.301479306+04:00
     digest: 9d54c7362620d1a799c3f8551936c19a0b1537da58af15c0d6117f7ea22c19c7
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc19.tgz
     version: v0.0.11-rc19
-  - created: 2020-01-27T16:32:44.229274746+04:00
+  - created: 2020-01-14T21:40:34.299827846+04:00
     digest: e6c2940d1373aa5d7ca19784529fb4acfbdf7f69a2b4aaa00e09a8d2d370a777
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc18.tgz
     version: v0.0.11-rc18
-  - created: 2020-01-27T16:32:44.228816158+04:00
+  - created: 2020-01-14T21:40:34.29769845+04:00
     digest: 1611e57a718e14b51a1a57961692de7bfb733371476c62201523a75a37614f65
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc17.tgz
     version: v0.0.11-rc17
-  - created: 2020-01-27T16:32:44.228368064+04:00
+  - created: 2020-01-14T21:40:34.29591098+04:00
     digest: d7707ae9225fa8b224c5ddaa45ae2cc4b14b592110367dc468bfa150f782f225
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc16.tgz
     version: v0.0.11-rc16
-  - created: 2020-01-27T16:32:44.227913922+04:00
+  - created: 2020-01-14T21:40:34.293881328+04:00
     digest: 15aeb22dab1d95ad2218021ea07bf303b57bcc1fea4659f78b088703b5e34833
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc15.tgz
     version: v0.0.11-rc15
-  - created: 2020-01-27T16:32:44.227461867+04:00
+  - created: 2020-01-14T21:40:34.292182572+04:00
     digest: ac91d3eb7240e6d8136fd02cadf201c8eae63b0bfe0aa86098f3b7f2bfe9f609
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc14.tgz
     version: v0.0.11-rc14
-  - created: 2020-01-27T16:32:44.22700694+04:00
+  - created: 2020-01-14T21:40:34.290351546+04:00
     digest: fcf10f83a55bf2c4c5ad1920741b4a431e4a9eceae0bc07fe919e616da7ef473
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc13.tgz
     version: v0.0.11-rc13
-  - created: 2020-01-27T16:32:44.226534173+04:00
+  - created: 2020-01-14T21:40:34.279273054+04:00
     digest: 1b07966530a56cce5bbef3a8ed7246f9340c7769329f74171f803f153bbb430d
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc12.tgz
     version: v0.0.11-rc12
-  - created: 2020-01-27T16:32:44.226071058+04:00
+  - created: 2020-01-14T21:40:34.278108296+04:00
     digest: 2ee68a1647793b3d8e26ca1210cb921eac57631bb7bb0a29aa277e0186f9ae59
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.11-rc1.tgz
     version: v0.0.11-rc1
-  - created: 2020-01-27T16:32:44.225658621+04:00
+  - created: 2020-01-14T21:40:34.269710708+04:00
     digest: 703d98f7975d4f8ca808202ece9e0bd8024dcd09fe351870f7e76019bab3a849
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.10.tgz
     version: v0.0.10
-  - created: 2020-01-27T16:32:44.239111734+04:00
+  - created: 2020-01-14T21:40:34.369116317+04:00
     digest: 6b3874334f85689c270cad78679ee797588580d839ca3b4d1e814cf53c3b5cb6
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.9.tgz
     version: v0.0.9
-  - created: 2020-01-27T16:32:44.224834337+04:00
+  - created: 2020-01-14T21:40:34.258473373+04:00
     digest: 5d5b837bae8372ad0633ce133cf8114fc57a1085c20891b236f037d82dcc19af
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-0.0.8.tgz
     version: 0.0.8
-  - created: 2020-01-27T16:32:44.238697391+04:00
+  - created: 2020-01-14T21:40:34.367120375+04:00
     digest: c8ba478bd4cfe0dd28d2de06972a5aeaa20c3f9034f61c0e7dab4eb64a097d9e
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.7.tgz
     version: v0.0.7
-  - created: 2020-01-27T16:32:44.238291499+04:00
+  - created: 2020-01-14T21:40:34.35910315+04:00
     digest: 92d6136e97ecb2e459c2d243fcc395db44f651a4dd25a4b6b0ebd9d8952ee20b
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.6.tgz
     version: v0.0.6
-  - created: 2020-01-27T16:32:44.237889911+04:00
+  - created: 2020-01-14T21:40:34.352883872+04:00
     digest: 50628575db501a09bbfd5441246c6628a3b2066fbb7febf7384b2390215cf117
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.5.tgz
     version: v0.0.5
-  - created: 2020-01-27T16:32:44.237514452+04:00
+  - created: 2020-01-14T21:40:34.343893129+04:00
     digest: b5583638a1f9e40fdc6fbb4dd69302d583a214c15da539bc01e8cd2a8d3faad7
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.4.tgz
     version: v0.0.4
-  - created: 2020-01-27T16:32:44.225249581+04:00
+  - created: 2020-01-14T21:40:34.261191987+04:00
     digest: 24433554b64241433c2db779e8d2361b3f36e1b72af280f22f9d722d6df887a1
     name: ckan
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ckan-v0.0.0-fix-plugins-indent.tgz
     version: v0.0.0-fix-plugins-indent
   efs:
-  - created: 2020-01-27T16:32:44.242319028+04:00
+  - created: 2020-01-14T21:40:34.3944281+04:00
     digest: 7e63242cf61686f5feb991e496f348c258261303fbafbaa52d70ec198b3048ca
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.14-rc4.tgz
     version: v0.0.14-rc4
-  - created: 2020-01-27T16:32:44.242174975+04:00
+  - created: 2020-01-14T21:40:34.393923875+04:00
     digest: 26adeaf937df20ec56ff96095b18c7103afc0d9695bb6f62e77b3d8e40c95a83
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.14-rc3.tgz
     version: v0.0.14-rc3
-  - created: 2020-01-27T16:32:44.241832498+04:00
+  - created: 2020-01-14T21:40:34.393381116+04:00
     digest: 2f32af64cf1eca09a33351a902e633a8d1202da6ca62245af919434ce68a7189
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.14-rc2.tgz
     version: v0.0.14-rc2
-  - created: 2020-01-27T16:32:44.241596004+04:00
+  - created: 2020-01-14T21:40:34.392546817+04:00
     digest: e335d69812e671921ef78bad1bdcc0d38b601576dd325ecfd7aaf563e9337845
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.14-rc1.tgz
     version: v0.0.14-rc1
-  - created: 2020-01-27T16:32:44.241433885+04:00
+  - created: 2020-01-14T21:40:34.391757389+04:00
     digest: 60e6ff53886dbc3d9b87f9aa0e756437a6b0b9a11926650ad2b890b408685b47
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.13.tgz
     version: v0.0.13
-  - created: 2020-01-27T16:32:44.241271901+04:00
+  - created: 2020-01-14T21:40:34.390281239+04:00
     digest: 342ede87e961519c615157f27156b093e538ac5fabd4aed896bf4fad0f641333
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.12.tgz
     version: v0.0.12
-  - created: 2020-01-27T16:32:44.241103209+04:00
+  - created: 2020-01-14T21:40:34.389391812+04:00
     digest: c343f5bca13fe21e3ab3035294088354b3cc23f178090d2d4eb39eef735a323e
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc3.tgz
     version: v0.0.11-rc3
-  - created: 2020-01-27T16:32:44.240925005+04:00
+  - created: 2020-01-14T21:40:34.388896383+04:00
     digest: 6866c2a6330b33af4f2a3ee00ce4a9285c1e6a5b79786ef3209860537f5635e9
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc22.tgz
     version: v0.0.11-rc22
-  - created: 2020-01-27T16:32:44.240623831+04:00
+  - created: 2020-01-14T21:40:34.3879897+04:00
     digest: daf78ee344bd97dd17a4ff154222e9b8eb75b18ec89c45b54721fa98c3b2b702
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc21.tgz
     version: v0.0.11-rc21
-  - created: 2020-01-27T16:32:44.240507089+04:00
+  - created: 2020-01-14T21:40:34.382003797+04:00
     digest: d4107bcfb1e1160eadf18706f8f1a3710c2247b0f58490dc66da8089b3264ad3
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc2.tgz
     version: v0.0.11-rc2
-  - created: 2020-01-27T16:32:44.24039349+04:00
+  - created: 2020-01-14T21:40:34.381510356+04:00
     digest: 67ef486ee950d69c4e7272bb98eaa9254a75015d1b308f43d8d479680c50ff14
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc19.tgz
     version: v0.0.11-rc19
-  - created: 2020-01-27T16:32:44.240277495+04:00
+  - created: 2020-01-14T21:40:34.381042712+04:00
     digest: 86c192832ca0580526039bcc52300b2c181244a57e8bf5cc361317ee12790c26
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc18.tgz
     version: v0.0.11-rc18
-  - created: 2020-01-27T16:32:44.240167816+04:00
+  - created: 2020-01-14T21:40:34.380227101+04:00
     digest: e3cf8e1a18984861612fe9e8ff386f1e3561074c603efe2ca39774434c3084be
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc17.tgz
     version: v0.0.11-rc17
-  - created: 2020-01-27T16:32:44.240054035+04:00
+  - created: 2020-01-14T21:40:34.374784783+04:00
     digest: a730c8673a7e9def7599408768e199dc113bc5b9a02d1624fa87b29c4f0d7a2f
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc16.tgz
     version: v0.0.11-rc16
-  - created: 2020-01-27T16:32:44.239926482+04:00
+  - created: 2020-01-14T21:40:34.374240243+04:00
     digest: d3dbf67eee010b942dbfbaee8c1a6f7be764bad5f2c2a4ada899407cedc21b0a
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc15.tgz
     version: v0.0.11-rc15
-  - created: 2020-01-27T16:32:44.239820006+04:00
+  - created: 2020-01-14T21:40:34.373540768+04:00
     digest: 639b9e0d022b69c6bc50f56dd644ff75bfa1e5958d5057cba71e61be4298bd13
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc14.tgz
     version: v0.0.11-rc14
-  - created: 2020-01-27T16:32:44.239716167+04:00
+  - created: 2020-01-14T21:40:34.372863269+04:00
     digest: a70eb181c6dc0bdf284213dfe38bdb8deae356a8d53642759fffee6946c436d9
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc13.tgz
     version: v0.0.11-rc13
-  - created: 2020-01-27T16:32:44.239606791+04:00
+  - created: 2020-01-14T21:40:34.37211298+04:00
     digest: 354806a9dadd0589e879023c749508b96b39e39d24f4ccaa10e162c6667854b1
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc12.tgz
     version: v0.0.11-rc12
-  - created: 2020-01-27T16:32:44.239467007+04:00
+  - created: 2020-01-14T21:40:34.371102647+04:00
     digest: acc1cc34938036f29a52bf4e41dfaed61bd13d8dc4bda061c80d45baa3a133bc
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.11-rc1.tgz
     version: v0.0.11-rc1
-  - created: 2020-01-27T16:32:44.239351511+04:00
+  - created: 2020-01-14T21:40:34.370483182+04:00
     digest: e5d1521f18c9459124d02ca7b42d3bc96e35b925385dc71f94b7e96092e943e2
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.10.tgz
     version: v0.0.10
-  - created: 2020-01-27T16:32:44.24301923+04:00
+  - created: 2020-01-14T21:40:34.404213567+04:00
     digest: bd46268b2fcc3df5efc91907c2763c780daffa0e39544074bd38ad0850497ee6
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.9.tgz
     version: v0.0.9
-  - created: 2020-01-27T16:32:44.23923551+04:00
+  - created: 2020-01-14T21:40:34.369865406+04:00
     digest: 01280bb89cc05dda4bd90975d453bd7b1ff77d9d56ebfbf6cb89a5c55ce4cb15
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-0.0.8.tgz
     version: 0.0.8
-  - created: 2020-01-27T16:32:44.242852768+04:00
+  - created: 2020-01-14T21:40:34.402886478+04:00
     digest: cb5d8bf839f01d9ab5aeec83adfe517df20bedbd0ca715037f7a1cbb78090ec9
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.7.tgz
     version: v0.0.7
-  - created: 2020-01-27T16:32:44.242747846+04:00
+  - created: 2020-01-14T21:40:34.402108481+04:00
     digest: 348753a9a17e6460d86be2ac6b0d957c513430a7646ef84b37d15de840f69d5c
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.6.tgz
     version: v0.0.6
-  - created: 2020-01-27T16:32:44.24263377+04:00
+  - created: 2020-01-14T21:40:34.396174225+04:00
     digest: 8ab023c0bd1a33be6af215c3ff613b47f670cf9507dbc50e9d109a81238415e4
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.5.tgz
     version: v0.0.5
-  - created: 2020-01-27T16:32:44.242472103+04:00
+  - created: 2020-01-14T21:40:34.395584043+04:00
     digest: 88ab25e7df0208f1da9fe3e1d00e134f4f42614d47b10c10e449f9ee05d4e03a
     name: efs
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/efs-v0.0.4.tgz
     version: v0.0.4
   elk:
-  - created: 2020-01-27T16:32:44.243402743+04:00
+  - created: 2020-01-14T21:40:34.421734466+04:00
     digest: af34cd9a5b63a20d5c15080a96ba8d3f0060ed6636906637f6eda387e6f83a5b
     name: elk
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/elk-v0.0.2.tgz
     version: v0.0.2
-  - created: 2020-01-27T16:32:44.243200503+04:00
+  - created: 2020-01-14T21:40:34.420479942+04:00
     digest: c3925c634c44eea1058e650b021aefd8f7bbe2e7fb727259ecf14d7fd882fc46
     name: elk
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/elk-0.0.1.tgz
     version: 0.0.1
   provisioning:
-  - created: 2020-01-27T16:32:44.246624594+04:00
+  - created: 2020-01-14T21:40:34.441872778+04:00
     digest: c9eb933b9d2d49eedcca7804fbf84e08539e27ac2e26eadd3ee7b47c48c1e4a9
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.14-rc4.tgz
     version: v0.0.14-rc4
-  - created: 2020-01-27T16:32:44.246464599+04:00
+  - created: 2020-01-14T21:40:34.441014225+04:00
     digest: f719a174cafc0e17dcd52d9c25b77127ad38d37203ab9958202f8b8f749e543d
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.14-rc3.tgz
     version: v0.0.14-rc3
-  - created: 2020-01-27T16:32:44.246321526+04:00
+  - created: 2020-01-14T21:40:34.440005779+04:00
     digest: 47dc874b2c1c1a55f2271813adcd67fbe24132ba05cb1e67f65f6854adc7e894
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.14-rc2.tgz
     version: v0.0.14-rc2
-  - created: 2020-01-27T16:32:44.24617479+04:00
+  - created: 2020-01-14T21:40:34.43903872+04:00
     digest: b15c72426252156ba4b26eb9999369f92d328dd0e9f6e86428318b47900ab768
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.14-rc1.tgz
     version: v0.0.14-rc1
-  - created: 2020-01-27T16:32:44.246031603+04:00
+  - created: 2020-01-14T21:40:34.438127372+04:00
     digest: f8936a1a96e1e91c1d6bf6915c0b4bfc0170ed89c96dbbaf4da13c17b6baa9e8
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.13.tgz
     version: v0.0.13
-  - created: 2020-01-27T16:32:44.245875779+04:00
+  - created: 2020-01-14T21:40:34.437271294+04:00
     digest: 2a3b2b9562789c2b05529d62ee12a89296af847ad216a235e02e68113184879b
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.12.tgz
     version: v0.0.12
-  - created: 2020-01-27T16:32:44.24572456+04:00
+  - created: 2020-01-14T21:40:34.436428418+04:00
     digest: b567d0391579958530c6eb90e1606876d49132311ee7448e909f6ac3bf821904
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc3.tgz
     version: v0.0.11-rc3
-  - created: 2020-01-27T16:32:44.245579279+04:00
+  - created: 2020-01-14T21:40:34.435555936+04:00
     digest: 615cd310ec9d8f57d2c2fc9000c0874a5116fed69c50d3cb29e5caaaa3e4e9e3
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc22.tgz
     version: v0.0.11-rc22
-  - created: 2020-01-27T16:32:44.245417192+04:00
+  - created: 2020-01-14T21:40:34.434678466+04:00
     digest: 58dc7025418dae12e879e519c6a0399f60aa203e9ec0d9b8befb910fe0570629
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc21.tgz
     version: v0.0.11-rc21
-  - created: 2020-01-27T16:32:44.245256182+04:00
+  - created: 2020-01-14T21:40:34.433754007+04:00
     digest: 58a3fbc38bbe8387dd0e6d86dba9ecbb0306ef0dc518cc04bee03d76b27b1d1d
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc2.tgz
     version: v0.0.11-rc2
-  - created: 2020-01-27T16:32:44.245100113+04:00
+  - created: 2020-01-14T21:40:34.432888792+04:00
     digest: 731c707ca9a0c92b867045741a23d6aed3eea88648797194ffc9596eb9abf5cf
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc19.tgz
     version: v0.0.11-rc19
-  - created: 2020-01-27T16:32:44.244935922+04:00
+  - created: 2020-01-14T21:40:34.431974342+04:00
     digest: dfa00662059368f365039f344056d7facebc128d536ebfd297364b23d21e2b8b
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc18.tgz
     version: v0.0.11-rc18
-  - created: 2020-01-27T16:32:44.244780165+04:00
+  - created: 2020-01-14T21:40:34.430975876+04:00
     digest: e23123ca2755e7dc7816e9d66b3c2792ff4eacc593421758c927aba9aecdd293
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc17.tgz
     version: v0.0.11-rc17
-  - created: 2020-01-27T16:32:44.244636896+04:00
+  - created: 2020-01-14T21:40:34.430081975+04:00
     digest: 086f4297cf10005fdd93a8e185a289a6826badfb702bf73d0badf4fdf6e2089b
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc16.tgz
     version: v0.0.11-rc16
-  - created: 2020-01-27T16:32:44.244481614+04:00
+  - created: 2020-01-14T21:40:34.429175701+04:00
     digest: 55ce3c39b5d13d0c5c63509a64c3dc99feca02bfb822cbd7145790367bb20cd3
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc15.tgz
     version: v0.0.11-rc15
-  - created: 2020-01-27T16:32:44.244331831+04:00
+  - created: 2020-01-14T21:40:34.428235088+04:00
     digest: 05a1d91f557484b21d95b73818f5af4c0a2ad58528312cdeb77d8aa8e628ca32
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc14.tgz
     version: v0.0.11-rc14
-  - created: 2020-01-27T16:32:44.244185506+04:00
+  - created: 2020-01-14T21:40:34.427206219+04:00
     digest: abd63cc34df097ce696cb3593393d97eaaf7cd13631ff9391f6d87be5528ef1b
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc13.tgz
     version: v0.0.11-rc13
-  - created: 2020-01-27T16:32:44.244038869+04:00
+  - created: 2020-01-14T21:40:34.426292224+04:00
     digest: 9c2931fbd55af7b1f69bb11ee0d7143f2c7be1e943d6fa8df9b7906c547b8f85
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc12.tgz
     version: v0.0.11-rc12
-  - created: 2020-01-27T16:32:44.243883476+04:00
+  - created: 2020-01-14T21:40:34.425392765+04:00
     digest: 5f234a1075e0522b81d9d671fd50f3a353e38f4e4c5fd020c51438c0509d59f6
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.11-rc1.tgz
     version: v0.0.11-rc1
-  - created: 2020-01-27T16:32:44.243723146+04:00
+  - created: 2020-01-14T21:40:34.424034027+04:00
     digest: 301f9f68745f48baef0dc0a2af97145927d843bf481cccfcc7ebe5007e72155e
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.10.tgz
     version: v0.0.10
-  - created: 2020-01-27T16:32:44.247266143+04:00
+  - created: 2020-01-14T21:40:34.445330797+04:00
     digest: 0ecc6125685ceb6f6f5e0fffcc5472eeaf4aee9dec1379a54ae89b324b0107b9
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.9.tgz
     version: v0.0.9
-  - created: 2020-01-27T16:32:44.2435709+04:00
+  - created: 2020-01-14T21:40:34.422733026+04:00
     digest: ec175eb5416cc42c5b01459c6fb9e65fae96f2ad5f96736adfb199c1e9a2266b
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-0.0.8.tgz
     version: 0.0.8
-  - created: 2020-01-27T16:32:44.247122308+04:00
+  - created: 2020-01-14T21:40:34.444492685+04:00
     digest: 385c4b5ef211d0d42d4615295d6bcd711e27273c298b6250d4f8731bc04836e8
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.7.tgz
     version: v0.0.7
-  - created: 2020-01-27T16:32:44.246955381+04:00
+  - created: 2020-01-14T21:40:34.443648302+04:00
     digest: 133d158a6b94137069bf7d5d6eb9f3bb019ed4dbd3f5ade30a11444a2bec7f7c
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.6.tgz
     version: v0.0.6
-  - created: 2020-01-27T16:32:44.246771481+04:00
+  - created: 2020-01-14T21:40:34.442765255+04:00
     digest: 054ee4fb20d4a856dd8ac53a6705588c00d639b5b9f190971a876037d009062d
     name: provisioning
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/provisioning-v0.0.5.tgz
     version: v0.0.5
   traefik:
-  - created: 2020-01-27T16:32:44.250901229+04:00
+  - created: 2020-01-14T21:40:34.482070297+04:00
     digest: d8b2177dfc4c727c4d7841ac56507197931f8c917cdf7d396958a4df239d75ad
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.14-rc4.tgz
     version: v0.0.14-rc4
-  - created: 2020-01-27T16:32:44.250771384+04:00
+  - created: 2020-01-14T21:40:34.481409804+04:00
     digest: 3a872066cb3df915ed0f6a17f75015614b3525c5ba9ab383dac2ba79148e8f94
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.14-rc3.tgz
     version: v0.0.14-rc3
-  - created: 2020-01-27T16:32:44.250640435+04:00
+  - created: 2020-01-14T21:40:34.480646833+04:00
     digest: 255971b31671513ba3ee4ee06593e997dae0d52f3f523c6344ae3f22038f8d2b
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.14-rc2.tgz
     version: v0.0.14-rc2
-  - created: 2020-01-27T16:32:44.250509715+04:00
+  - created: 2020-01-14T21:40:34.479790222+04:00
     digest: 4d0c5348009315ce540d56890552aac6daac72ffe34aa38fcf5070d1f0a20c6f
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.14-rc1.tgz
     version: v0.0.14-rc1
-  - created: 2020-01-27T16:32:44.25037641+04:00
+  - created: 2020-01-14T21:40:34.47911842+04:00
     digest: 1a28911542771b9622d6bd48769dfed46939404449dfae02e338f597565cdf50
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.13.tgz
     version: v0.0.13
-  - created: 2020-01-27T16:32:44.250241027+04:00
+  - created: 2020-01-14T21:40:34.478390251+04:00
     digest: 05d9318fa560de5a98218ba85978cb686743031a6a241a78e6b7c69c085a86b0
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.12.tgz
     version: v0.0.12
-  - created: 2020-01-27T16:32:44.249960585+04:00
+  - created: 2020-01-14T21:40:34.477379154+04:00
     digest: aad0547ba441aaa95bc0e0fa63f318bc0f9d882dabb882c594299c30f1b79611
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc3.tgz
     version: v0.0.11-rc3
-  - created: 2020-01-27T16:32:44.249592467+04:00
+  - created: 2020-01-14T21:40:34.469966929+04:00
     digest: daf188457ba1b54cf40a30dcd97b88a0ef707fdabca01217d35d3e331b5dff81
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc22.tgz
     version: v0.0.11-rc22
-  - created: 2020-01-27T16:32:44.24938977+04:00
+  - created: 2020-01-14T21:40:34.458038601+04:00
     digest: 86ff90ae6878d52b0233d3875d25f3918db1ee8a5c4d857a2967fb56c69a7ca3
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc21.tgz
     version: v0.0.11-rc21
-  - created: 2020-01-27T16:32:44.249221677+04:00
+  - created: 2020-01-14T21:40:34.457268478+04:00
     digest: 9a91737a8ccaef502e77ef119eda7048e5264345c1629090061c2edfb060ded4
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc2.tgz
     version: v0.0.11-rc2
-  - created: 2020-01-27T16:32:44.249053865+04:00
+  - created: 2020-01-14T21:40:34.45648154+04:00
     digest: 4cbe5095a7b9abec7f592daf00718edf7cc468ac6ed267978fca63b1f6dda5a1
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc19.tgz
     version: v0.0.11-rc19
-  - created: 2020-01-27T16:32:44.248881738+04:00
+  - created: 2020-01-14T21:40:34.455555485+04:00
     digest: 4b9fbd6a7bf11624d24b385627858ca0e7ef664b6d75f208cd34036fa6d83cff
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc18.tgz
     version: v0.0.11-rc18
-  - created: 2020-01-27T16:32:44.248649922+04:00
+  - created: 2020-01-14T21:40:34.45428745+04:00
     digest: be91a7963f3ecb045ced33e1d0506b1a5aeb1536db6bb04293e1449dc9496c01
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc17.tgz
     version: v0.0.11-rc17
-  - created: 2020-01-27T16:32:44.248259269+04:00
+  - created: 2020-01-14T21:40:34.453200205+04:00
     digest: 14db3abd5ddb01e763ea70a000157aa4483a6ca8e19e8f01522bbcf0321755a8
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc16.tgz
     version: v0.0.11-rc16
-  - created: 2020-01-27T16:32:44.248134837+04:00
+  - created: 2020-01-14T21:40:34.452155714+04:00
     digest: 6d063ff6297d6c25cf21ad140c2b1629135a323aef0db163de8665056154554a
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc15.tgz
     version: v0.0.11-rc15
-  - created: 2020-01-27T16:32:44.248011458+04:00
+  - created: 2020-01-14T21:40:34.450260573+04:00
     digest: 6df0dfe940f07710ce2541a86fec8dac2173c765ddb93e64a0915c5e7534a5a3
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc14.tgz
     version: v0.0.11-rc14
-  - created: 2020-01-27T16:32:44.247888882+04:00
+  - created: 2020-01-14T21:40:34.449381234+04:00
     digest: b893aa9822c50af1b1517f620f2b5bfff015104905da7639c27ba19db50e75dd
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc13.tgz
     version: v0.0.11-rc13
-  - created: 2020-01-27T16:32:44.247765374+04:00
+  - created: 2020-01-14T21:40:34.448583923+04:00
     digest: a56e039dc63ec58e2fae9035597f910451e763e17fbf3a904b1455e441882149
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc12.tgz
     version: v0.0.11-rc12
-  - created: 2020-01-27T16:32:44.247643208+04:00
+  - created: 2020-01-14T21:40:34.447784655+04:00
     digest: 71e0221dc12b07d950e0f008028192c42c4933d3ab8cf325ec0a8f637b81c243
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.11-rc1.tgz
     version: v0.0.11-rc1
-  - created: 2020-01-27T16:32:44.247521474+04:00
+  - created: 2020-01-14T21:40:34.446992139+04:00
     digest: d13191210cb1063e231cdf878bb1b5d0ece41ff3a8959bc108d4e974efdd64c8
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.10.tgz
     version: v0.0.10
-  - created: 2020-01-27T16:32:44.251591021+04:00
+  - created: 2020-01-14T21:40:34.486439525+04:00
     digest: d195e363a4045447f2a64023c0ca22c284f979fa28a195778b04695e980a5d1c
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.9.tgz
     version: v0.0.9
-  - created: 2020-01-27T16:32:44.247400274+04:00
+  - created: 2020-01-14T21:40:34.446222873+04:00
     digest: 55f713ac32a8c2281ab7e788797b7ab566e44bf798620b39536de0f0f6b89823
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-0.0.8.tgz
     version: 0.0.8
-  - created: 2020-01-27T16:32:44.251461012+04:00
+  - created: 2020-01-14T21:40:34.485429629+04:00
     digest: e6db3e44fd09b2b6fee12346a9b1a90e5d2de1b46486991f3ecd82757e46933d
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.7.tgz
     version: v0.0.7
-  - created: 2020-01-27T16:32:44.251331534+04:00
+  - created: 2020-01-14T21:40:34.484537793+04:00
     digest: ee0c1095f41c7fa05e183c4141a47cdcdcbc3f4604446fdc76d54121d8c024a6
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.6.tgz
     version: v0.0.6
-  - created: 2020-01-27T16:32:44.25119842+04:00
+  - created: 2020-01-14T21:40:34.483801224+04:00
     digest: 98bb09e75cf17de7e3725e7c0e88d0d51b2022984a6f0ba27679834fbd140d90
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.5.tgz
     version: v0.0.5
-  - created: 2020-01-27T16:32:44.251067459+04:00
+  - created: 2020-01-14T21:40:34.483043947+04:00
     digest: d72b1746d92f60d8f1a74c575cec12280194100d1b19836bd198b72d5f9828d6
     name: traefik
     urls:
     - https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/traefik-v0.0.4.tgz
     version: v0.0.4
-generated: 2020-01-27T16:32:44.224321651+04:00
+generated: 2020-01-14T21:40:34.239323909+04:00
