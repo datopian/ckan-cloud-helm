@@ -7,7 +7,7 @@ metadata:
 spec:
   storageClassName: {{ .Values.ckanStorageClassName }}
   accessModes:
-    - {{ .Values.ckanAccessMode | default "ReadWriteMany" }} 
+    - {{ .Values.diskAccessMode | default "ReadWriteMany" }} 
   resources:
     requests:
       storage: 1Mi
