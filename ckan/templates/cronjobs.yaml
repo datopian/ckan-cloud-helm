@@ -1,0 +1,37 @@
+{{- $top := . }}
+{{- if hasKey .Values "cronjobs" }}
+{{- range .Values.cronjobs }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .name }}
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .name }}
+            image: {{ .image }}
+            args:
+            {{- range .args }}
+            - {{ . }}
+            {{- end }}
+            {{- if hasKey . "env" }}
+            env:
+            {{- range .env }}
+            - name: {{ .name }}
+              value: {{ .value }}
+            {{- end }}
+            {{- end }}
+          {{- if hasKey $top.Values "imagePullSecret" }}
+          imagePullSecrets:
+          - name: {{ $top.Values.imagePullSecret }}
+          {{- end }}
+          restartPolicy: OnFailure
+{{- end }}
+{{- end }}
