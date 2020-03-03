@@ -99,13 +99,13 @@ spec:
         volumeMounts:
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
       {{ end }}
+      {{- if hasKey .Values "imagePullSecret" }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       containers:
       - name: ckan
         image: {{ .Values.ckanImage | quote }}
-        {{- if hasKey .Values "imagePullSecret" }}
-        imagePullSecrets:
-        - name: {{ .Values.imagePullSecret }}
-        {{- end }}
         env:
         - name: CKAN_STORAGE_PATH
           value: /var/lib/ckan/data
