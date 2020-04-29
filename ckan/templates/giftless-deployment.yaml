@@ -32,6 +32,8 @@ spec:
         - name: GIFTLESS_DEBUG
           value: "1"
         {{ end }}
+        - name: GIFTLESS_CONFIG_FILE
+          value: /app/giftless.yaml
         image: {{ .Values.giftlessImage | default "datopian/giftless:latest" | quote }}
         name: giftless
         ports:
