@@ -27,8 +27,8 @@ spec:
         - app
         - --http
         - 0.0.0.0:5000
-        {{ if .Values.giftlessDebug }}
         env:
+        {{ if .Values.giftlessDebug }}
         - name: GIFTLESS_DEBUG
           value: "1"
         {{ end }}
