@@ -53,8 +53,7 @@ spec:
           subPath: giftless.yaml
       volumes:
       - secret:
-          defaultMode: 420
-          name: jwt-keys
+          secretName: jwt-keys
         name: jwt-key-pub
       - configMap:
           defaultMode: 420
