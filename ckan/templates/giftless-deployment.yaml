@@ -1,0 +1,61 @@
+{{ if .Values.enableGiftless  }}
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: giftless}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {app: giftless}
+  template:
+    metadata:
+      labels: {app: giftless}
+    spec:
+      containers:
+      - command:
+        - uwsgi
+        - -M
+        - -T
+        - --threads
+        - "2"
+        - -p
+        - "2"
+        - --manage-script-name
+        - --callable
+        - app
+        - --http
+        - 0.0.0.0:5000
+        {{ if .Values.giftlessDebug }}
+        env:
+        - name: GIFTLESS_DEBUG
+          value: "1"
+        {{ end }}
+        image: {{ .Values.giftlessImage | default "datopian/giftless:latest" | quote }}
+        name: giftless
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        {{ if .Values.giftlessResources }}
+        resources: {{ .Values.giftlessResources }}
+        {{ end }}
+        volumeMounts:
+        - mountPath: /etc/ssh/jwt-rs256.key.pub
+          name: jwt-key-pub
+          readOnly: true
+          subPath: jwt-rs256.key.pub
+        - mountPath: /app/giftless.yaml
+          name: giftless-config
+          readOnly: true
+          subPath: giftless.yaml
+      volumes:
+      - secret:
+          defaultMode: 420
+          name: jwt-keys
+        name: jwt-key-pub
+      - configMap:
+          defaultMode: 420
+          name: giftless
+        name: giftless-config
+{{ end }}

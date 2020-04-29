@@ -1,0 +1,34 @@
+{{ if .Values.enableGiftless }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: giftless
+data:
+  giftless.yaml: |
+    AUTH_PROVIDERS:
+      - factory: giftless.auth.jwt:factory
+        options:
+          algorithm: RS256
+          public_key_file: /etc/ssh/jwt-rs256.key.pub
+
+    TRANSFER_ADAPTERS:
+      basic:
+        factory: giftless.transfer.basic_external:factory
+        options:
+          storage_class: ..storage.azure:AzureBlobsStorage
+          storage_options:
+            connection_string: {{ .Values.excternalStorageConnectionString }}
+            container_name: {{ .Values.excternalStorageContainerName }}
+            path_prefix: {{ .Values.giftlessPathPrefix | default "giftless" | quote }}
+
+    PRE_AUTHORIZED_ACTION_PROVIDER:
+      options:
+        private_key: {{ randAlphaNum 16 | b64enc | quote }}
+
+    MIDDLEWARE:
+      - class: werkzeug.middleware.proxy_fix:ProxyFix
+        kwargs:
+          x_host: 1
+          x_port: 1
+          x_prefix: 1
+{{ end }}
