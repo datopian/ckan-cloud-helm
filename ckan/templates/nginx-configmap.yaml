@@ -25,9 +25,9 @@ data:
 {{ end }}
 
 {{ if .Values.enableGiftless }}
-        location /{{ .Values.giftlessProxyPrefix | default "giftless" | quote }}/ {
+        location /{{ .Values.giftlessProxyPrefix | default giftless | quote }}/ {
             proxy_pass http://giftless:5000/;
-            proxy_set_header X-Forwarded-Prefix /{{ .Values.giftlessProxyPrefix | default "giftless" | quote }};
+            proxy_set_header X-Forwarded-Prefix /{{ .Values.giftlessProxyPrefix | default giftless | quote }};
         }
 {{ end }}
         location / {
