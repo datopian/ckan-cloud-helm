@@ -1,4 +1,4 @@
-{{ if not .Values.centralizedInfraOnly }}
+  {{ if not .Values.centralizedInfraOnly }}
 apiVersion: apps/v1
 kind: Deployment
 metadata: {name: ckan}
@@ -134,11 +134,9 @@ spec:
         - mountPath: /etc/ssh/jwt-rs256.key
           name: jwt-key
           readOnly: true
-          subPath: jwt-rs256.key
         - mountPath: /etc/ssh/jwt-rs256.key.pub
           name: jwt-key-pub
           readOnly: true
-          subPath: jwt-rs256.key.pub
         {{ end }}
         {{ if not .Values.noProbes }}
         readinessProbe:
