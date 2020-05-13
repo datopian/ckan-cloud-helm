@@ -20,6 +20,10 @@ spec:
       {{ if .Values.terminationGracePeriodSeconds }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       {{ end }}
+      {{ if .Values.ckanPodReplaceStrategy }}
+      strategy:
+        type: {{ .Values.ckanPodReplaceStrategy }}
+      {{ end }}
       serviceAccountName: ckan-{{ .Release.Namespace }}-operator
       initContainers:
       - name: secrets
