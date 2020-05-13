@@ -5,7 +5,10 @@ metadata: {name: ckan}
 spec:
   replicas: {{ .Values.replicas | default "2" }}
   revisionHistoryLimit: 2
-  strategy: {{ .Values.ckanPodReplaceStrategy | default "RollingUpdate" | quote }}
+  {{ if .Values.ckanPodReplaceStrategy }}
+  strategy:
+    type: {{ .Values.ckanPodReplaceStrategy }}
+  {{ end }}
   selector:
     matchLabels: {app: ckan}
   template:
