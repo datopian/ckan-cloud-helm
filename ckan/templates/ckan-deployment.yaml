@@ -5,6 +5,7 @@ metadata: {name: ckan}
 spec:
   replicas: {{ .Values.replicas | default "2" }}
   revisionHistoryLimit: 2
+  strategy: {{ .Values.ckanPodReplaceStrategy | default "RollingUpdate" | quote }}
   selector:
     matchLabels: {app: ckan}
   template:
@@ -16,7 +17,6 @@ spec:
       {{ if .Values.terminationGracePeriodSeconds }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       {{ end }}
-      strategy: {{ .Values.ckanPodReplaceStrategy | default "RollingUpdate" | quote }}
       serviceAccountName: ckan-{{ .Release.Namespace }}-operator
       initContainers:
       - name: secrets
