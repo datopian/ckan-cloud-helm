@@ -28,7 +28,7 @@ spec:
         - {{ .Values.ckanSecretName | quote }}
         - /etc/ckan-conf/secrets/secrets.sh
         volumeMounts:
-        - name: ckan-conf-secrets
+        - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
       - name: permissions
         image: alpine
@@ -41,8 +41,8 @@ spec:
         securityContext:
           runAsUser: 0
         volumeMounts:
-        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
-        - name: ckan-conf-secrets
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
+        - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
       containers:
       - name: ckan-jobs
@@ -59,23 +59,23 @@ spec:
           value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
         resources: {{ .Values.ckanJobsResources }}
         volumeMounts:
-        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-ckan}
-        - name: ckan-conf-secrets
+        - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
+        - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
           readOnly: true
-        - name: ckan-conf-templates
+        - name: ckan-conf-templates-jobs
           mountPath: /etc/ckan-conf/templates
           readOnly: true
       volumes:
-      - name: ckan-conf-secrets
+      - name: ckan-conf-secrets-jobs
         emptyDir: {}
-      - name: ckan-conf-templates
+      - name: ckan-conf-templates-jobs
         configMap:
           name: ckan
       - name: ckan-data
       {{ if .Values.usePersistentVolumes }}
         persistentVolumeClaim:
-          claimName: {{ .Release.Namespace }}-ckan
+          claimName: {{ .Release.Namespace }}-jobs
       {{ else }}
         hostPath:
           path: /var/ckan-cloud-{{ .Release.Namespace }}

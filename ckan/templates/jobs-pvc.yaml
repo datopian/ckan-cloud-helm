@@ -1,0 +1,15 @@
+{{ if not .Values.centralizedInfraOnly }}
+{{ if .Values.usePersistentVolumes }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Namespace }}-jobs
+spec:
+  storageClassName: {{ .Values.ckanStorageClassName }}
+  accessModes:
+    - {{ .Values.ckanStorageDiskAccessMode | default "ReadWriteMany" }}
+  resources:
+    requests:
+      storage: 1Mi
+{{ end }}
+{{ end }}
