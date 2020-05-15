@@ -115,7 +115,7 @@ data:
 
     #		Add ``resource_proxy`` to enable resorce proxying and get around the
     #		same origin policy
-    ckan.plugins = 
+    ckan.plugins =
 {{ .Values.ckanPlugins | default "stats text_view image_view recline_view datastore xloader" | indent 6 }}
 
     # Define which views should be created by default
@@ -203,7 +203,8 @@ data:
     smtp.mail_from = {{ "{{" }}SMTP_MAIL_FROM{{ "}}" }}
 
 {{ if .Values.extraCkanConfig }}{{ .Values.extraCkanConfig | indent 4 }}{{ end }}
-
+{{ if .Values.costumCkanLogging }}{{ .Values.costumCkanLogging | indent 4 }}
+{{ else }}
     ## Logging configuration
     [loggers]
     keys = root, ckan, ckanext
@@ -238,6 +239,7 @@ data:
 
     [formatter_generic]
     format = %(asctime)s %(levelname)-5.5s [%(name)s] %(message)s
+{{ end }}
   ckan_init.sh.template: |
     #!/usr/bin/env bash
     echo Waiting for ckan infrastructure...
