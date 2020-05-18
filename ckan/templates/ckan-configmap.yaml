@@ -203,7 +203,7 @@ data:
     smtp.mail_from = {{ "{{" }}SMTP_MAIL_FROM{{ "}}" }}
 
 {{ if .Values.extraCkanConfig }}{{ .Values.extraCkanConfig | indent 4 }}{{ end }}
-{{ if .Values.costumCkanLogging }}{{ .Values.costumCkanLogging | indent 4 }}
+{{ if .Values.customCkanLogging }}{{ .Values.customCkanLogging | indent 4 }}
 {{ else }}
     ## Logging configuration
     [loggers]
