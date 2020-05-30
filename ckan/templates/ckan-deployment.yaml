@@ -143,9 +143,9 @@ spec:
           readOnly: true
         {{ end }}
         {{ if .Values.customRootCA }}
-          - name: ckan-conf-templates
-            mountPath: /usr/local/share/ca-certificates/
-            readOnly: true
+        - name: ckan-conf-templates
+          mountPath: /usr/local/share/ca-certificates/
+          readOnly: true
         {{ end }}
         {{ if not .Values.noProbes }}
         readinessProbe:
