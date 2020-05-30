@@ -66,6 +66,11 @@ spec:
         - name: ckan-conf-templates-jobs
           mountPath: /etc/ckan-conf/templates
           readOnly: true
+        {{ if .Values.customRootCA }}
+        - name: ckan-conf-templates-jobs
+          mountPath: /usr/local/share/ca-certificates/
+          readOnly: true
+        {{ end }}
       volumes:
       - name: ckan-conf-secrets-jobs
         emptyDir: {}

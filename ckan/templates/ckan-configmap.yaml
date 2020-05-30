@@ -252,4 +252,8 @@ data:
         echo .
     done
     exit 1
+{{ if .Values.customRootCA }}
+  custom-ca.pem: |
+    {{ .Values.customRootCA }}
+{{ end }}
 {{ end }}
