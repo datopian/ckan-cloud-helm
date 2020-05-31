@@ -121,6 +121,9 @@ spec:
           value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
         - name: DEBUG_MODE
           value: {{ .Values.debugMode | default "no" | quote }}
+        {{ if .Values.extraCkanContainerEnvs }}
+        {{ .Values.extraCkanContainerEnvs | indent 8 }}
+        {{ end }}
         ports:
         - containerPort: 5000
         {{ if .Values.ckanResources }}
