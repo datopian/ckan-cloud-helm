@@ -57,6 +57,9 @@ spec:
           value: /etc/ckan-conf/templates
         - name: GUNICORN_WORKERS
           value: {{ .Values.ckanGunicornWorkers | default "2" | quote }}
+{{ if .Values.extraJobsContainerEnvs }}
+{{ .Values.extraJobsContainerEnvs | indent 8 }}
+{{ end }}
         resources: {{ .Values.ckanJobsResources }}
         volumeMounts:
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
