@@ -120,7 +120,7 @@ data:
 
     # Define which views should be created by default
     # (plugins must be loaded in ckan.plugins)
-    ckan.views.default_views = image_view text_view recline_view
+    ckan.views.default_views = {{ .Values.defaultViews | default "image_view text_view recline_view"}}
 
     # Customize which text formats the text_view plugin will show
     #ckan.preview.json_formats = json
@@ -170,8 +170,8 @@ data:
     ## Storage Settings
 
     ckan.storage_path = /var/lib/ckan
-    ckan.max_resource_size = 100
-    ckan.max_image_size = 5
+    ckan.max_resource_size = ckan.display_timezone = {{ .Values.maxResourceSize | default "100" }}
+    ckan.max_image_size = ckan.display_timezone = {{ .Values.maxImageSize | default "5" }}
 
     ## xloader settings
 
