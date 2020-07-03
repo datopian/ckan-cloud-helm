@@ -170,12 +170,12 @@ data:
     ## Storage Settings
 
     ckan.storage_path = /var/lib/ckan
-    ckan.max_resource_size = ckan.display_timezone = {{ .Values.maxResourceSize | default "100" }}
-    ckan.max_image_size = ckan.display_timezone = {{ .Values.maxImageSize | default "5" }}
+    ckan.max_resource_size = {{ .Values.maxResourceSize | default "100" }}
+    ckan.max_image_size = {{ .Values.maxImageSize | default "5" }}
 
     ## xloader settings
 
-    ckanext.xloader.jobs_db.uri = {{ .Values.xLoaderJobsURI | default "postgresql://postgres:123456@jobs-db/postgres" }} 
+    ckanext.xloader.jobs_db.uri = {{ .Values.xLoaderJobsURI | default "postgresql://postgres:123456@jobs-db/postgres" }}
 
     # Resource Proxy settings
     # Preview size limit, default: 1MB
