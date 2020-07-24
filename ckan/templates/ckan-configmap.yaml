@@ -197,11 +197,11 @@ data:
     #email_to = errors@example.com
     #error_email_from = ckan-errors@example.com
     {{ if .Values.ckanSmtpServer }}
-    smtp.server = .Valuse.ckanSmtpServer
-    smtp.starttls = .Valuse.ckanSmtpStarttls
-    smtp.user = .Valuse.ckanSmtpUuser
-    smtp.password = .Valuse.ckanSmtpPassword
-    smtp.mail_from = .Valuse.ckanSmtpMail_from
+    smtp.server = {{ .Valuse.ckanSmtpServer }}
+    smtp.starttls = {{ .Valuse.ckanSmtpStarttls }}
+    smtp.user = {{ .Valuse.ckanSmtpUuser }}
+    smtp.password = {{ .Valuse.ckanSmtpPassword }}
+    smtp.mail_from = {{ .Valuse.ckanSmtpMail_from }}
     {{ else }}
     smtp.server = {{ "{{" }}SMTP_SERVER{{ "}}" }}
     smtp.starttls = {{ "{{" }}SMTP_STARTTLS{{ "}}" }}
