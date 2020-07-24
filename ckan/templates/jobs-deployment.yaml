@@ -44,6 +44,10 @@ spec:
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
         - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
+      {{ if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{ end }}
       containers:
       - name: ckan-jobs
         image: {{ .Values.ckanImage | quote }}
