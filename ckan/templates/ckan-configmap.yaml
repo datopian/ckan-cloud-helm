@@ -199,7 +199,7 @@ data:
     {{ if .Values.ckanSmtpServer }}
     smtp.server = {{ .Values.ckanSmtpServer }}
     smtp.starttls = {{ .Values.ckanSmtpStarttls }}
-    smtp.user = {{ .Values.ckanSmtpUuser }}
+    smtp.user = {{ .Values.ckanSmtpUser }}
     smtp.password = {{ .Values.ckanSmtpPassword }}
     smtp.mail_from = {{ .Values.ckanSmtpMail_from }}
     {{ else }}
