@@ -15,7 +15,7 @@ data:
       basic:
         factory: giftless.transfer.basic_external:factory
         options:
-          storage_class: ..storage.azure:AzureBlobsStorage
+          storage_class: giftless.storage.azure:AzureBlobsStorage
           storage_options:
             connection_string: {{ .Values.excternalStorageConnectionString }}
             container_name: {{ .Values.excternalStorageContainerName }}
