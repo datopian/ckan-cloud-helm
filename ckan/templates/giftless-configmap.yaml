@@ -25,7 +25,7 @@ data:
         factory: giftless.transfer.multipart:factory
         options:
           action_lifetime: {{ .Values.giftlessMultipartActionLifetime | default "43200" }}
-          max_part_size: {{ .Values.giftlessMultipartMaxPartSize | default "51200000" }}
+          max_part_size: {{ .Values.giftlessMultipartMaxPartSize | default "51200000" | int }}
           storage_class: giftless.storage.azure:AzureBlobsStorage
           storage_options:
             connection_string: {{ .Values.excternalStorageConnectionString }}
