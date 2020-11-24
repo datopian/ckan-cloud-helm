@@ -1,7 +1,7 @@
 {{ if not .Values.useCentralizedInfra }}
 {{ if .Values.usePersistentVolumes }}
 {{ if not .Values.dbDisabled }}
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Namespace }}-db

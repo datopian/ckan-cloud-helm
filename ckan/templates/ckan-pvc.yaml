@@ -1,13 +1,13 @@
 {{ if not .Values.centralizedInfraOnly }}
 {{ if .Values.usePersistentVolumes }}
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Namespace }}-ckan
 spec:
   storageClassName: {{ .Values.ckanStorageClassName }}
   accessModes:
-    - {{ .Values.ckanStorageDiskAccessMode | default "ReadWriteMany" }} 
+    - {{ .Values.ckanStorageDiskAccessMode | default "ReadWriteMany" }}
   resources:
     requests:
       storage: 1Mi

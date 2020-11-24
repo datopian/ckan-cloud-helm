@@ -1,6 +1,6 @@
 {{ if .Values.enableHarvesterNG }}
 {{ if .Values.usePersistentVolumes }}
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Namespace }}-harvester-db

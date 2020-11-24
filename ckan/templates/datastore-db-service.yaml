@@ -1,6 +1,6 @@
 {{ if not .Values.centralizedInfraOnly }}
 {{ if not .Values.useCentralizedInfra }}
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: Service
 metadata:
   name: datastore-db
