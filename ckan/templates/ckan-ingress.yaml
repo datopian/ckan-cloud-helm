@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     {{ if .Values.enableGiftless }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header X-Forwarded-Prefix /giftless;
+      proxy_set_header X-Forwarded-Prefix /{{ .Values.giftlessForwardPrefix | default "giftless" }};
     {{ end }}
 {{ if .Values.nginxIngressExtraConfig}}{{ .Values.nginxIngressExtraConfig | indent 4 }}{{ end }}
 spec:
@@ -32,6 +32,6 @@ spec:
       - backend:
           serviceName: giftless
           servicePort: 5000
-        path: /giftless/(.*)
+        path: /{{ .Values.giftlessForwardPrefix | default "giftless" }}/(.*)
       {{ end }}
 {{ end }}
