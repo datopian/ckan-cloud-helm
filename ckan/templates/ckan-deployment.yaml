@@ -110,6 +110,10 @@ spec:
       containers:
       - name: ckan
         image: {{ .Values.ckanImage | quote }}
+        {{ if .Values.runAsRoot }}
+        securityContext:
+          runAsUser: 0
+        {{ end }}
         env:
         - name: CKAN_STORAGE_PATH
           value: /var/lib/ckan/data
