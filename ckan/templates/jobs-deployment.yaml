@@ -41,7 +41,9 @@ spec:
         securityContext:
           runAsUser: 0
         volumeMounts:
+        {{ if .Values.enableLocalData }}
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
+        {{ end }}
         - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
       {{ if .Values.imagePullSecret }}
@@ -66,7 +68,9 @@ spec:
 {{ end }}
         resources: {{ .Values.ckanJobsResources }}
         volumeMounts:
+        {{ if .Values.enableLocalData }}
         - {mountPath: /var/lib/ckan, name: ckan-data, subPath: {{ .Release.Namespace }}-jobs}
+        {{ end }}
         - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
           readOnly: true
@@ -79,6 +83,7 @@ spec:
       - name: ckan-conf-templates-jobs
         configMap:
           name: ckan
+      {{ if .Values.enableLocalData }}
       - name: ckan-data
       {{ if .Values.usePersistentVolumes }}
         persistentVolumeClaim:
@@ -87,6 +92,7 @@ spec:
         hostPath:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
+      {{ end }}
       {{ end }}
 {{ end }}
 {{ end }}
