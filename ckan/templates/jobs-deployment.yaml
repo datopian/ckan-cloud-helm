@@ -35,9 +35,14 @@ spec:
         command:
         - sh
         - "-c"
+        {{ if .Values.enableLocalData }}
         - |
           chown -R 900:900 /var/lib/ckan && chmod -R ug+w /var/lib/ckan && chown -R 900:900 /etc/ckan-conf/secrets &&\
           ls -lah /var/lib/ckan && ls -lah /etc/ckan-conf/secrets
+        {{ else }}
+        - |
+          chown -R 900:900 /etc/ckan-conf/secrets && ls -lah /etc/ckan-conf/secrets
+        {{ end }}
         securityContext:
           runAsUser: 0
         volumeMounts:
