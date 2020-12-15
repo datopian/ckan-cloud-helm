@@ -18,7 +18,7 @@ spec:
       {{ end }}
       containers:
       - name: postgres
-        image: postgres
+        image: {{ .Values.jobsDbImage | default "postgres:12" }}
         ports:
         - containerPort: 5432
         env:
