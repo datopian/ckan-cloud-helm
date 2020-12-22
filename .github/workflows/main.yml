@@ -15,7 +15,7 @@ jobs:
     - name: Download and Install
       uses: wei/curl@master
       with:
-          args: curl -L https://raw.githubusercontent.com/MuhammadIsmailShahzad/ckan-cloud-helm/MuhammadIsmailShahzad-patch-1/travis_ci_operator.sh > travis_ci_operator.sh
+          args: curl -L https://raw.githubusercontent.com/datopian/ckan-cloud-helm/master/travis_ci_operator.sh > travis_ci_operator.sh
     - name: Setup env variables
       uses: FranzDiebold/github-env-vars-action@v2
     - name: Install and init 
