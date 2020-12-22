@@ -1,0 +1,49 @@
+name: Continuous Deployment
+on: [push]
+jobs:
+  CICD:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.1
+    - name: Download and Install
+      uses: wei/curl@master
+      with:
+          args: curl -L https://raw.githubusercontent.com/MuhammadIsmailShahzad/ckan-cloud-helm/MuhammadIsmailShahzad-patch-1/travis_ci_operator.sh > travis_ci_operator.sh
+    - name: Setup env variables
+      uses: FranzDiebold/github-env-vars-action@v2
+    - name: Install and init 
+      run: |
+        ls -a
+        mkdir -p $HOME/bin/
+        mv travis_ci_operator.sh $HOME/bin/travis_ci_operator.sh
+        sudo bash $HOME/bin/travis_ci_operator.sh init
+        sudo bash .travis.sh install
+      shell: bash
+    - name: Run the script
+      run: |
+        sudo bash .travis.sh script
+      shell: bash
+    - name: Print environment variables exposed by this action
+      env:
+        TRAVIS_REPO_SLUG: MuhammadIsmailShahzad/ckan-cloud-helm
+        encrypted_3a25b31f1ad6_key: ${{ secrets.TRAVIS_KEY }}
+        encrypted_3a25b31f1ad6_iv: ${{ secrets.TRAVIS_IV }}
+      run: |
+        mkdir -p ~/.ssh/
+        git config --global user.email "travis-ci-operator@null"
+        git config --global user.name "travis-ci-operator"
+        echo "${{ secrets.TRAVIS_KEY }}"
+        pwd
+        cp .travis_ci_operator_self_github_deploy_key.id_rsa.enc /home/runner/bin/.travis_ci_operator_self_github_deploy_key.id_rsa.enc
+        cp .travis-ci-operator.yaml /home/runner/bin/.travis-ci-operator.yaml
+        ls -a /home/runner/bin/
+        echo "current loc"
+        cp /home/runner/bin/.travis_ci_operator_self_github_deploy_key.id_rsa.enc .
+        ls -a
+        echo "$TRAVIS_REPO_SLUG"
+        echo "DONE"
+        bash .travis.sh deploy
