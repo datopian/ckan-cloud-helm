@@ -32,7 +32,6 @@ jobs:
         TRAVIS_REPO_SLUG: MuhammadIsmailShahzad/ckan-cloud-helm
         TRAVIS_BRANCH: ${{ env.CI_ACTION_REF_NAME }}
         TRAVIS_TAG: ${{ env.CI_ACTION_REF_NAME }}
-        COMMIT_MSG: Test-Commit
         encrypted_3a25b31f1ad6_key: ${{ secrets.TRAVIS_KEY }}
         encrypted_3a25b31f1ad6_iv: ${{ secrets.TRAVIS_IV }}
       run: |
