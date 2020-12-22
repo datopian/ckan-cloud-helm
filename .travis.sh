@@ -19,7 +19,7 @@ elif [ "${1}" == "deploy" ]; then
         sudo helm package ../efs --version "${TRAVIS_TAG}" &&\
         sudo helm package ../traefik --version "${TRAVIS_TAG}" &&\
         sudo helm package ../provisioning --version "${TRAVIS_TAG}" &&\
-        sudo helm repo index --url https://raw.githubusercontent.com/ViderumGlobal/ckan-cloud-helm/master/charts_repository/ . &&\
+        sudo helm repo index --url https://raw.githubusercontent.com/datopian/ckan-cloud-helm/master/charts_repository/ . &&\
         cd .. &&\
         git stash &&\
         git checkout master &&\
