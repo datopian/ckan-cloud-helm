@@ -12,10 +12,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2.3.1
-    - name: Download and Install
-      uses: wei/curl@master
-      with:
-          args: curl -L https://raw.githubusercontent.com/datopian/ckan-cloud-helm/master/travis_ci_operator.sh > travis_ci_operator.sh
     - name: Setup env variables
       uses: FranzDiebold/github-env-vars-action@v2
     - name: Install and init 
@@ -29,7 +25,7 @@ jobs:
         sudo bash .travis.sh script
     - name: Deploy
       env:
-        TRAVIS_REPO_SLUG: MuhammadIsmailShahzad/ckan-cloud-helm
+        TRAVIS_REPO_SLUG: datopian/ckan-cloud-helm
         TRAVIS_BRANCH: ${{ env.CI_ACTION_REF_NAME }}
         TRAVIS_TAG: ${{ env.CI_ACTION_REF_NAME }}
         encrypted_3a25b31f1ad6_key: ${{ secrets.TRAVIS_KEY }}
