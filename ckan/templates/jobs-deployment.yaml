@@ -57,7 +57,7 @@ spec:
       {{ end }}
       containers:
       - name: ckan-jobs
-        image: {{ .Values.ckanImage | quote }}
+        image: {{ .Values.jobsImage | default .Values.ckanImage | quote }}
         command: [/ckan-entrypoint.sh, ckan-paster, --plugin=ckan, jobs, -c, /etc/ckan/production.ini, worker]
         env:
         - name: CKAN_STORAGE_PATH
