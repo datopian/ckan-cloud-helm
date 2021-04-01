@@ -15,6 +15,8 @@ jobs:
     - name: Setup env variables
       uses: FranzDiebold/github-env-vars-action@v2
     - name: Install and init
+      env:
+        GITHUB_WORKSPACE: ${{ env.GITHUB_WORKSPACE }}
       run: |
         mkdir -p $GITHUB_WORKSPACE/bin/
         mv travis_ci_operator.sh $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
@@ -23,6 +25,7 @@ jobs:
         ls -alh $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
         sudo bash $GITHUB_WORKSPACE/bin/travis_ci_operator.sh init
         sudo bash .travis.sh install
+
     - name: Run the script
       run: |
         sudo bash .travis.sh script
