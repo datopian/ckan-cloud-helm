@@ -33,6 +33,7 @@ jobs:
         TRAVIS_TAG: ${{ env.CI_ACTION_REF_NAME }}
         encrypted_3a25b31f1ad6_key: ${{ secrets.RSA_KEY }}
         encrypted_3a25b31f1ad6_iv: ${{ secrets.RSA_IV }}
+        GITHUB_WORKSPACE: ${{ env.GITHUB_WORKSPACE }}
       run: |
         mkdir -p ~/.ssh/
         git config --global user.email "travis-ci-operator@null"
