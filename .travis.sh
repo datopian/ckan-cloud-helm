@@ -12,7 +12,7 @@ elif [ "${1}" == "script" ]; then
     exit 0
 
 elif [ "${1}" == "deploy" ]; then
-    $HOME/bin/travis_ci_operator.sh github-update self master "
+    $GITHUB_WORKSPACE/bin/travis_ci_operator.sh github-update self master "
         cd charts_repository &&\
         git checkout ${TRAVIS_BRANCH} && git checkout master -- index.yaml && git commit -m. ;\
         sudo helm package ../ckan --version "${TRAVIS_TAG}" &&\

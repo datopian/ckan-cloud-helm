@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
 _install_travis_ci_operator() {
-    echo $HOME
-    ls -alh $HOME/bin/travis_ci_operator.sh
-    chmod +x $HOME/bin/travis_ci_operator.sh
+    ls -alh $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
+    chmod +x $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
 }
 
 _install_script() {
-    if [ -e "${1}" ]; then cp "${1}" "${HOME}/bin/${1}"
-    else curl -L "https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/${1}" > "${HOME}/bin/${1}"
-    fi && chmod +x "${HOME}/bin/${1}"
+    if [ -e "${1}" ]; then cp "${1}" "${GITHUB_WORKSPACE}/bin/${1}"
+    else curl -L "https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/${1}" > "${GITHUB_WORKSPACE}/bin/${1}"
+    fi && chmod +x "${GITHUB_WORKSPACE}/bin/${1}"
 }
 
 if [ "${1}" == "init" ]; then
