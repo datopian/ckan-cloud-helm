@@ -23,6 +23,7 @@ jobs:
         echo $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
         echo "++++++++++++++++++++++++++++++++"
         ls -alh $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
+        export GITHUB_WORKSPACE=$GITHUB_WORKSPACE
         sudo bash $GITHUB_WORKSPACE/bin/travis_ci_operator.sh init
         sudo bash .travis.sh install
 
