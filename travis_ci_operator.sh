@@ -12,6 +12,7 @@ _install_script() {
 }
 
 if [ "${1}" == "init" ]; then
+    GITHUB_WORKSPACE=${2}
     _install_travis_ci_operator &&\
     _install_script read_yaml.py &&\
     _install_script update_yaml.py &&\
