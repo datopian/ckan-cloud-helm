@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 _install_travis_ci_operator() {
-    ls -alh $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
-    chmod +x $GITHUB_WORKSPACE/bin/travis_ci_operator.sh
+    ls -alh "${GITHUB_WORKSPACE}/bin/travis_ci_operator.sh"
+    chmod +x "${GITHUB_WORKSPACE}/bin/travis_ci_operator.sh"
 }
 
 _install_script() {
@@ -12,7 +12,6 @@ _install_script() {
 }
 
 if [ "${1}" == "init" ]; then
-    GITHUB_WORKSPACE=${2}
     _install_travis_ci_operator &&\
     _install_script read_yaml.py &&\
     _install_script update_yaml.py &&\
