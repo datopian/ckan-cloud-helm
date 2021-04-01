@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 _install_travis_ci_operator() {
+    echo $HOME
+    ls -alh $HOME/bin/travis_ci_operator.sh
     chmod +x $HOME/bin/travis_ci_operator.sh
 }
 
