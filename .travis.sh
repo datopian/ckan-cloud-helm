@@ -12,7 +12,7 @@ elif [ "${1}" == "script" ]; then
     exit 0
 
 elif [ "${1}" == "deploy" ]; then
-    $HOME/bin/travis_ci_operator.sh github-update self master "
+    $GITHUB_WORKSPACE/bin/travis_ci_operator.sh github-update self master "
         cd charts_repository &&\
         git checkout ${TRAVIS_BRANCH} && git checkout master -- index.yaml && git commit -m. ;\
         sudo helm package ../ckan --version "${TRAVIS_TAG}" &&\
@@ -29,7 +29,7 @@ elif [ "${1}" == "deploy" ]; then
                 charts_repository/efs-${TRAVIS_TAG}.tgz \
                 charts_repository/traefik-${TRAVIS_TAG}.tgz \
                 charts_repository/provisioning-${TRAVIS_TAG}.tgz
-    " "upgrade helm chart repo to CKAN chart ${TRAVIS_TAG}"
+    " "upgrade helm chart repo to CKAN chart ${TRAVIS_TAG}" $GITHUB_WORKSPACE
     [ "$?" != "0" ] && exit 1
     if ! [ -z "${SLACK_TAG_NOTIFICATION_CHANNEL}" ] && ! [ -z "${SLACK_TAG_NOTIFICATION_WEBHOOK_URL}" ]; then
         ! curl -X POST \

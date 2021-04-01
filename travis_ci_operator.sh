@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
 _install_travis_ci_operator() {
-    chmod +x $HOME/bin/travis_ci_operator.sh
+    ls -alh "${GITHUB_WORKSPACE}/bin/travis_ci_operator.sh"
+    chmod +x "${GITHUB_WORKSPACE}/bin/travis_ci_operator.sh"
 }
 
 _install_script() {
-    if [ -e "${1}" ]; then cp "${1}" "${HOME}/bin/${1}"
-    else curl -L "https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/${1}" > "${HOME}/bin/${1}"
-    fi && chmod +x "${HOME}/bin/${1}"
+    if [ -e "${1}" ]; then cp "${1}" "${GITHUB_WORKSPACE}/bin/${1}"
+    else curl -L "https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/${1}" > "${GITHUB_WORKSPACE}/bin/${1}"
+    fi && chmod +x "${GITHUB_WORKSPACE}/bin/${1}"
+    ls -alh "${GITHUB_WORKSPACE}/bin/${1}"
 }
 
 if [ "${1}" == "init" ]; then
+    GITHUB_WORKSPACE=${2}
     _install_travis_ci_operator &&\
     _install_script read_yaml.py &&\
     _install_script update_yaml.py &&\
@@ -28,6 +31,7 @@ elif [ "${1}" == "github-update" ]; then
     GIT_BRANCH="${3}"
     UPDATE_SCRIPT="${4}"
     COMMIT_MSG="${5}"
+    GITHUB_WORKSPACE="${6}"
     if [ "${DEPLOY_KEY_NAME}" == "self" ]; then
         GITHUB_REPO_SLUG="${TRAVIS_REPO_SLUG}"
     else
@@ -38,7 +42,8 @@ elif [ "${1}" == "github-update" ]; then
     [ "${DEPLOY_KEY_NAME}" == "self" ] && [ "${COMMIT_MSG}" == "${TRAVIS_COMMIT_MESSAGE}" ] && [ "${GIT_BRANCH}" == "${TRAVIS_BRANCH}" ] \
         && echo skipping update of self with same commit msg and branch && exit 0
     [ -z "${GITHUB_REPO_SLUG}" ] && echo missing GITHUB_REPO_SLUG && exit 1
-    ! $(eval echo `python /home/runner/bin/read_yaml.py /home/runner/bin/.travis-ci-operator.yaml ${DEPLOY_KEY_NAME}DeployKeyDecryptCmd`) \
+    ls -alh /home/runner/bin/read_yaml.py
+    ! $(eval echo `python ${GITHUB_WORKSPACE}/bin/read_yaml.py ${GITHUB_WORKSPACE}/bin/.travis-ci-operator.yaml ${DEPLOY_KEY_NAME}DeployKeyDecryptCmd`) \
         && echo Failed to get deploy key && exit 1
     GITHUB_DEPLOY_KEY_FILE=".travis_ci_operator_${DEPLOY_KEY_NAME}_github_deploy_key.id_rsa"
     if [ -e "${GITHUB_DEPLOY_KEY_FILE}" ]; then
