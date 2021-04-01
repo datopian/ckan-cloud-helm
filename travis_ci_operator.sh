@@ -32,6 +32,7 @@ elif [ "${1}" == "github-update" ]; then
     GIT_BRANCH="${3}"
     UPDATE_SCRIPT="${4}"
     COMMIT_MSG="${5}"
+    GITHUB_WORKSPACE="${6}"
     if [ "${DEPLOY_KEY_NAME}" == "self" ]; then
         GITHUB_REPO_SLUG="${TRAVIS_REPO_SLUG}"
     else
@@ -44,7 +45,7 @@ elif [ "${1}" == "github-update" ]; then
     [ -z "${GITHUB_REPO_SLUG}" ] && echo missing GITHUB_REPO_SLUG && exit 1
     echo "============================="
     ls -alh /home/runner/bin/read_yaml.py
-    ! $(eval echo `python /home/runner/bin/read_yaml.py /home/runner/bin/.travis-ci-operator.yaml ${DEPLOY_KEY_NAME}DeployKeyDecryptCmd`) \
+    ! $(eval echo `python ${GITHUB_WORKSPACE}/bin/read_yaml.py ${GITHUB_WORKSPACE}/bin/.travis-ci-operator.yaml ${DEPLOY_KEY_NAME}DeployKeyDecryptCmd`) \
         && echo Failed to get deploy key && exit 1
     GITHUB_DEPLOY_KEY_FILE=".travis_ci_operator_${DEPLOY_KEY_NAME}_github_deploy_key.id_rsa"
     if [ -e "${GITHUB_DEPLOY_KEY_FILE}" ]; then
