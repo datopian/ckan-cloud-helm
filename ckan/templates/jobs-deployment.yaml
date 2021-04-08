@@ -2,7 +2,9 @@
 {{ if not .Values.disableJobs }}
 apiVersion: apps/v1
 kind: Deployment
-metadata: {name: jobs}
+metadata:
+  name: jobs
+  finalizers: []
 spec:
   replicas: 1
   revisionHistoryLimit: 2
