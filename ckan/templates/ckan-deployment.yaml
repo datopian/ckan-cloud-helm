@@ -1,7 +1,9 @@
   {{ if not .Values.centralizedInfraOnly }}
 apiVersion: apps/v1
 kind: Deployment
-metadata: {name: ckan}
+metadata:
+  name: ckan
+  finalizers: []
 spec:
   replicas: {{ .Values.replicas | default "2" }}
   revisionHistoryLimit: 2
