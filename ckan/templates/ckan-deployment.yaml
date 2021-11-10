@@ -44,7 +44,7 @@ spec:
           value: {{ .Values.ckanAppInstanceUUID | quote }}
         {{ end }}
         {{ if .Values.beakerSessionSecret }}
-        - name: BEAKER_SESSION_SECRET
+        - name: CKAN_BEAKER_SESSION_SECRET
           value: {{ .Values.beakerSessionSecret | quote }}
         {{ end }}
         - name: CKAN_CLOUD_INSTANCE_ID
