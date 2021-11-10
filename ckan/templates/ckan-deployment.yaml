@@ -39,6 +39,14 @@ spec:
           echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
         {{ if .Values.useCentralizedInfra }}
         env:
+        {{ if .Values.ckanAppInstanceUUID }}
+        - name: CKAN_APP_INSTANCE_UUID
+          value: {{ .Values.ckanAppInstanceUUID | quote }}
+        {{ end }}
+        {{ if .Values.beakerSessionSecret }}
+        - name: BEAKER_SESSION_SECRET
+          value: {{ .Values.beakerSessionSecret | quote }}
+        {{ end }}
         - name: CKAN_CLOUD_INSTANCE_ID
           {{ if .Values.ckanCloudInstanceId }}
           value: {{ .Values.ckanCloudInstanceId | quote }}
