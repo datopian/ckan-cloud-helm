@@ -28,6 +28,7 @@ spec:
           ls -lah /opt/solr
         {{ else }}
         - |
+          mkdir -p /opt/solr/server/solr/ckan/data
           chown -R 8983:8983 /opt/solr/server/solr/ckan/data &&\
           ls -lah /opt/solr/server/solr/ckan/data
         {{ end }}
