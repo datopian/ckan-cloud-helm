@@ -15,7 +15,7 @@ spec:
       labels:
         app: solr
     spec:
-      {{ if .Values.useStandaloneSolr }}
+      {{ if not .Values.useStandaloneSolr }}
       initContainers:
       - name: permissions
         image: alpine
@@ -51,13 +51,13 @@ spec:
         {{ if .Values.solrResources }}
         resources: {{ .Values.solrResources }}
         {{ end }}
-        {{ if .Values.useStandaloneSolr }}
+        {{ if not .Values.useStandaloneSolr }}
         volumeMounts:
         - name: ckan-data
           mountPath: /opt/solr/server/solr
           subPath: solr-ckan-data
         {{ end }}
-      {{ if .Values.useStandaloneSolr }}
+      {{ if not .Values.useStandaloneSolr }}
       volumes:
       - name: ckan-data
       {{ if .Values.usePersistentVolumes }}
