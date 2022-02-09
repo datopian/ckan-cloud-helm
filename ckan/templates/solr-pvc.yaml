@@ -1,5 +1,6 @@
 {{ if .Values.usePersistentVolumes }}
 {{ if not .Values.solrDisabled }}
+{{ if not .Values.useStandaloneSolr }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -11,5 +12,6 @@ spec:
   resources:
     requests:
       storage: {{ .Values.solrPersistentDiskSizeGB }}G
+{{ end }}
 {{ end }}
 {{ end }}
