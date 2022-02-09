@@ -1,4 +1,3 @@
-{{ if not .Values.useCentralizedInfra }}
 {{ if not .Values.solrDisabled }}
 apiVersion: apps/v1
 kind: Deployment
@@ -63,5 +62,4 @@ spec:
           path: /var/ckan-cloud-{{ .Release.Namespace }}
           type: DirectoryOrCreate
       {{ end }}
-{{ end }}
 {{ end }}
