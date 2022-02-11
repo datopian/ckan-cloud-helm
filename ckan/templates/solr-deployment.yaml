@@ -40,6 +40,10 @@ spec:
           mountPath: /opt/solr/server/solr
           subPath: solr-ckan-data
       {{ end }}
+      {{ if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{ end }}
       containers:
       - image: {{ if .Values.centralizedInfraOnly }}{{ .Values.solrcloudImage | quote }}{{ else }}{{ .Values.solrImage | quote }}{{ end }}
         name: solr
