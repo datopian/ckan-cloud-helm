@@ -1,4 +1,4 @@
-{{ if not .Values.privateRegistryEnable }}
+{{ if .Values.privateRegistryEnable }}
 apiVersion: v1
 kind: Secret
 metadata:
