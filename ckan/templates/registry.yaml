@@ -5,5 +5,5 @@ metadata:
   name: {{ .Values.imagePullSecret | default "container-registry" }}
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: {{ .Values.dockerconfigjson }}
+  .dockerconfigjson: {{ .Values.dockerconfigjson | b64enc }}
 {{ end }}
