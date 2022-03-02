@@ -1,0 +1,9 @@
+{{ if not .Values.privateReistryEnable }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.imagePullSecret | default "container-registry" }}
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ .Values.dockerconfigjson }}
+{{ end }}
