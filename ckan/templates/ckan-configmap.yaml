@@ -93,7 +93,7 @@ data:
     ## Search Settings
 
     ckan.site_id = default
-    solr_url = {{ "{{" }}SOLR_URL{{ "}}" }}
+    solr_url = {{ .Values.solrUrl | default "{{ SOLR_URL }}" }}
 
 
     ## Redis Settings
