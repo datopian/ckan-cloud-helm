@@ -93,7 +93,7 @@ spec:
           mountPath: /etc/ckan-conf/templates
           readOnly: true
         {{ if not .Values.noProbes }}
-        readinessProbe:
+        livenessProbe:
           exec:
             command:
             - /bin/sh
