@@ -94,6 +94,7 @@ spec:
           mountPath: /etc/ckan-conf/secrets
         - mountPath: /etc/ckan-conf/scripts
           name: ckan-init
+          readOnly: false
       - name: files
         image: alpine
         command:
