@@ -164,6 +164,9 @@ spec:
         - name: ckan-conf-templates
           mountPath: /etc/ckan-conf/templates
           readOnly: true
+        - mountPath: /
+          name: ckan-deployment
+          readOnly: true
         {{ if .Values.enableGiftless }}
         - mountPath: /etc/ssh/jwt-rs256.key
           name: jwt-key

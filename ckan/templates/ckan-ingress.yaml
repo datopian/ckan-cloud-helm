@@ -30,7 +30,7 @@ spec:
             port:
               number: 5000
         path: /(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
       {{ if .Values.enableGiftless }}
       - backend:
           service:
@@ -38,6 +38,6 @@ spec:
             port:
               number: 5000
         path: /{{ .Values.giftlessForwardPrefix | default "giftless" }}/(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
       {{ end }}
 {{ end }}
