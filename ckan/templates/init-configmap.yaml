@@ -364,28 +364,12 @@ data:
             ! export_ckan_env_vars $ENV_VARS_SECRET && exit 1
             TEMPFILE=`mktemp`
             echo "export BEAKER_SESSION_SECRET=${CKAN_BEAKER_SESSION_SECRET}
-    export APP_INSTANCE_UUID=${CKAN_APP_INSTANCE_UUID}
-    export SQLALCHEMY_URL=postgresql://${POSTGRES_USER}${HOST_SUFFIX}:${POSTGRES_PASSWORD}@${POSTGRES_HOST:-db}/${POSTGRES_DB_NAME:-ckan}?sslmode=require
-    export CKAN_DATASTORE_WRITE_URL=postgresql://${DATASTORE_POSTGRES_USER}${HOST_SUFFIX}:${DATASTORE_POSTGRES_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
-    export CKAN_DATASTORE_READ_URL=postgresql://${DATASTORE_RO_USER}${HOST_SUFFIX}:${DATASTORE_RO_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
-    export SOLR_URL=${SOLR_URL}
-    export CKAN_REDIS_URL=redis://redis:6379/1
-    export CKAN_DATAPUSHER_URL=
-    export SMTP_SERVER=
-    export SMTP_STARTTLS=
-    export SMTP_USER=
-    export SMTP_PASSWORD=
-    export SMTP_MAIL_FROM=" > $TEMPFILE
-            cat $TEMPFILE
-            kubectl $KUBECTL_GLOBAL_ARGS create secret generic "${CKAN_SECRETS_SECRET}" --from-file=secrets.sh=$TEMPFILE
-            CKAN_SECRET_RES="$?"
-            rm $TEMPFILE
-            [ "$CKAN_SECRET_RES" != "0" ] && echo failed to create ckan secrets secret && exit 1
-            ckan_cloud_log '{"event":"ckan-secrets-created", "secrets-secret-name": "'${CKAN_SECRETS_SECRET}'"}'
-            echo Great Success
-            echo Created new ckan secrets secret: $CKAN_SECRETS_SECRET
-            echo Please update the relevant values.yaml file with the new secret name
-            exit 0
+            export APP_INSTANCE_UUID=${CKAN_APP_INSTANCE_UUID}
+            export SQLALCHEMY_URL=postgresql://${POSTGRES_USER}${HOST_SUFFIX}:${POSTGRES_PASSWORD}@${POSTGRES_HOST:-db}/${POSTGRES_DB_NAME:-ckan}?sslmode=require
+            export CKAN_DATASTORE_WRITE_URL=postgresql://${DATASTORE_POSTGRES_USER}${HOST_SUFFIX}:${DATASTORE_POSTGRES_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
+            export CKAN_DATASTORE_READ_URL=postgresql://${DATASTORE_RO_USER}${HOST_SUFFIX}:${DATASTORE_RO_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
+            export SOLR_URL=${SOLR_URL}
+            export CKAN_REDIS_URL=redis://redis:6379/1
         else
             ckan_cloud_log '{"event":"ckan-secrets-exists", "secrets-secret-name": "'${CKAN_SECRETS_SECRET}'"}'
             echo Ckan secrets secret $CKAN_SECRETS_SECRET already exists
@@ -405,13 +389,6 @@ data:
         ckan_cloud_log '{"event":"got-ckan-secrets", "secrets-secret-name": "'${CKAN_SECRETS_SECRET}'"}'
         echo Successfully copied secrets
         exit 0
-    elif [ "${1}" == "" ] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
-        echo Available commands:
-        echo
-        for F in `ls *.sh`; do
-            [ "${F}" != "functions.sh" ] && [ "${F}" != "cca-operator.sh" ] && [ "${F}" != "templater.sh" ] &&\
-            ./${F} --help
-        done
     else
         ! bash "$@" && exit 1
         exit 0
