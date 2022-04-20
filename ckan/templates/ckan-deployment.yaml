@@ -165,7 +165,7 @@ spec:
           mountPath: /etc/ckan-conf/templates
           readOnly: true
         - mountPath: /
-          name: ckan-deployment
+          name: ckan-init
           readOnly: true
         {{ if .Values.enableGiftless }}
         - mountPath: /etc/ssh/jwt-rs256.key
