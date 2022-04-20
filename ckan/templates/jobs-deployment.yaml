@@ -92,6 +92,18 @@ spec:
         - name: ckan-conf-templates-jobs
           mountPath: /etc/ckan-conf/templates
           readOnly: true
+        {{ if not .Values.noProbes }}
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - if ! ps -x | grep "bin/ckan jobs worker" | grep -v grep > /dev/null; then echo "Jobs worker are not running."; fi;
+          initialDelaySeconds: {{ .Values.ckanReadinessInitialDelaySeconds | default "30" }}
+          periodSeconds: {{ .Values.ckanReadinessPeriodSeconds | default "5" }}
+          timeoutSeconds: {{ .Values.ckanReadinessTimeoutSeconds | default "10" }}
+          failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "15" }}
+        {{ end }}
       volumes:
       - name: ckan-conf-secrets-jobs
         emptyDir: {}
