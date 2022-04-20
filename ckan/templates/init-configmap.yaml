@@ -14,7 +14,7 @@ data:
     python3 -m pip install pyyaml &&\
     curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh &&\
     chmod 700 get_helm.sh && ./get_helm.sh --version v2.11.0 && helm version --client && rm ./get_helm.sh
-    chmod +x functions.sh cca-operator.sh
+    chmod +x /etc/ckan-conf/scripts/functions.sh /etc/ckan-conf/scripts/cca-operator.sh
   functions.sh: |
     get_secrets_json() {
         kubectl $KUBECTL_GLOBAL_ARGS get secret $1 -o json
@@ -262,7 +262,7 @@ data:
     }
   cca-operator.sh: |
     #!/usr/bin/env bash
-    source functions.sh
+    source /etc/ckan-conf/scripts/functions.sh
     if [ "${1}" == "initialize-ckan-env-vars" ]; then
         ENV_VARS_SECRET="${2}"
         [ -z "${ENV_VARS_SECRET}" ] && echo usage: cca-operator initialize-ckan-env-vars '<ENV_VARS_SECRET_NAME>' && exit 1
