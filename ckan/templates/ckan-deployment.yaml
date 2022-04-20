@@ -30,7 +30,8 @@ spec:
         - bash
         - "-c"
         - |
-          chmod -x install.sh && install.sh
+          chmod -x install.sh
+          ./install.sh
           ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
           ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
@@ -193,9 +194,9 @@ spec:
         {{ end }}
       volumes:
       - name: ckan-init
-          configMap:
-            defaultMode: 0777
-            name: ckan-init
+        configMap:
+          defaultMode: 0777
+          name: ckan-init
       - name: ckan-conf-secrets
         emptyDir: {}
       - name: ckan-conf-templates
