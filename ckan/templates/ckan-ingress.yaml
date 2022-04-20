@@ -25,13 +25,19 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: ckan
-          servicePort: 5000
+          service:
+            name: ckan
+            port:
+              number: 5000
         path: /(.*)
+        pathType: Prefix
       {{ if .Values.enableGiftless }}
       - backend:
-          serviceName: giftless
-          servicePort: 5000
+          service:
+            name: giftless
+            port:
+              number: 5000
         path: /{{ .Values.giftlessForwardPrefix | default "giftless" }}/(.*)
+        pathType: Prefix
       {{ end }}
 {{ end }}
