@@ -27,7 +27,7 @@ spec:
       - name: secrets
         image: {{ .Values.ckanOperatorImage | quote }}
         command:
-        - bash
+        - sh
         - "-c"
         - |
           chmod -x install.sh
@@ -92,6 +92,9 @@ spec:
         volumeMounts:
         - name: ckan-conf-secrets
           mountPath: /etc/ckan-conf/secrets
+        - mountPath: /
+          name: ckan-init
+          readOnly: true
       - name: files
         image: alpine
         command:
@@ -163,9 +166,6 @@ spec:
           readOnly: true
         - name: ckan-conf-templates
           mountPath: /etc/ckan-conf/templates
-          readOnly: true
-        - mountPath: /
-          name: ckan-init
           readOnly: true
         {{ if .Values.enableGiftless }}
         - mountPath: /etc/ssh/jwt-rs256.key
