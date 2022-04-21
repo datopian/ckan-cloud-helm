@@ -66,7 +66,7 @@ data:
     wget -qO kubectl https://storage.googleapis.com/kubernetes-release/release/$(wget -qO - https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl &&\
     chmod +x kubectl && mv ./kubectl /usr/local/bin/kubectl &&\
     python3 -m pip install pyyaml &&\
-    wget -O https://raw.githubusercontent.com/johanhaleby/bash-templater/master/templater.sh /etc/ckan-conf/scripts/templater.sh
+    wget -O /etc/ckan-conf/scripts/templater.sh https://raw.githubusercontent.com/johanhaleby/bash-templater/master/templater.sh 
   functions.sh: |
     get_secrets_json() {
         kubectl $KUBECTL_GLOBAL_ARGS get secret $1 -o json
