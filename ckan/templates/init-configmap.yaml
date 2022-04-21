@@ -66,7 +66,8 @@ data:
     wget -qO kubectl https://storage.googleapis.com/kubernetes-release/release/$(wget -qO - https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl &&\
     chmod +x kubectl && mv ./kubectl /usr/local/bin/kubectl &&\
     python3 -m pip install pyyaml &&\
-    wget -O /etc/ckan-conf/scripts/templater.sh https://raw.githubusercontent.com/johanhaleby/bash-templater/master/templater.sh 
+    curl -L https://raw.githubusercontent.com/johanhaleby/bash-templater/master/templater.sh -o /usr/local/bin/templater &&
+    chmod +x /usr/local/bin/templater
   functions.sh: |
     get_secrets_json() {
         kubectl $KUBECTL_GLOBAL_ARGS get secret $1 -o json
@@ -303,7 +304,7 @@ data:
             GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"${DS_RO_USER}\";
             ALTER DEFAULT PRIVILEGES FOR USER \"${DS_RW_USER}\" IN SCHEMA public GRANT SELECT ON TABLES TO \"${DS_RO_USER}\";
         " &&\
-        bash ./templater.sh ./datastore-permissions.sql.template | grep ' OWNER TO ' -v \
+        bash templater.sh ./datastore-permissions.sql.template | grep ' OWNER TO ' -v \
             | psql -v ON_ERROR_STOP=on -h "${POSTGRES_HOST}" -U "${POSTGRES_USER}" -d "${DS_RW_USER}" &&\
         ckan_cloud_log '{"event":"ckan-datastore-db-initialized"}' &&\
         echo Datastore DB initialized successfully && return 0
