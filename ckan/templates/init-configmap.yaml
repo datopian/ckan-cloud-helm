@@ -366,7 +366,7 @@ data:
             export CKAN_DATASTORE_WRITE_URL=postgresql://${DATASTORE_POSTGRES_USER}${HOST_SUFFIX}:${DATASTORE_POSTGRES_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
             export CKAN_DATASTORE_READ_URL=postgresql://${DATASTORE_RO_USER}${HOST_SUFFIX}:${DATASTORE_RO_PASSWORD}@${POSTGRES_HOST:-datastore-db}/$(echo ${POSTGRES_DB_NAME}-datastore?sslmode=require | cut -f1 -d%)
             export SOLR_URL=${SOLR_URL}
-            export CKAN_REDIS_URL=redis://redis:6379/1
+            export CKAN_REDIS_URL=redis://redis:6379/1" > $TEMPFILE
         else
             ckan_cloud_log '{"event":"ckan-secrets-exists", "secrets-secret-name": "'${CKAN_SECRETS_SECRET}'"}'
             echo Ckan secrets secret $CKAN_SECRETS_SECRET already exists
