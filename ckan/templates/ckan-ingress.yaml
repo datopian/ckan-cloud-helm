@@ -1,5 +1,5 @@
 {{ if .Values.useNginxIngress }}
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ckan-ingress-ingress
@@ -25,19 +25,13 @@ spec:
     http:
       paths:
       - backend:
-          service:
-            name: ckan
-            port:
-              number: 5000
+          serviceName: ckan
+          servicePort: 5000
         path: /(.*)
-        pathType: ImplementationSpecific
       {{ if .Values.enableGiftless }}
       - backend:
-          service:
-            name: giftless
-            port:
-              number: 5000
+          serviceName: giftless
+          servicePort: 5000
         path: /{{ .Values.giftlessForwardPrefix | default "giftless" }}/(.*)
-        pathType: ImplementationSpecific
       {{ end }}
 {{ end }}
