@@ -30,7 +30,6 @@ spec:
         - sh
         - "-c"
         - |
-          chmod -x install.sh
           ./etc/ckan-conf/scripts/install.sh
           ./etc/ckan-conf/scripts/cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
           ./etc/ckan-conf/scripts/cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \

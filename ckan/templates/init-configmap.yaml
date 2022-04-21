@@ -11,8 +11,7 @@ data:
     ); do sleep 1; done &&\
     wget -qO kubectl https://storage.googleapis.com/kubernetes-release/release/$(wget -qO - https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl &&\
     chmod +x kubectl && mv ./kubectl /usr/local/bin/kubectl &&\
-    python3 -m pip install pyyaml &&\
-    chmod +x /etc/ckan-conf/scripts/functions.sh /etc/ckan-conf/scripts/cca-operator.sh
+    python3 -m pip install pyyaml
   functions.sh: |
     get_secrets_json() {
         kubectl $KUBECTL_GLOBAL_ARGS get secret $1 -o json
