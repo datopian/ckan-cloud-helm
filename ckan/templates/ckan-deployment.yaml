@@ -27,13 +27,14 @@ spec:
       - name: secrets
         image: {{ .Values.ckanOperatorImage | quote }}
         command:
-        - bash
+        - sh
         - "-c"
         - |
-          ./cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
-          ./cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
+          ./etc/ckan-conf/scripts/install.sh
+          ./etc/ckan-conf/scripts/cca-operator.sh initialize-ckan-env-vars {{ .Values.envVarsSecretName | quote }} &&\
+          ./etc/ckan-conf/scripts/cca-operator.sh initialize-ckan-secrets {{ .Values.envVarsSecretName | quote }} \
                                                     {{ .Values.ckanSecretName | quote }} &&\
-          ./cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
+          ./etc/ckan-conf/scripts/cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh &&\
           cat /etc/ckan-conf/secrets/secrets.sh &&
           echo ckan secrets initialized successfully && exit 0
           echo failed to initialize, waiting 1 hour before exiting && sleep 3600 && exit 1
@@ -90,6 +91,9 @@ spec:
         volumeMounts:
         - name: ckan-conf-secrets
           mountPath: /etc/ckan-conf/secrets
+        - mountPath: /etc/ckan-conf/scripts
+          name: ckan-init
+          readOnly: false
       - name: files
         image: alpine
         command:
@@ -191,6 +195,10 @@ spec:
           failureThreshold: {{ .Values.ckanLivenessFailureThreshold | default "15" }}
         {{ end }}
       volumes:
+      - name: ckan-init
+        configMap:
+          defaultMode: 0777
+          name: ckan-init
       - name: ckan-conf-secrets
         emptyDir: {}
       - name: ckan-conf-templates

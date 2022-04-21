@@ -25,13 +25,18 @@ spec:
       initContainers:
       - name: secrets
         image: {{ .Values.ckanOperatorImage | quote }}
-        args:
-        - get-ckan-secrets
-        - {{ .Values.ckanSecretName | quote }}
-        - /etc/ckan-conf/secrets/secrets.sh
+        command:
+        - sh
+        - "-c"
+        - |
+          ./etc/ckan-conf/scripts/install.sh
+          ./etc/ckan-conf/scripts/cca-operator.sh get-ckan-secrets {{ .Values.ckanSecretName | quote }} /etc/ckan-conf/secrets/secrets.sh
         volumeMounts:
         - name: ckan-conf-secrets-jobs
           mountPath: /etc/ckan-conf/secrets
+        - mountPath: /etc/ckan-conf/scripts
+          name: ckan-init
+          readOnly: false
       - name: permissions
         image: alpine
         command:
@@ -105,6 +110,10 @@ spec:
           failureThreshold: {{ .Values.ckanReadinessFailureThreshold | default "15" }}
         {{ end }}
       volumes:
+      - name: ckan-init
+        configMap:
+          defaultMode: 0777
+          name: ckan-init
       - name: ckan-conf-secrets-jobs
         emptyDir: {}
       - name: ckan-conf-templates-jobs
